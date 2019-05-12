@@ -1,3 +1,21 @@
-<p>
-  confirm works!
-</p>
+<div *ngFor="let cartItem of cartItems">
+  {{cartItem.name}}
+  <br>
+  {{cartItem.price}}<br>
+</div>
+<p>Total {{totalCost}}</p>
+
+<div *ngIf="userData">
+  {{userData.firstName}}<br>
+  {{userData.lastName}}<br>
+  {{userData.email}}<br>
+  {{userData.paymentMethod}}<br>
+  {{userData.street}}<br>
+  {{userData.city}}<br>
+  {{userData.postcode}}<br>
+  {{userData.phoneNumber}}<br>
+  {{userData.phoneNumbers}}<br>
+</div>
+
+<button (click)="submit(order)">Order</button>
+<button (click)="goBack()">Go back</button>

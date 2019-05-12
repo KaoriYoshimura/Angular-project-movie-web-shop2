@@ -15,6 +15,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // import { ConfirmComponent } from './confirm/confirm.component';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ProductComponent } from './product/product.component';
     HomeComponent,
     ProductComponent,
     CartComponent,
+    PageNotFoundComponent,
     // CheckoutComponent,
     // ConfirmComponent
     // PageNotFoundComponent,

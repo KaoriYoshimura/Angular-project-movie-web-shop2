@@ -1,3 +1,8 @@
-<p>
-  cart works!
-</p>
+<div *ngFor="let cartItem of cartItems">
+  <a  routerLink="/product/{{cartItem.id}}">{{cartItem.name}}</a>
+  <br>
+  <img src= "{{cartItem.imageUrl}}"><br>
+  <button (click)="removeFromCart(cartItem.id)">Remove</button>
+</div>
+
+<button routerLink="/checkout">Checkout</button>

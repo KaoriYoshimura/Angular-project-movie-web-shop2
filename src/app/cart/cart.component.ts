@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IProduct } from '../interfaces/iproduct';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-cart',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  
+  cartItems: IProduct[];
 
-  constructor() { }
+  constructor(private service:DataService) { }
 
   ngOnInit() {
+    this.getCartItems();
+  }
+
+  getCartItems(){
+    this.cartItems = this.service.getSessionCartItems();
+  }
+
+  removeFromCart(item: number) {
+    this.service.RemoveFromSessionStorage(item);
   }
 
 }

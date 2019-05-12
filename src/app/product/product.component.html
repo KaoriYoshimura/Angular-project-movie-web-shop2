@@ -1,3 +1,17 @@
-<p>
-  product works!
-</p>
+<p>Number of Cart Items is : {{NumberOfCartItems}}</p>
+
+<button (click)="addToCart()">ADD TO CART</button>
+
+<button (click)="goBack()">GO BACK</button>
+
+<div *ngIf="details">
+    <h2>{{details.name}}</h2>
+    <br>
+    <img src= "{{details.imageUrl}}"><br>
+    {{details.description}}<br>
+  {{details.year}}<br>
+  {{details.added | date}}
+
+  <!-- <p *ngFor="let category of detail.productCategory">{{category.categoryId}}</p> -->
+</div>
+

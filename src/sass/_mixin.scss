@@ -1,0 +1,60 @@
+/*borders for checking*/
+@mixin bordersToCheck ($colour1, $colour2, $colour3) {
+    div, section{
+        border: 1px dashed $colour1;
+    }
+
+    nav, img, i, ul, li{
+        border: 1px dashed $colour2;
+    }
+
+    main, aside, button{
+        border: 1px dashed $colour3;
+    }
+}
+
+//Header text
+@mixin textColor($color, $textShadow){
+    color: $color;
+    text-shadow: $textShadow 0 0 2px;
+}
+
+//Header text without text shadow
+@mixin textColorNoShadow{
+    color: $mainColorB;
+    text-shadow: none;
+}
+
+//Button style
+@mixin buttonStyle($bgColor,$tColor) {
+    background-color: $bgColor;
+    color: $tColor;
+    line-height: 22px;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 25px;
+    text-decoration: none;
+    border: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+}
+
+@mixin limitScreenForMobile {
+    @media screen and (min-width: 575px){
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: 768px){
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: 991px){
+        @content;
+    }
+}

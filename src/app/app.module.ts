@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     CartComponent,
     PageNotFoundComponent,
     CheckoutComponent,
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ import { ProductComponent } from './product/product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { SearchComponent } from './home/search/search/search.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
     PageNotFoundComponent,
     CheckoutComponent,
     ConfirmComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

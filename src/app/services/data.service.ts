@@ -19,7 +19,7 @@ export class DataService implements IdataService{
   cartItems : IProduct[] = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   totalCost = 0;
   userData : IUser[] = JSON.parse(sessionStorage.getItem('userData'))|| [];
-
+  searchWord: string = "";
 
   getData():Observable<IProduct[]>{
     return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/products');
@@ -93,7 +93,14 @@ export class DataService implements IdataService{
       'https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order).subscribe(res => {
       console.log(res);
     })
+  }
 
+  searchProductApi(Query: string):Observable<IProduct[]>{
+    console.log('datas: ', Query);
+    return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
+
+    // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
+      // return this.searchWord = Query;
   }
 
 }

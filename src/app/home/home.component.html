@@ -1,4 +1,4 @@
-<div *ngFor="let product of products">
+<div id="home" *ngFor="let product of products">
   <a  routerLink="/product/{{product.id}}">{{product.name}}</a>
   <br>
   <img src= "{{product.imageUrl}}"><br>

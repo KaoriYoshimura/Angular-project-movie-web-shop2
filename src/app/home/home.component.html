@@ -1,3 +1,5 @@
-<p>
-  home works!
-</p>
+<div *ngFor="let product of products">
+  <a  routerLink="/product/{{product.id}}">{{product.name}}</a>
+  <br>
+  <img src= "{{product.imageUrl}}"><br>
+</div>

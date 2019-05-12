@@ -15,6 +15,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // import { ConfirmComponent } from './confirm/confirm.component';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ProductComponent } from './product/product.component';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     // MatButtonModule,
     // MatCheckboxModule,
     // MatInputModule,

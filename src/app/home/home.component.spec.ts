@@ -8,7 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SearchComponent } from './search/search/search.component';
 import { FormsModule } from '@angular/forms';
 
-describe('ProductsComponent', () => {
+describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 

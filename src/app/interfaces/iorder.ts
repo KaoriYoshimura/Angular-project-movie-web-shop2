@@ -6,5 +6,10 @@ export interface IOrder {
     paymentMethod: string;
     totalPrice:number;
     status: string;
-    orderRows:Array<{}>
+    orderRows: IOrderRow[];
+}
+
+interface IOrderRow {
+    ProductId: number;
+    Amount: number;
 }

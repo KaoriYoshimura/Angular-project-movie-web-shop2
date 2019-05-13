@@ -78,7 +78,7 @@ describe('CheckoutComponent', () => {
     expect(component.userForm.controls["phoneNumber"].valid).toBeTruthy;
   });
 
-  // it(`Should add a new phone number field`, () => {
+  it(`Should add a new phone number field`, () => {
   //   // const fb = new FormBuilder();
   //   // let phoneNumbers = this.fb.array([
   //   //   this.fb.control('')
@@ -90,15 +90,15 @@ describe('CheckoutComponent', () => {
     
   //   component.userForm.get('phoneNumbers')['controls'][0];
 
-
+  expect(component.phoneNumbers.length).toBe(1);
   //   // const arrayLength = component.userForm.get('phoneNumbers')[0];
   //   // const arrayLength = component.userForm.get('phoneNumbers')['controls'][0].length;
   //   // component.userForm.get('phoneNumbers')[0];
-  //   component.addPhoneNumber();
+     component.addPhoneNumber();
   //   // expect(arrayLength).toBeTruthy();
-  //   expect(this.phoneNumbers.length).toBe(1);
+     expect(component.phoneNumbers.length).toBe(2);
 
-  // });
+  });
 
   it(`Should caluculate total cost`, () => {
     expect(component.cartItems.length).toBe(2);

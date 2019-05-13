@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../interfaces/iproduct';
 // import { MockDataService } from '../services/mock-data.service';
 import { DataService } from '../services/data.service';
-import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-home',

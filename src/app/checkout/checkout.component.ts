@@ -51,7 +51,7 @@ export class CheckoutComponent implements OnInit{
 }
 
   billingOnSubmit(){
-    // console.log(this.userForm.value);
+    console.log(this.userForm.value);
     sessionStorage.setItem('userData', JSON.stringify(this.userForm.value));
 
   }

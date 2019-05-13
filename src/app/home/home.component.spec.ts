@@ -5,6 +5,8 @@ import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SearchComponent } from './search/search/search.component';
+import { FormsModule } from '@angular/forms';
 
 describe('ProductsComponent', () => {
   let component: HomeComponent;
@@ -13,8 +15,8 @@ describe('ProductsComponent', () => {
   // Call testBed methods within a beforeEach() to ensure a fresh start before each indivisual test
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule],
-      declarations: [ HomeComponent ]
+      imports: [HttpClientModule, RouterTestingModule, FormsModule],
+      declarations: [ HomeComponent, SearchComponent ]
     })
 
     //Override component's own provider

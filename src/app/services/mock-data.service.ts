@@ -12,7 +12,7 @@ export class MockDataService implements IdataService{
 
   // Temporary cartItems to store instead of sessionStorage
   cartItems: IProduct[] = [];
-  userData: IUser[] = [];
+  userData: IUser;
 
   // To show a number of items in sessionStorage
   NumberOfCartItems = 0;
@@ -25,9 +25,9 @@ export class MockDataService implements IdataService{
 
   totalCost = 0;
 
-  // userDataMock: IUser[] = {
-  //   firstName:"Kaori", lastName:"Yoshimura", email:"kaori.yoshimura@medieinstitutet.se", confirmEmail:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", street:"Tulegatan 41", city:"Stockholm", postcode:1, phoneNumber:555222
-  // };
+  userDataMock: IUser = {
+    firstName:"Kaori", lastName:"Yoshimura", email:"kaori.yoshimura@medieinstitutet.se", confirmEmail:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", street:"Tulegatan 41", city:"Stockholm", postcode:1, phoneNumber:555222
+  };
 
 
   // Return product array above as Observable<Iproduct[]>
@@ -85,10 +85,10 @@ export class MockDataService implements IdataService{
     return this.totalCost;
   }
 
-  // get error!!
-  // getSessionUserData() {
-  //   return this.userData = this.userDataMock;
-  // }
+  // Fetch user data from sessionStorage to show user info
+  getSessionUserData() {
+    return this.userData = this.userDataMock;
+  }
 
   constructor() { }
 }

@@ -13,7 +13,7 @@ import { IOrder } from '../interfaces/iorder';
 export class ConfirmComponent implements OnInit {
   cartItems: IProduct[];
   totalCost = 0;
-  userData: IUser[];
+  userData: IUser;
   location: any;
   order: IOrder [];
 
@@ -23,8 +23,8 @@ export class ConfirmComponent implements OnInit {
 
   ngOnInit() {
     this.getCartItems();
-    // this.getUserData();
-    console.log(this.userData);
+    this.getUserData();
+    // console.log(this.userData);
 
   }
 
@@ -37,9 +37,10 @@ export class ConfirmComponent implements OnInit {
     this.totalCost = this.service.caluculateTotalCost();
   }
 
-  // getUserData(){
-  //   this.userData = this.service.getSessionUserData();
-  // }
+  getUserData(){
+    this.userData = this.service.getSessionUserData();
+    console.log(this.userData);
+  }
 
   // Back to previous page
   goBack(): void {

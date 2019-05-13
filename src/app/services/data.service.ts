@@ -18,7 +18,7 @@ export class DataService implements IdataService{
   NumberOfCartItems = 0;
   cartItems : IProduct[] = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   totalCost = 0;
-  userData : IUser[] = JSON.parse(sessionStorage.getItem('userData'))|| [];
+  userData : IUser = JSON.parse(sessionStorage.getItem('userData'))|| [];
   searchWord: string = "";
 
   getData():Observable<IProduct[]>{

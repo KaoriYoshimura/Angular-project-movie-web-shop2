@@ -8,7 +8,7 @@
 
 <div>
   <h2>Billing Information</h2>
-  <form [formGroup]="userForm">
+  <form [formGroup]="userForm" (ngSubmit)="billingOnSubmit()">
     <mat-form-field>
       <label>First Name<span>(required)</span></label>
       <input matInput type="text" formControlName="firstName">
@@ -81,12 +81,12 @@
           <button mat-button (click)="removePhoneNumber(i)">Remove</button>
           <br>
         </div>
-        <button (click)="addPhoneNumber()">Add more phone numbers</button>
+        <button type="button" (click)="addPhoneNumber()">Add more phone numbers</button>
       </div>
     <br>
 
     <!-- <span *ngIf="userForm.errors?.matchingFields">Emailds do not match</span> -->
-    <button type="submit"  (click)="billingOnSubmit()" [disabled]="!userForm.valid" routerLink="/confirm">Confirm</button>
+    <button type="submit" [disabled]="!userForm.valid">Confirm</button>
   </form>
 
 

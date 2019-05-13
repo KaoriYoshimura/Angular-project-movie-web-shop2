@@ -79,25 +79,9 @@ describe('CheckoutComponent', () => {
   });
 
   it(`Should add a new phone number field`, () => {
-  //   // const fb = new FormBuilder();
-  //   // let phoneNumbers = this.fb.array([
-  //   //   this.fb.control('')
-  //   // ]);
-  //   const fb = new FormBuilder();
-  //   const myObject = fb.group('myArray': fb.array());
-    
-  //   expect(this.phoneNumbers).toBeUndefined();
-    
-  //   component.userForm.get('phoneNumbers')['controls'][0];
-
   expect(component.phoneNumbers.length).toBe(1);
-  //   // const arrayLength = component.userForm.get('phoneNumbers')[0];
-  //   // const arrayLength = component.userForm.get('phoneNumbers')['controls'][0].length;
-  //   // component.userForm.get('phoneNumbers')[0];
      component.addPhoneNumber();
-  //   // expect(arrayLength).toBeTruthy();
      expect(component.phoneNumbers.length).toBe(2);
-
   });
 
   it(`Should caluculate total cost`, () => {

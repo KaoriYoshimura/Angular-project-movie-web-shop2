@@ -15,7 +15,7 @@ export class ConfirmComponent implements OnInit {
   totalCost = 0;
   userData: IUser;
   location: any;
-  order: IOrder [];
+  orders: IOrder;
 
   constructor(
     private service: DataService
@@ -47,7 +47,18 @@ export class ConfirmComponent implements OnInit {
     this.location.back();
   }
 
-  submit(order: IOrder) {
-    this.service.submitOrder(order);
-  }
+  submit() {
+    const newOrder: IOrder = {
+      // id: number, //delete from Interface as well?
+      companyId: 25,
+      created: ,
+      createdBy: this.userData.email,
+      paymentMethod: this.userData.paymentMethod,
+      totalPrice:this.totalCost,
+      status: 0,
+      orderRows: [] //For loop
+ }
+    this.service.submitOrder(newOrder)
+      .subscribe(data => this.orders.push(data));
+ }
 }

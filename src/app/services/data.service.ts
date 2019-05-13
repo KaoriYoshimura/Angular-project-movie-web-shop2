@@ -86,17 +86,14 @@ export class DataService implements IdataService{
     return this.userData;
   }
 
-  // res means response
+  // Add a new order to the database
   // Call http.post and pass in the URL and order. In order to execute the HPPT post and get the response, use subscribe and take it in our response by using an arrow function.
-  submitOrder(order: IOrder) {
-    this.http.post(
-      'https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order).subscribe(res => {
-      console.log(res);
-    })
+  submitOrder(order: IOrder): Observable<IOrder> {
+    return this.http.post<IOrder>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order);
   }
 
   searchProductApi(Query: string):Observable<IProduct[]>{
-    console.log('datas: ', Query);
+    // console.log('datas: ', Query);
     return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
 
     // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern

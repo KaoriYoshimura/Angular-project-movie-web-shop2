@@ -28,11 +28,6 @@ export class ConfirmComponent implements OnInit {
   ngOnInit() {
     this.getCartItems();
     this.getUserData();
-    // this.createOrders();
-
-    console.log(this.now);
-
-
   }
 
   getCartItems(){
@@ -79,7 +74,7 @@ export class ConfirmComponent implements OnInit {
 
   }
 
-  submit() {
+  orderSubmit() {
     this.createOrders();
 
     this.service.submitOrder(this.orders).subscribe(
@@ -87,6 +82,9 @@ export class ConfirmComponent implements OnInit {
       err => {console.log(err.message);},
       () => { console.log('completed');}
     );
+
+    this.router.navigate(['/ordersent']);
+
  }
 
 }

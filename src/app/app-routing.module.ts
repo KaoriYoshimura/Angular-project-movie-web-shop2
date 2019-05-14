@@ -7,6 +7,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { OrderSentComponent } from './order-sent/order-sent.component';
 
 const appRoutes: Routes= [
   { path: '', component:HomeComponent },
@@ -14,6 +15,7 @@ const appRoutes: Routes= [
   { path: 'cart', component:CartComponent },
   { path: 'checkout', component:CheckoutComponent },
   { path: 'confirm', component:ConfirmComponent },
+  { path: 'ordersent', component:OrderSentComponent },
   { path: '**', component:PageNotFoundComponent },
 ];
 

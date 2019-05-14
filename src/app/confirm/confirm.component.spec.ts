@@ -36,7 +36,14 @@ describe('ConfirmComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it(`Should show user info`, () => {
+    // getUserData() function is in ngOnInit
+    expect(component.userData).toBeDefined();
+    expect(component.userData.firstName).toBe('Kaori');
+  });
+
   // it(`Should show user info`, () => {
+  //   // getUserData() function is in ngOnInit
   //   expect(component.userData).toBeDefined();
   //   expect(component.userData.firstName).toBe('Kaori');
   // });

@@ -58,19 +58,18 @@ export class ConfirmComponent implements OnInit {
     }
   }
 
+  createOrders(){
+    this.createOrderRows();
 
- createOrders(){
-  this.createOrderRows();
-
-  this.orders = {
-    companyId: 25,
-    created: this.now,
-    createdBy: this.userData.email,
-    paymentMethod: this.userData.paymentMethod,
-    totalPrice:this.totalCost,
-    status: 0,
-    orderRows: this.orderRows
-  };
+    this.orders = {
+      companyId: 25,
+      created: this.now,
+      createdBy: this.userData.email,
+      paymentMethod: this.userData.paymentMethod,
+      totalPrice:this.totalCost,
+      status: 0,
+      orderRows: this.orderRows
+    };
 
   }
 

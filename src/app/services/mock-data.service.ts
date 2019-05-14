@@ -85,9 +85,27 @@ export class MockDataService implements IdataService{
     return this.totalCost;
   }
 
-  // Fetch user data from sessionStorage to show user info
+
+    // ||[]creates array if cartItem is empty
+  // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionUserData() {
-    return this.userData = this.userDataMock;
+    return this.userDataMock;
+  }
+
+  // Add a new order to the database
+  // Call http.post and pass in the URL and order. In order to execute the HPPT post and get the response, use subscribe and take it in our response by using an arrow function.
+  submitOrder(order: IOrder): Observable<IOrder> {
+    return this.http.post<IOrder>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order, httpOptions);
+  }
+
+
+
+  searchProductApi(Query: string):Observable<IProduct[]>{
+    // console.log('datas: ', Query);
+    return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
+
+    // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
+      // return this.searchWord = Query;
   }
 
   constructor() { }

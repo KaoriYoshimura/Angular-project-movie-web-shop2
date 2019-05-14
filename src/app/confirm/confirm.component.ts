@@ -50,45 +50,40 @@ export class ConfirmComponent implements OnInit {
     this.location.back();
   }
 
+  orderRows: any = [];
 
-
-orderRows: any = [];
-
- createOrders(){
-  this.caluculateCost();
-  this.getUserData();
-  this.getCartItems();
-
-  for(var i=0; i<this.cartItems.length; i++){
-    this.orderRows.push(
-      {productid: this.cartItems[i].id, amount: 1}
-      );
+  createOrderRows(){
+    for(var i=0; i<this.cartItems.length; i++){
+      this.orderRows.push(
+        {productid: this.cartItems[i].id, amount: 1}
+        );
+    }
   }
 
-  const tempOrders = {
-  companyId: 25,
-  created: "2019-04-01T00:00:00",
-  createdBy: this.userData.email,
-  paymentMethod: this.userData.paymentMethod,
-  totalPrice:this.totalCost,
-  status: 0,
-  orderRows: this.orderRows
+
+ createOrders(){
+  this.createOrderRows();
+
+  this.orders = {
+    companyId: 25,
+    created: "2019-04-01T00:00:00",
+    createdBy: this.userData.email,
+    paymentMethod: this.userData.paymentMethod,
+    totalPrice:this.totalCost,
+    status: 0,
+    orderRows: this.orderRows
   };
 
-  return tempOrders;
   }
 
   submit() {
-    this.orders = this.createOrders();
-    // console.log(this.createOrders());
+    this.createOrders();
 
-    // this.orders = {"companyId":25,"created":"2019-04-01T00:00:00","createdBy":"Kaori","paymentMethod":"paypal","totalPrice":100,"status":0,"orderRows":[{"ProductId": 79, "Amount": 3}]};
-    console.log(this.orders);
     this.service.submitOrder(this.orders).subscribe(
       response => {console.log(response);},
       err => {console.log(err.message);},
       () => { console.log('completed');}
-      );
+    );
  }
 
 }

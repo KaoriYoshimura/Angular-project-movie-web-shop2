@@ -1,5 +1,5 @@
 export interface IOrder {
-    id: number;
+    // id: number; //It will be automatically created
     companyId: number;
     created: string;
     createdBy: string;

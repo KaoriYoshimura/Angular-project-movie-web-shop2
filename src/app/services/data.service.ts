@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { IdataService } from '../interfaces/idata-service';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IProduct } from '../interfaces/iproduct';
 import { map } from 'rxjs/operators';
 import { IUser } from '../interfaces/iuser';
 import { IOrder } from '../interfaces/iorder';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -89,8 +96,10 @@ export class DataService implements IdataService{
   // Add a new order to the database
   // Call http.post and pass in the URL and order. In order to execute the HPPT post and get the response, use subscribe and take it in our response by using an arrow function.
   submitOrder(order: IOrder): Observable<IOrder> {
-    return this.http.post<IOrder>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order);
+    return this.http.post<IOrder>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order, httpOptions);
   }
+
+
 
   searchProductApi(Query: string):Observable<IProduct[]>{
     // console.log('datas: ', Query);

@@ -83,7 +83,7 @@ export class DataService implements IdataService{
     for (let i = 0; i <this.cartItems.length; i++){
       this.totalCost += this.cartItems[i].price;
     }
-
+    
     return this.totalCost;
   }
 

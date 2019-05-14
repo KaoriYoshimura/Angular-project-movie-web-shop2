@@ -32,11 +32,14 @@ export class ConfirmComponent implements OnInit {
 
   getCartItems(){
     this.cartItems = this.service.getSessionCartItems();
-    this.caluculateCost()
+    this.caluculateCost();
+    console.log(this.totalCost);
+
   }
 
   caluculateCost(){
     this.totalCost = this.service.caluculateTotalCost();
+    console.log(this.totalCost);
   }
 
   getUserData(){
@@ -81,6 +84,7 @@ export class ConfirmComponent implements OnInit {
       () => { console.log('completed');}
     );
 
+    sessionStorage.clear();
     this.router.navigate(['/ordersent']);
 
  }

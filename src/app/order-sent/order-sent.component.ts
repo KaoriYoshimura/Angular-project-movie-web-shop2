@@ -10,6 +10,7 @@ export class OrderSentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

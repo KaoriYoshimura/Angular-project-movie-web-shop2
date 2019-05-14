@@ -5,7 +5,7 @@ import { IUser } from '../interfaces/iuser';
 import { IOrder } from '../interfaces/iorder';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-confirm',
@@ -17,6 +17,7 @@ export class ConfirmComponent implements OnInit {
   totalCost = 0;
   userData: IUser;
   orders: IOrder;
+  now = moment().format('LLLL');
 
   constructor(
     private service: DataService,
@@ -28,6 +29,8 @@ export class ConfirmComponent implements OnInit {
     this.getCartItems();
     this.getUserData();
     // this.createOrders();
+
+    console.log(this.now);
 
 
   }
@@ -66,7 +69,7 @@ export class ConfirmComponent implements OnInit {
 
   this.orders = {
     companyId: 25,
-    created: "2019-04-01T00:00:00",
+    created: this.now,
     createdBy: this.userData.email,
     paymentMethod: this.userData.paymentMethod,
     totalPrice:this.totalCost,

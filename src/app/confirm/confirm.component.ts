@@ -70,7 +70,6 @@ export class ConfirmComponent implements OnInit {
       status: 0,
       orderRows: this.orderRows
     };
-
   }
 
   orderSubmit() {

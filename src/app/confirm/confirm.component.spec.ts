@@ -42,9 +42,21 @@ describe('ConfirmComponent', () => {
     expect(component.userData.firstName).toBe('Kaori');
   });
 
-  // it(`Should show user info`, () => {
-  //   // getUserData() function is in ngOnInit
-  //   expect(component.userData).toBeDefined();
-  //   expect(component.userData.firstName).toBe('Kaori');
-  // });
+  it(`Should create orderRows`, () => {
+    expect(component.orderRows).toBeDefined();
+    expect(component.orderRows.length).toBe(0);
+    component.createOrderRows();
+    expect(component.orderRows[0].productid).toBe(76);
+    expect(component.orderRows.length).toBe(2);
+  });
+
+  it(`Should create orders`, () => {
+    // Why this is undefined?
+    expect(component.orders).toBeUndefined();
+    // expect(component.orders).toBeNull();
+    component.createOrders();
+    expect(component.orders).toBeDefined();
+    expect(component.orders.companyId).toBe(25);
+  });
+
 });

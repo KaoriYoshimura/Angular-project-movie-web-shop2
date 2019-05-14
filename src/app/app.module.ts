@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SearchComponent } from './home/search/search/search.component';
+import { OrderSentComponent } from './order-sent/order-sent.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SearchComponent } from './home/search/search/search.component';
     CheckoutComponent,
     ConfirmComponent,
     SearchComponent,
+    OrderSentComponent,
   ],
   imports: [
     BrowserModule,

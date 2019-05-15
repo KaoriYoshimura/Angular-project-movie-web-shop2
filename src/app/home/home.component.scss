@@ -1,5 +1,19 @@
 @import './../../sass/_import.scss';
 
 #home {
-    background-color: $lightColorB;
+    .container{
+        padding: 10px;
+
+        .card{
+            padding:5px;
+            margin: 5px 1px;
+        
+            img{
+                width: 100%;
+                height: 350px;
+                -o-object-fit: cover;
+                object-fit: cover;
+            }
+        }
+    }
 }

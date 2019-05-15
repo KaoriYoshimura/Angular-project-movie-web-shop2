@@ -7,6 +7,7 @@ import { IProduct } from '../interfaces/iproduct';
 import { map } from 'rxjs/operators';
 import { IUser } from '../interfaces/iuser';
 import { IOrder } from '../interfaces/iorder';
+import { ICategory } from '../interfaces/icategory';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -99,14 +100,16 @@ export class DataService implements IdataService{
     return this.http.post<IOrder>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order, httpOptions);
   }
 
-
-
   searchProductApi(Query: string):Observable<IProduct[]>{
     // console.log('datas: ', Query);
     return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
 
     // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
       // return this.searchWord = Query;
+  }
+
+  getCategory():Observable<ICategory[]>{
+    return this.http.get<ICategory[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/categories');
   }
 
 }

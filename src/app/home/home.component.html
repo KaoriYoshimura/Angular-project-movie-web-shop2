@@ -1,13 +1,14 @@
-<app-filter (queryEvent)="searchProduct($event)">
+<app-filter (queryEvent)="searchProduct($event)" [homeCategories]="categories">
   <!-- caputure an even from EventEmitter when something is typed in the input field -->
 </app-filter>
+
 
 <div *ngIf="searchResults && searchResults.length"></div>
   <div *ngFor="let product of products">
     <a  routerLink="/product/{{product.id}}">{{product.name}}</a>
     <br>
     <img src= "{{product.imageUrl}}"><br>
-  </div>
+</div>
 
 <!-- <div *ngIf="searchResults.length === 0"></div>
   <div *ngFor="let searchResult of searchResults">

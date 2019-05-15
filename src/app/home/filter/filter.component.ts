@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ICategory } from 'src/app/interfaces/icategory';
 
 @Component({
   selector: 'app-filter',
@@ -7,7 +8,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  // Create output decorator
+  // Input decorator
+  @Input() homeCategories: ICategory;
+
+  // Output decorator
   @Output() queryEvent = new EventEmitter<string>();
 
   // Function to emit "query" when something is typed in the input filed

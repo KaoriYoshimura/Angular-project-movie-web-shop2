@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../interfaces/iproduct';
 // import { MockDataService } from '../services/mock-data.service';
 import { DataService } from '../services/data.service';
+import { ICategory } from '../interfaces/icategory';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,8 @@ export class HomeComponent implements OnInit {
   products: IProduct[];
   searchResults: IProduct[];
   errorMessage: string;
+  categories: ICategory[];
+
 
   isValid = this.searchResults && this.searchResults.length;
 
@@ -21,7 +24,8 @@ export class HomeComponent implements OnInit {
   constructor(private service:DataService) { }
 
   ngOnInit() {
-    this.getMovie()
+    this.getMovie();
+    this.getCategory();
   }
 
   getMovie(){
@@ -34,7 +38,7 @@ export class HomeComponent implements OnInit {
       this.service.searchProductApi(QueryFromInput).subscribe(
         response => this.products = response,
         error => console.log(error),
-        () => console.log('HTTP request completed')
+        () => console.log('HTTP request for search completed')
     );
 
     console.log(this.searchResults);
@@ -45,4 +49,11 @@ export class HomeComponent implements OnInit {
   // });
   }
 
+  getCategory(){
+    this.service.getCategory().subscribe(
+      response => this.categories = response,
+      error => console.log(error),
+      () => console.log('HPPT request for category completed')
+    );
+  }
 }

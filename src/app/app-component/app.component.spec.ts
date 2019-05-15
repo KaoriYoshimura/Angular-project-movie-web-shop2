@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 // import { ProductsComponent } from '../products/products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,7 +12,7 @@ describe('AppComponent', () => {
         AppComponent,
         // ProductsComponent
       ],
-    imports: [HttpClientModule, RouterTestingModule],
+    imports: [HttpClientModule, RouterTestingModule, FontAwesomeModule],
     }).compileComponents();
   }));
 

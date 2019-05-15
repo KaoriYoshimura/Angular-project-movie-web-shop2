@@ -4,6 +4,7 @@ import { IProduct } from '../interfaces/iproduct';
 import { IUser } from '../interfaces/iuser';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ICategory } from '../interfaces/icategory';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,11 @@ export class MockDataService implements IdataService{
   userDataMock: IUser = {
     firstName:"Kaori", lastName:"Yoshimura", email:"kaori.yoshimura@medieinstitutet.se", confirmEmail:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", street:"Tulegatan 41", city:"Stockholm", postcode:1, phoneNumber:555222
   };
+
+  categoryDataMock: ICategory[] = [
+    {id:5, name :"Action"},
+    {id:6, name :"Comedy"},
+  ];
 
 
   // Return product array above as Observable<Iproduct[]>
@@ -107,6 +113,10 @@ export class MockDataService implements IdataService{
   //   // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
   //     // return this.searchWord = Query;
   // }
+
+  getCategory():Observable<ICategory[]>{
+    return of(this.categoryDataMock);
+  }
 
   constructor() { }
 }

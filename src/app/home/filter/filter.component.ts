@@ -13,6 +13,7 @@ export class FilterComponent implements OnInit {
 
   // Output decorator
   @Output() queryEvent = new EventEmitter<string>();
+  @Output() categoryEvent = new EventEmitter<number>();
 
   // Function to emit "query" when something is typed in the input filed
   searchByQuery(query: string){
@@ -20,6 +21,10 @@ export class FilterComponent implements OnInit {
     this.queryEvent.emit(query);
   }
   
+  filterByCategory(){
+    // pass category to EventEmitter
+    this.categoryEvent.emit(this.homeCategories.id);
+  }
   constructor() { }
 
   ngOnInit() {

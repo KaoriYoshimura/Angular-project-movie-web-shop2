@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   searchResults: IProduct[];
   errorMessage: string;
   categories: ICategory[];
+  categoryid:number;
+
 
 
   isValid = this.searchResults && this.searchResults.length;
@@ -56,4 +58,12 @@ export class HomeComponent implements OnInit {
       () => console.log('HPPT request for category completed')
     );
   }
+
+  showProductsByCategory(id:number){
+    console.log(id);
+    // this.service.getProductsByCategory(id).subscribe((productsFromApi)=> {
+    //   this.products = productsFromApi;
+    // }
+  }
+
 }

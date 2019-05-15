@@ -1,4 +1,8 @@
-<app-filter (queryEvent)="searchProduct($event)" [homeCategories]="categories">
+<app-filter
+  (queryEvent)="searchProduct($event)"
+  (categoryEvent)="showProductsByCategory($event)"
+  [homeCategories]="categories"
+>
   <!-- caputure an even from EventEmitter when something is typed in the input field -->
 </app-filter>
 

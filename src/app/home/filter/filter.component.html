@@ -6,6 +6,6 @@
 
   <div>
     <ul>
-      <li *ngFor="let category of homeCategories">{{category.name}}</li>
+      <li *ngFor="let category of homeCategories" (click)="filterByCategory()">{{category.name}}</li>
     </ul>
   </div>

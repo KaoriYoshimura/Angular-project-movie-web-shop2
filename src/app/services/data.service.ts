@@ -112,4 +112,11 @@ export class DataService implements IdataService{
     return this.http.get<ICategory[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/categories');
   }
 
+  // getProductsByCategory(id: number): Observable<IProduct> {
+  //   return this.getData().pipe(map(details =>
+  //     details.find(products=>
+  //       products.id == id)
+  //   ));
+  // }
+
 }

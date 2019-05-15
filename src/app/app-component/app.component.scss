@@ -1,13 +1,17 @@
-.container {
-    position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-}
+@import './../../sass/_import.scss';
 
-.container .mat-drawer {
-    padding-left: 20px;
-    padding-left: 20px;
-    min-width: 200px;
+.wrapper {
+    background-color: $backgroundNav;
+
+    nav {
+        color: $fontColorNav;
+        padding: 10px 0px;
+
+        fa-icon {
+            color: $fontColorNav;
+            font-size: 2rem;
+        }
+
+    }
+
 }

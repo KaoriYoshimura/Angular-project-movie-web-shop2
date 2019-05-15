@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app-component/app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,7 +41,8 @@ import { OrderSentComponent } from './order-sent/order-sent.component';
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

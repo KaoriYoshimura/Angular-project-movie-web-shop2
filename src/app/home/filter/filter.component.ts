@@ -11,7 +11,7 @@ export class FilterComponent implements OnInit {
   @Output() queryEvent = new EventEmitter<string>();
 
   // Function to emit "query" when something is typed in the input filed
-  filterByCategory(query: string){
+  searchByQuery(query: string){
     // pass query to EventEmitter
     this.queryEvent.emit(query);
   }

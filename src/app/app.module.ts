@@ -16,6 +16,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SearchComponent } from './home/search/search/search.component';
 import { OrderSentComponent } from './order-sent/order-sent.component';
+import { CategoryComponent } from './home/category/category.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { OrderSentComponent } from './order-sent/order-sent.component';
     ConfirmComponent,
     SearchComponent,
     OrderSentComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@ import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SearchComponent } from './search/search/search.component';
+import { FilterComponent } from './filter/filter.component';
 import { FormsModule } from '@angular/forms';
 
 describe('HomeComponent', () => {
@@ -16,7 +16,7 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule, FormsModule],
-      declarations: [ HomeComponent, SearchComponent ]
+      declarations: [ HomeComponent, FilterComponent ]
     })
 
     //Override component's own provider

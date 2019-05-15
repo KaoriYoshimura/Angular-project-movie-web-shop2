@@ -1,6 +1,6 @@
-<app-search (queryEvent)="searchProduct($event)">
+<app-filter (queryEvent)="searchProduct($event)">
   <!-- caputure an even from EventEmitter when something is typed in the input field -->
-</app-search>
+</app-filter>
 
 <div *ngIf="searchResults && searchResults.length"></div>
   <div *ngFor="let product of products">

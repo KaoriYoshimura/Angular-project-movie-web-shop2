@@ -14,9 +14,8 @@ import { ProductComponent } from './product/product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
-import { SearchComponent } from './home/search/search/search.component';
+import { FilterComponent } from './home/filter/filter.component';
 import { OrderSentComponent } from './order-sent/order-sent.component';
-import { CategoryComponent } from './home/category/category.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +26,8 @@ import { CategoryComponent } from './home/category/category.component';
     PageNotFoundComponent,
     CheckoutComponent,
     ConfirmComponent,
-    SearchComponent,
+    FilterComponent,
     OrderSentComponent,
-    CategoryComponent,
   ],
   imports: [
     BrowserModule,

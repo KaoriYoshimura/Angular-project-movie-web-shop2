@@ -46,14 +46,12 @@ describe('ConfirmComponent', () => {
     expect(component.orderRows).toBeDefined();
     expect(component.orderRows.length).toBe(0);
     component.createOrderRows();
-    expect(component.orderRows[0].productid).toBe(76);
+    expect(component.orderRows[0].ProductId).toBe(76);
     expect(component.orderRows.length).toBe(2);
   });
 
   it(`Should create orders`, () => {
-    // Why this is undefined?
     expect(component.orders).toBeUndefined();
-    // expect(component.orders).toBeNull();
     component.createOrders();
     expect(component.orders).toBeDefined();
     expect(component.orders.companyId).toBe(25);

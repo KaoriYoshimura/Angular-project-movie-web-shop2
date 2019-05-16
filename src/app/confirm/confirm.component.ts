@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { IProduct } from '../interfaces/iproduct';
 import { IUser } from '../interfaces/iuser';
-import { IOrder } from '../interfaces/iorder';
+import { IOrder, IOrderRow } from '../interfaces/iorder';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -51,12 +51,12 @@ export class ConfirmComponent implements OnInit {
     this.location.back();
   }
 
-  orderRows: any = [];
+  orderRows: IOrderRow[] = [];
 
   createOrderRows(){
     for(var i=0; i<this.cartItems.length; i++){
       this.orderRows.push(
-        {productid: this.cartItems[i].id, amount: 1}
+        {ProductId: this.cartItems[i].id, Amount: 1}
         );
     }
   }

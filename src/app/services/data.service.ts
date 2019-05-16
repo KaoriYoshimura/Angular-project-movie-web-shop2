@@ -43,7 +43,7 @@ export class DataService implements IdataService{
   // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionCartItems() {
-    return this.cartItems;
+    return this.cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   }
 
   countNumberOfCartItems() {
@@ -108,13 +108,13 @@ export class DataService implements IdataService{
     return this.http.get<ICategory[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/categories');
   }
 
-  // getProductsByCategory(id: number): Observable<IProduct> {
+  // getProductsByCategory(id: number): Observable<IProduct[]> {
   //   return this.getData().pipe(map(productsByCategory =>
   //     productsByCategory.find(products =>
   //       products.productCategory.map(prodCat => { prodCat.categoryId == id }))
   //   ));
 
-    // for(var i=0; i<this.products.length; i++){
+    // for(var i=0; i<this.getData().length; i++){
     //   this.orderRows.push(
     //     {ProductId: this.cartItems[i].id, Amount: 1}
     //     );

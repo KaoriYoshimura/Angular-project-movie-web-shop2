@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   products: IProduct[];
   allProducts: IProduct[];
   searchResults: IProduct[];
-  categoryResults: IProduct[];
+  categoryResults: IProduct[] = [];
   errorMessage: string;
   categories: ICategory[];
   categoryid:number;
@@ -65,12 +65,19 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  // id is not shown, category and search should be separated to show
   showProductsByCategory(id:number){
-    console.log(id);
-  //   this.service.getProductsByCategory(id).subscribe((productsFromApi)=> {
-  //     this.categoryResults = productsFromApi
-  //   });
+
+    // Empty categoryResults array
+    this.categoryResults = [];
+
+    for(var i=0; i<this.allProducts.length; i++){
+      for(var j=0; j<this.allProducts[i].productCategory.length; j++){
+        if(this.allProducts[i].productCategory[j].categoryId === id){
+          this.categoryResults.push(this.allProducts[i]);
+        }
+      };
+    }
+    this.products = this.categoryResults;
   }
 
 }

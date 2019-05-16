@@ -26,9 +26,12 @@ export class MockDataService implements IdataService{
 
   totalCost = 0;
 
-  userDataMock: IUser = {
-    firstName:"Kaori", lastName:"Yoshimura", email:"kaori.yoshimura@medieinstitutet.se", confirmEmail:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", street:"Tulegatan 41", city:"Stockholm", postcode:1, phoneNumber:555222
-  };
+  userDataMock: IUser;
+
+  categoryDataMock: ICategory[] = [
+    {id:5, name :"Action"},
+    {id:6, name :"Comedy"},
+  ];
 
   categoryDataMock: ICategory[] = [
     {id:5, name :"Action"},
@@ -95,7 +98,9 @@ export class MockDataService implements IdataService{
     // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionUserData() {
-    return this.userDataMock;
+    return this.userData = {
+      firstName:"Kaori", lastName:"Yoshimura", email:"kaori.yoshimura@medieinstitutet.se", confirmEmail:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", street:"Tulegatan 41", city:"Stockholm", postcode:1, phoneNumber:555222
+    };
   }
 
   // // Add a new order to the database

@@ -1,5 +1,6 @@
 <aside>
-    <app-filter
+    <!-- run *ngFor= in here-->
+    <app-filter 
       (queryEvent)="searchProduct($event)"
       (categoryEvent)="showProductsByCategory($event)"
       [homeCategories]="categories"
@@ -11,7 +12,6 @@
 
   <div class="container">
     <div class="row match-height">
-      <div *ngIf="searchResults && searchResults.length"></div>
         <div class="col-xl-3 col-md-6 col-sm-12 card-wrapper" *ngFor="let product of products">
           <div class="card">
             <div class="card-content">
@@ -23,13 +23,6 @@
             </div>
           </div>
       </div>
-
-    <!-- <div *ngIf="searchResults.length === 0"></div>
-      <div *ngFor="let searchResult of searchResults">
-          <a  routerLink="/searchResult/{{searchResult.id}}">{{searchResult.name}}</a>
-          <br>
-          <img src= "{{searchResult.imageUrl}}"><br>
-        </div> -->
     </div>
   </div>
 </main>

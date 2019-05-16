@@ -26,7 +26,7 @@ export class DataService implements IdataService{
   NumberOfCartItems = 0;
   cartItems : IProduct[] = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   totalCost = 0;
-  userData : IUser = JSON.parse(sessionStorage.getItem('userData'))|| [];
+  userData : IUser;
   searchWord: string = "";
 
   getData():Observable<IProduct[]>{
@@ -91,7 +91,7 @@ export class DataService implements IdataService{
   // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionUserData() {
-    return this.userData;
+    return this.userData = JSON.parse(sessionStorage.getItem('userData'))|| [];
   }
 
   // Add a new order to the database
@@ -101,22 +101,18 @@ export class DataService implements IdataService{
   }
 
   searchProductApi(Query: string):Observable<IProduct[]>{
-    // console.log('datas: ', Query);
     return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
-
-    // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
-      // return this.searchWord = Query;
   }
 
   getCategory():Observable<ICategory[]>{
     return this.http.get<ICategory[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/categories');
   }
 
-  // getProductsByCategory(id: number): Observable<IProduct> {
-  //   return this.getData().pipe(map(details =>
-  //     details.find(products=>
-  //       products.id == id)
-  //   ));
-  // }
+  getProductsByCategory(id: number): Observable<IProduct> {
+    return this.getData().pipe(map(productsByCategory =>
+      productsByCategory.find(products=>
+        products.id == id)
+    ));
+  }
 
 }

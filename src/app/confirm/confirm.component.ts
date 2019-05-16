@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { IProduct } from '../interfaces/iproduct';
 import { IUser } from '../interfaces/iuser';
-import { IOrder } from '../interfaces/iorder';
+import { IOrder, IOrderRow } from '../interfaces/iorder';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -18,6 +18,7 @@ export class ConfirmComponent implements OnInit {
   userData: IUser;
   orders: IOrder;
   now = moment().format('LLLL');
+  orderRows: IOrderRow[] = [];
 
   constructor(
     private service: DataService,
@@ -33,13 +34,11 @@ export class ConfirmComponent implements OnInit {
   getCartItems(){
     this.cartItems = this.service.getSessionCartItems();
     this.caluculateCost();
-    console.log(this.totalCost);
 
   }
 
   caluculateCost(){
     this.totalCost = this.service.caluculateTotalCost();
-    console.log(this.totalCost);
   }
 
   getUserData(){
@@ -51,12 +50,10 @@ export class ConfirmComponent implements OnInit {
     this.location.back();
   }
 
-  orderRows: any = [];
-
   createOrderRows(){
     for(var i=0; i<this.cartItems.length; i++){
       this.orderRows.push(
-        {productid: this.cartItems[i].id, amount: 1}
+        {ProductId: this.cartItems[i].id, Amount: 1}
         );
     }
   }

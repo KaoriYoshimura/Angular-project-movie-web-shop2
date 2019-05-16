@@ -42,5 +42,11 @@ describe('HomeComponent', () => {
 
   it('should contain 2 products',() => {
     expect(component.products.length).toBe(2);
-  })
+  });
+
+  it('should search', ()=> {
+    // component.searchProduct('dark');
+
+    // component.products
+  });
 });

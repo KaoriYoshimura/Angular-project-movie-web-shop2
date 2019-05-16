@@ -1,12 +1,16 @@
 <aside>
     <!-- run *ngFor= in here-->
-    <app-filter 
+    <app-filter
       (queryEvent)="searchProduct($event)"
-      (categoryEvent)="showProductsByCategory($event)"
-      [homeCategories]="categories"
-      >
-      <!-- caputure an even from EventEmitter when something is typed in the input field -->
+    >
+    <!-- caputure an even from EventEmitter when something is typed in the input field -->
     </app-filter>
+
+    <app-category
+      [homeCategories]="categories"
+      (categoryEvent)="showProductsByCategory($event)"
+    >
+    </app-category>
 </aside>
 <main id="home">
 

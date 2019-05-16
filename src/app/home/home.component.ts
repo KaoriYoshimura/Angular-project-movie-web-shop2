@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   products: IProduct[];
   allProducts: IProduct[];
   searchResults: IProduct[];
+  categoryResults: IProduct[];
   errorMessage: string;
   categories: ICategory[];
   categoryid:number;
@@ -66,11 +67,12 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  showProductsByCategory(id:number){
-    console.log(id);
-    // this.service.getProductsByCategory(id).subscribe((productsFromApi)=> {
-      // this.products = productsFromApi
-    // });
-  }
+  // id is not shown, category and search should be separated to show
+  // showProductsByCategory(id:number){
+  //   console.log(id);
+  //   this.service.getProductsByCategory(id).subscribe((productsFromApi)=> {
+  //     this.categoryResults = productsFromApi
+  //   });
+  // }
 
 }

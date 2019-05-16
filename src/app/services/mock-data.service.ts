@@ -4,6 +4,7 @@ import { IProduct } from '../interfaces/iproduct';
 import { IUser } from '../interfaces/iuser';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ICategory } from '../interfaces/icategory';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +26,12 @@ export class MockDataService implements IdataService{
 
   totalCost = 0;
 
-  userDataMock: IUser = {
-    firstName:"Kaori", lastName:"Yoshimura", email:"kaori.yoshimura@medieinstitutet.se", confirmEmail:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", street:"Tulegatan 41", city:"Stockholm", postcode:1, phoneNumber:555222
-  };
+  userDataMock: IUser;
+
+  categoryDataMock: ICategory[] = [
+    {id:5, name :"Action"},
+    {id:6, name :"Comedy"},
+  ];
 
 
   // Return product array above as Observable<Iproduct[]>
@@ -89,7 +93,9 @@ export class MockDataService implements IdataService{
     // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionUserData() {
-    return this.userDataMock;
+    return this.userData = {
+      firstName:"Kaori", lastName:"Yoshimura", email:"kaori.yoshimura@medieinstitutet.se", confirmEmail:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", street:"Tulegatan 41", city:"Stockholm", postcode:1, phoneNumber:555222
+    };
   }
 
   // // Add a new order to the database
@@ -107,6 +113,10 @@ export class MockDataService implements IdataService{
   //   // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
   //     // return this.searchWord = Query;
   // }
+
+  getCategory():Observable<ICategory[]>{
+    return of(this.categoryDataMock);
+  }
 
   constructor() { }
 }

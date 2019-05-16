@@ -26,7 +26,7 @@ export class DataService implements IdataService{
   NumberOfCartItems = 0;
   cartItems : IProduct[] = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   totalCost = 0;
-  userData : IUser = JSON.parse(sessionStorage.getItem('userData'))|| [];
+  userData : IUser;
   searchWord: string = "";
 
   getData():Observable<IProduct[]>{
@@ -91,7 +91,7 @@ export class DataService implements IdataService{
   // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionUserData() {
-    return this.userData;
+    return this.userData = JSON.parse(sessionStorage.getItem('userData'))|| [];
   }
 
   // Add a new order to the database

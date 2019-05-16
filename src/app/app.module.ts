@@ -18,6 +18,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FilterComponent } from './home/filter/filter.component';
 import { OrderSentComponent } from './order-sent/order-sent.component';
+import { CategoryComponent } from './home/category/category.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { OrderSentComponent } from './order-sent/order-sent.component';
     ConfirmComponent,
     FilterComponent,
     OrderSentComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,

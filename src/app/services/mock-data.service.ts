@@ -33,12 +33,6 @@ export class MockDataService implements IdataService{
     {id:6, name :"Comedy"},
   ];
 
-  categoryDataMock: ICategory[] = [
-    {id:5, name :"Action"},
-    {id:6, name :"Comedy"},
-  ];
-
-
   // Return product array above as Observable<Iproduct[]>
   getData():Observable<IProduct[]>{
     return of(this.products);

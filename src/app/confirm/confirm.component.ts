@@ -18,6 +18,7 @@ export class ConfirmComponent implements OnInit {
   userData: IUser;
   orders: IOrder;
   now = moment().format('LLLL');
+  orderRows: IOrderRow[] = [];
 
   constructor(
     private service: DataService,
@@ -48,8 +49,6 @@ export class ConfirmComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
-  orderRows: IOrderRow[] = [];
 
   createOrderRows(){
     for(var i=0; i<this.cartItems.length; i++){

@@ -102,9 +102,6 @@ export class DataService implements IdataService{
 
   searchProductApi(Query: string):Observable<IProduct[]>{
     return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
-
-    // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
-      // return this.searchWord = Query;
   }
 
   getCategory():Observable<ICategory[]>{
@@ -112,8 +109,8 @@ export class DataService implements IdataService{
   }
 
   getProductsByCategory(id: number): Observable<IProduct> {
-    return this.getData().pipe(map(details =>
-      details.find(products=>
+    return this.getData().pipe(map(productsByCategory =>
+      productsByCategory.find(products=>
         products.id == id)
     ));
   }

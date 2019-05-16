@@ -1,5 +1,6 @@
 <aside>
-    <app-filter
+    <!-- run *ngFor= in here-->
+    <app-filter 
       (queryEvent)="searchProduct($event)"
       (categoryEvent)="showProductsByCategory($event)"
       [homeCategories]="categories"

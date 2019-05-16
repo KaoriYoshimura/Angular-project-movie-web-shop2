@@ -101,7 +101,6 @@ export class DataService implements IdataService{
   }
 
   searchProductApi(Query: string):Observable<IProduct[]>{
-    // console.log('datas: ', Query);
     return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
 
     // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
@@ -112,11 +111,11 @@ export class DataService implements IdataService{
     return this.http.get<ICategory[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/categories');
   }
 
-  // getProductsByCategory(id: number): Observable<IProduct> {
-  //   return this.getData().pipe(map(details =>
-  //     details.find(products=>
-  //       products.id == id)
-  //   ));
-  // }
+  getProductsByCategory(id: number): Observable<IProduct> {
+    return this.getData().pipe(map(details =>
+      details.find(products=>
+        products.id == id)
+    ));
+  }
 
 }

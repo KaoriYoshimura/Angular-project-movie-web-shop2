@@ -13,42 +13,49 @@ import { ICategory } from '../interfaces/icategory';
 })
 export class HomeComponent implements OnInit {
   products: IProduct[];
+  allProducts: IProduct[];
   searchResults: IProduct[];
   errorMessage: string;
   categories: ICategory[];
   categoryid:number;
 
 
-
-  isValid = this.searchResults && this.searchResults.length;
-
   // Inject the class of DataService
   constructor(private service:DataService) { }
 
   ngOnInit() {
-    this.getMovie();
     this.getCategory();
+    this.getMovie();
+    
   }
 
   getMovie(){
     this.service.getData().subscribe((data) => {
       this.products = data;
+      this.allProducts = data;
+      console.log(this.allProducts);
+
     });
+  }
+
+  isSearchResultsExist() {
+    if(this.searchResults && this.searchResults.length){
+      this.products = this.searchResults;
+      console.log(this.searchResults);
+    } else {
+      this.products = this.allProducts;
+    }
   }
 
   searchProduct(QueryFromInput:string){
       this.service.searchProductApi(QueryFromInput).subscribe(
-        response => this.products = response,
+        response => {
+          this.searchResults = response;
+          this.isSearchResultsExist();
+        },
         error => console.log(error),
         () => console.log('HTTP request for search completed')
     );
-
-    console.log(this.searchResults);
-
-  //   this.service.searchProductApi(QueryFromInput).subscribe((data) =>{
-  //     this.products = data;
-    
-  // });
   }
 
   getCategory(){
@@ -62,8 +69,8 @@ export class HomeComponent implements OnInit {
   showProductsByCategory(id:number){
     console.log(id);
     // this.service.getProductsByCategory(id).subscribe((productsFromApi)=> {
-    //   this.products = productsFromApi;
-    // }
+      // this.products = productsFromApi
+    // });
   }
 
 }

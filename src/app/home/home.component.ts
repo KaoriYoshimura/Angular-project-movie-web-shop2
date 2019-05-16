@@ -34,8 +34,6 @@ export class HomeComponent implements OnInit {
     this.service.getData().subscribe((data) => {
       this.products = data;
       this.allProducts = data;
-      console.log(this.allProducts);
-
     });
   }
 
@@ -68,11 +66,11 @@ export class HomeComponent implements OnInit {
   }
 
   // id is not shown, category and search should be separated to show
-  // showProductsByCategory(id:number){
-  //   console.log(id);
+  showProductsByCategory(id:number){
+    console.log(id);
   //   this.service.getProductsByCategory(id).subscribe((productsFromApi)=> {
   //     this.categoryResults = productsFromApi
   //   });
-  // }
+  }
 
 }

@@ -1,6 +1,1 @@
-<div>
-    <ul>
-      <li *ngFor="let category of homeCategories" (click)="filterByCategory(category.id)">{{category.name}}</li>
-    </ul>
-  </div>
-<div>
+<p (click)="filterByCategory()">{{categoryInput.name}}</p>

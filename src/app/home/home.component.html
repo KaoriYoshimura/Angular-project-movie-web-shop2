@@ -1,14 +1,15 @@
 <aside>
     <!-- run *ngFor= in here-->
+    <!-- caputure an even from EventEmitter when something is typed in the input field -->
     <app-search
       (queryEvent)="searchProduct($event)"
     >
-    <!-- caputure an even from EventEmitter when something is typed in the input field -->
     </app-search>
 
     <app-category
-      [homeCategories]="categories"
       (categoryEvent)="showProductsByCategory($event)"
+      *ngFor="let category of categories"
+      [categoryInput]="category"
     >
     </app-category>
 </aside>

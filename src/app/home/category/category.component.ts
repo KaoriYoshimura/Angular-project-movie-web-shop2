@@ -4,22 +4,20 @@ import { ICategory } from 'src/app/interfaces/icategory';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
 
   // Input decorator
-  @Input() homeCategories: ICategory;
+  @Input() categoryInput: ICategory;
 
   // Output decorator
   @Output() categoryEvent = new EventEmitter<number>();
 
   filterByCategory(){
     // pass category to EventEmitter
-    // this.categoryEvent.emit(this.homeCategories.id);
-    this.categoryEvent.emit(6);
+    this.categoryEvent.emit(this.categoryInput.id);
   }
-  
+
   constructor() { }
 
   ngOnInit() {

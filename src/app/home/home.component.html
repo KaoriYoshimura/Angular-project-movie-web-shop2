@@ -1,10 +1,10 @@
 <aside>
     <!-- run *ngFor= in here-->
-    <app-filter
+    <app-search
       (queryEvent)="searchProduct($event)"
     >
     <!-- caputure an even from EventEmitter when something is typed in the input field -->
-    </app-filter>
+    </app-search>
 
     <app-category
       [homeCategories]="categories"

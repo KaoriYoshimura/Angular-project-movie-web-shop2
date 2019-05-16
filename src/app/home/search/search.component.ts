@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
 })
-export class FilterComponent implements OnInit {
+export class SearchComponent implements OnInit {
 
 
   // Output decorator

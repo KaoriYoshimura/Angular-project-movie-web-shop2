@@ -5,7 +5,7 @@ import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FilterComponent } from './filter/filter.component';
+import { FilterComponent } from './search/filter.component';
 import { FormsModule } from '@angular/forms';
 
 describe('HomeComponent', () => {

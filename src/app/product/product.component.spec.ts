@@ -14,7 +14,7 @@ describe('ProductComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProductComponent ],
-      imports: [HttpClientModule, RouterTestingModule]
+      imports: [ HttpClientModule, RouterTestingModule ]
     })
         //Override component's own provider to test with MockData.service
         .overrideComponent(ProductComponent, {

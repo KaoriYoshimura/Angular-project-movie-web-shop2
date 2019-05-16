@@ -9,7 +9,7 @@ export interface IOrder {
     orderRows: IOrderRow[];
 }
 
-interface IOrderRow {
+export interface IOrderRow {
     ProductId: number;
     Amount: number;
 }

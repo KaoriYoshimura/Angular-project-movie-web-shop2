@@ -4,15 +4,25 @@
     .container{
         padding: 10px;
 
-        .card{
-            padding:5px;
-            margin: 5px 1px;
-        
-            img{
-                width: 100%;
-                height: 350px;
-                -o-object-fit: cover;
-                object-fit: cover;
+        .card-wrapper {
+            padding:0 15px;
+
+            .card{
+                height:500px;
+                margin-bottom: 1.875rem;
+                border: none;
+                border-radius: 0;
+                -webkit-box-shadow: 0 10px 40px 0 rgba(62,57,107,.07), 0 2px 9px 0 rgba(62,57,107,.06);
+                box-shadow: 0 10px 40px 0 rgba(62,57,107,.07), 0 2px 9px 0 rgba(62,57,107,.06);
+            
+                img{
+                    width: 100%;
+                    height: 350px;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    -o-object-position: top;
+                    object-position: top;
+                }
             }
         }
     }

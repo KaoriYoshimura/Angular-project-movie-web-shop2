@@ -7,9 +7,7 @@ import { ICategory } from '../interfaces/icategory';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: [
-    './home.component.scss'
-  ]
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   products: IProduct[];
@@ -27,14 +25,17 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getCategory();
     this.getMovie();
-    
   }
 
   getMovie(){
-    this.service.getData().subscribe((data) => {
-      this.products = data;
-      this.allProducts = data;
-    });
+    this.service.getData().subscribe(
+      response => {
+        this.products = response;
+        this.allProducts = response;
+      },
+      error => console.log(error),
+      () => console.log('HTTP request for getMovie completed')
+    );
   }
 
   isSearchResultsExist() {

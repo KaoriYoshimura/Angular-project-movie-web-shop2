@@ -1,3 +1,35 @@
-<p>
-  admin works!
-</p>
+<main>
+  <div class="container main-container">
+    <h2>Your cart</h2>
+    <div>
+      <table class="table table-bordered">
+        <!-- header -->
+        <tr>
+            <td class="text-center">ID</td>
+            <td class="text-center">Ordered On</td>
+            <td class="text-center">Ordered By</td>
+            <td class="text-center">PaymentMethod</td>
+            <td class="text-center">Total Price</td>
+            <td class="text-center">Status</td>
+            <td class="text-center">Update</td>
+        </tr>
+        <!-- cart items -->
+        <tr *ngFor="let order of orders">
+            <td class="text-center">{{order.id}}</td>
+            <td class="text-center">{{order.created}}</td>
+            <td class="text-center">{{order.createdBy}}</td>
+            <td class="text-center">{{order.paymentMethod}}</td>
+            <td class="text-right">{{order.totalPrice}}</td>
+            <td class="text-center">{{order.status}}</td>
+            <td class="text-center">Choose</td>
+            <!-- <td class="text-center" *ngFor="let row of order.orderRows">{{row.amount}}</td> -->
+            <!-- <td class="text-center" title="remove from cart">
+                <a (click)="pdtSvc.clearCartItem(item.sku)" >
+                    <i class="glyphicon glyphicon-remove"></i>
+                </a>
+            </td> -->
+        </tr>
+      </table>
+    <div>
+  <div class="container main-container">
+<main>

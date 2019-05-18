@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { IUser } from '../interfaces/iuser';
 import { IOrder } from '../interfaces/iorder';
 import { ICategory } from '../interfaces/icategory';
+import { IPlacedOrders } from '../interfaces/iplaced-orders';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -106,6 +107,10 @@ export class DataService implements IdataService{
 
   getCategory():Observable<ICategory[]>{
     return this.http.get<ICategory[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/categories');
+  }
+
+  getOrders(): Observable<IPlacedOrders[]> {
+    return this.http.get<IPlacedOrders[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25');
   }
 
 }

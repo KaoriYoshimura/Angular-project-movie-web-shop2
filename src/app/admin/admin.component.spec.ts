@@ -35,4 +35,11 @@ describe('AdminComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should print out placed order list',() => {
+    expect(component.orders).toBeUndefined();
+    component.getOrders();
+    expect(component.orders.length).toBe(2);
+  });
+  
 });

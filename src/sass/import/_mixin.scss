@@ -14,9 +14,10 @@
 }
 
 //Header text
-@mixin textColor($color, $textShadow){
-    color: $color;
-    text-shadow: $textShadow 0 0 2px;
+@mixin boxShadow(){
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
 }
 
 //Header text without text shadow

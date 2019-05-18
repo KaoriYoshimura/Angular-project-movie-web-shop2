@@ -97,25 +97,18 @@ export class MockDataService implements IdataService{
     };
   }
 
-  // // Add a new order to the database
-  // // Call http.post and pass in the URL and order. In order to execute the HPPT post and get the response, use subscribe and take it in our response by using an arrow function.
-  // submitOrder(order: IOrder): Observable<IOrder> {
-  //   return this.http.post<IOrder>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders', order, httpOptions);
-  // }
-
-
-
+  // How can I use search API?
   // searchProductApi(Query: string):Observable<IProduct[]>{
-  //   // console.log('datas: ', Query);
-  //   return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
+  //   return of(this.products);
+  // return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
 
-  //   // https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=modern
-  //     // return this.searchWord = Query;
   // }
 
   getCategory():Observable<ICategory[]>{
     return of(this.categoryDataMock);
   }
+
+
 
   constructor() { }
 }

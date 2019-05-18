@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
   isSearchResultsExist() {
     if(this.searchResults && this.searchResults.length){
       this.products = this.searchResults;
-      console.log(this.searchResults);
     } else {
       this.products = this.allProducts;
     }

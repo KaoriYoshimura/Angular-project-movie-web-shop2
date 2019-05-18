@@ -5,8 +5,9 @@ import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FilterComponent } from './search/filter.component';
 import { FormsModule } from '@angular/forms';
+import { SearchComponent } from './search/search.component';
+import { CategoryComponent } from './category/category.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -16,7 +17,7 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule, FormsModule],
-      declarations: [ HomeComponent, FilterComponent ]
+      declarations: [ HomeComponent, SearchComponent, CategoryComponent ]
     })
 
     //Override component's own provider
@@ -40,13 +41,24 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should contain 2 products',() => {
+  it('should print out all products',() => {
     expect(component.products.length).toBe(2);
   });
 
-  it('should search', ()=> {
-    // component.searchProduct('dark');
+  // How can I use mockDataService instead of API?
+  // it('should search', ()=> {
+  //   component.searchProduct('dark');
+  //   expect(component.searchResults.length).toBe(1);
+  // });
 
-    // component.products
+  it('should print out category list',() => {
+    expect(component.categories.length).toBe(2);
   });
+
+  it('should filter by category',() => {
+    expect(component.categoryResults.length).toBe(0);
+    component.showProductsByCategory(5);
+    expect(component.categoryResults.length).toBe(1);
+  });
+
 });

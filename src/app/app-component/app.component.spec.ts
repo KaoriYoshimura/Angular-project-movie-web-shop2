@@ -12,8 +12,11 @@ describe('AppComponent', () => {
         AppComponent,
         // ProductsComponent
       ],
-    imports: [HttpClientModule, RouterTestingModule, FontAwesomeModule],
-    }).compileComponents();
+      imports: [
+        HttpClientModule, RouterTestingModule, FontAwesomeModule
+      ],
+    })
+    .compileComponents();
   }));
 
   it('should create the app', () => {

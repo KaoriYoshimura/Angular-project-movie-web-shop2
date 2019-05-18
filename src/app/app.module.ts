@@ -19,6 +19,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { SearchComponent } from './home/search/search.component';
 import { OrderSentComponent } from './order-sent/order-sent.component';
 import { CategoryComponent } from './home/category/category.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CategoryComponent } from './home/category/category.component';
     SearchComponent,
     OrderSentComponent,
     CategoryComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

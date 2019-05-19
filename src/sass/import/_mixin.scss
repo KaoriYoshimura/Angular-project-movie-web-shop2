@@ -13,21 +13,14 @@
     }
 }
 
-//Header text
 @mixin boxShadow(){
     -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
     box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
     box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
 }
 
-//Header text without text shadow
-@mixin textColorNoShadow{
-    color: $mainColorB;
-    text-shadow: none;
-}
-
 //Button style
-@mixin buttonStyle($bgColor,$tColor) {
+@mixin buttonStyle($bgColor,$tColor,$bColor) {
     background-color: $bgColor;
     color: $tColor;
     line-height: 22px;
@@ -35,7 +28,7 @@
     margin: 10px;
     margin-bottom: 25px;
     text-decoration: none;
-    border: none;
+    border: 1px solid $bColor;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;

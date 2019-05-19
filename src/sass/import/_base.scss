@@ -1,4 +1,6 @@
 @import "variables";
+@import "mixin";
+
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
@@ -410,3 +412,17 @@
     color: white;
   }
   
+//Button style
+button {
+  @include buttonStyle($mainColorB, $fontColorNav, $mainColorB);
+  text-transform: uppercase;
+
+  &:hover {
+    @include buttonStyle($fontColorNav, $mainColorB, $mainColorB);
+  }
+}
+
+  // Padding for top containers in every page
+  .main-container {
+    padding: 20px 10px 0px 10px;
+  }

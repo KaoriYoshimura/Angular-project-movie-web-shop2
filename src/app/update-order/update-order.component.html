@@ -1,3 +1,66 @@
-<p>
-  update-order works!
-</p>
+<main>
+  <div class="container main-container">
+    <h2>Update order</h2>
+    <div>
+
+      <h3>Order details</h3>
+      <table class="table table-bordered">
+        <!-- Order header -->
+        <tr>
+            <td class="text-center">ID</td>
+            <td class="text-center">Ordered On</td>
+            <td class="text-center">Ordered By</td>
+            <td class="text-center">PaymentMethod</td>
+            <td class="text-center">Status</td>
+            <td class="text-center">Update</td>
+            <td class="text-center">Delete</td>
+        </tr>
+        <!-- Order details -->
+        <tr>
+            <td class="text-center">{{orderDetails.id}}</td>
+            <td class="text-center">{{orderDetails.created}}</td>
+            <td class="text-center">{{orderDetails.createdBy}}</td>
+            <td class="text-center">{{orderDetails.paymentMethod}}</td>
+            <td class="text-center">{{orderDetails.status}}</td>
+            <td class="text-center"><button>Update</button></td>
+            <td class="text-center"><button>Delete</button></td>
+            <!-- <td class="text-center" *ngFor="let row of order.orderRows">{{row.amount}}</td> -->
+            <!-- <td class="text-center" title="remove from cart">
+                <a (click)="pdtSvc.clearCartItem(item.sku)" >
+                    <i class="glyphicon glyphicon-remove"></i>
+                </a>
+            </td> -->
+        </tr>
+      </table>
+
+      <h3>Order items</h3>
+      <table class="table table-bordered">
+        <!-- Order items header -->
+        <tr>
+            <td class="text-center">ID</td>
+            <td class="text-center">Product ID</td>
+            <td class="text-center">Product</td>
+            <td class="text-center">Amount</td>
+            <td class="text-center">Update</td>
+            <td class="text-center">Delete</td>
+        </tr>
+        <!-- Order items -->
+        <tr *ngFor="let row of orderDetails.orderRows">
+            <td class="text-center">{{row.id}}</td>
+            <td class="text-center">{{row.productId}}</td>
+            <td class="text-center"></td>
+            <td class="text-center">{{row.amount}}</td>
+            <td class="text-center"><button>Update</button></td>
+            <td class="text-center"><button>Delete</button></td>
+            <!-- <td class="text-center" *ngFor="let row of order.orderRows">{{row.amount}}</td> -->
+            <!-- <td class="text-center" title="remove from cart">
+                <a (click)="pdtSvc.clearCartItem(item.sku)" >
+                    <i class="glyphicon glyphicon-remove"></i>
+                </a>
+            </td> -->
+        </tr>
+      </table>
+
+    <div>
+  <div class="container main-container">
+<main>

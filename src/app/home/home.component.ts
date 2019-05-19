@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
         }
       };
     }
-    this.products = this.categoryResults;
+    return this.products = this.categoryResults;
   }
 
 }

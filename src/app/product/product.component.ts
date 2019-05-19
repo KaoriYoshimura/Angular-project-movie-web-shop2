@@ -23,7 +23,6 @@ export class ProductComponent implements OnInit {
   // Get the property params from product.component, 'id' and copies the data into myParams. Use this id to collect the item with the same id from API.
   ngOnInit() {
     this.route.params.subscribe(myParams => {
-
       const id = myParams['id'];
       this.getMovie(id);
       this.NumberOfCartItems = this.service.countNumberOfCartItems();
@@ -35,8 +34,6 @@ export class ProductComponent implements OnInit {
   getMovie(id: number){
     this.service.getDetailById(id).subscribe((detailsFromApi)=> {
       this.details = detailsFromApi;
-      // console.log(this.details);
-
     });
   }
 

@@ -413,7 +413,7 @@
   }
   
 //Button style
-button {
+button:not(.dataTables_wrapper):not(.paginate_button ):not(.paginate_button) {
   @include buttonStyle($mainColorB, $fontColorNav, $mainColorB);
   text-transform: uppercase;
 

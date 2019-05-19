@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ConfirmComponent } from './confirm/confirm.component';
 import { OrderSentComponent } from './order-sent/order-sent.component';
 import { AdminComponent } from './admin/admin.component';
+import { UpdateOrderComponent } from './update-order/update-order.component';
 
 
 const appRoutes: Routes= [
@@ -19,6 +20,7 @@ const appRoutes: Routes= [
   { path: 'confirm', component:ConfirmComponent },
   { path: 'ordersent', component:OrderSentComponent },
   { path: 'admin', component:AdminComponent },
+  { path: 'updateorder/:id', component:UpdateOrderComponent },
   { path: '**', component:PageNotFoundComponent },
 ];
 

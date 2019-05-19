@@ -3,8 +3,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatPaginatorModule, MatTreeModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { CdkTableModule } from '@angular/cdk/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app-component/app.component';
@@ -48,6 +50,10 @@ import { UpdateOrderComponent } from './update-order/update-order.component';
     MatCheckboxModule,
     MatInputModule,
     MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    CdkTableModule,
+    MatTreeModule,
     FontAwesomeModule,
   ],
   providers: [],

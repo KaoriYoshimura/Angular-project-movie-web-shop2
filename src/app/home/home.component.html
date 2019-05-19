@@ -1,27 +1,33 @@
 <main>
   <div class="container main-container">
 
-      <div class="filter row justify-content-center">
-        <div class="search-box col-lg-4 align-self-center text-center">
-          <!-- caputure an even from EventEmitter when something is typed in the input field -->
-          <app-search
-            (queryEvent)="searchProduct($event)"
-          >
-          </app-search>
-        </div>
+    <!-- Filter child components -->
+    <div class="filter row justify-content-center">
 
-        <p class="col-lg-1  align-self-center text-center">or</p>
-
-        <div class="category-box col-lg-5 row justify-content-left">
-          <app-category
-            (categoryEvent)="showProductsByCategory($event)"
-            *ngFor="let category of categories"
-            [categoryInput]="category"
-          >
-          </app-category>
-        </div>
+      <!-- Search child components -->
+      <div class="search-box col-lg-4 align-self-center text-center">
+        <!-- Caputure an even from EventEmitter when something is typed in the input field -->
+        <app-search
+          (queryEvent)="searchProduct($event)"
+        >
+        </app-search>
       </div>
 
+      <!-- Separation -->
+      <p class="col-lg-1  align-self-center text-center">or</p>
+
+      <!-- Category child components -->
+      <div class="category-box col-lg-5 row justify-content-left">
+        <app-category
+          (categoryEvent)="showProductsByCategory($event)"
+          *ngFor="let category of categories"
+          [categoryInput]="category"
+        >
+        </app-category>
+      </div>
+    </div>
+
+      <!-- Product list  -->
     <div class="product-list">
       <div class="row match-height">
           <div class="col-xl-3 col-md-6 col-sm-12 card-wrapper" *ngFor="let product of products">

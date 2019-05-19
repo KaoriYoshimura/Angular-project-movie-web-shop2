@@ -1,35 +1,97 @@
 <main>
   <div class="container main-container">
-    <h2>Your cart</h2>
+    <h1>Admin</h1>
+    <h2>Order List</h2>
     <div>
-      <table class="table table-bordered">
-        <!-- header -->
-        <tr>
-            <td class="text-center">ID</td>
-            <td class="text-center">Ordered On</td>
-            <td class="text-center">Ordered By</td>
-            <td class="text-center">PaymentMethod</td>
-            <td class="text-center">Total Price</td>
-            <td class="text-center">Status</td>
-            <td class="text-center">Update</td>
-        </tr>
-        <!-- cart items -->
-        <tr *ngFor="let order of orders">
-            <td class="text-center">{{order.id}}</td>
-            <td class="text-center">{{order.created}}</td>
-            <td class="text-center">{{order.createdBy}}</td>
-            <td class="text-center">{{order.paymentMethod}}</td>
-            <td class="text-right">{{order.totalPrice}}</td>
-            <td class="text-center">{{order.status}}</td>
-            <td class="text-center">Choose</td>
-            <!-- <td class="text-center" *ngFor="let row of order.orderRows">{{row.amount}}</td> -->
-            <!-- <td class="text-center" title="remove from cart">
-                <a (click)="pdtSvc.clearCartItem(item.sku)" >
-                    <i class="glyphicon glyphicon-remove"></i>
-                </a>
-            </td> -->
-        </tr>
-      </table>
+      <mat-table class="table table-bordered" [dataSource]="orders">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="text-center">ID</th>
+          <td mat-cell *matCellDef="let order">{{order.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="OrderedOn">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Ordered On</th>
+            <td mat-cell *matCellDef="let order">{{order.created | date: 'M-d h:mm a'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="orderedBy">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Ordered By</th>
+            <td mat-cell *matCellDef="let order">{{order.createdBy}}</td>
+        </ng-container>
+        <ng-container matColumnDef="paymentMethod">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Payment Method</th>
+            <td mat-cell *matCellDef="let order"><input type="text" placeholder="{{order.paymentMethod}}" value="{{order.payment}}" #payment></td>
+        </ng-container>
+        <ng-container matColumnDef="totalPrice">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Total Price</th>
+            <td mat-cell *matCellDef="let order" class="text-right">{{order.totalPrice}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Status</th>
+            <td mat-cell *matCellDef="let order"><input type="text" placeholder="{{order.status}}"  max="3" min="0" #status></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Update</th>
+            <td mat-cell *matCellDef="let order"><button (click)="UpdateOrder(payment.value, status.value, order.id)">Update</button></td>
+        </ng-container>
+        <ng-container matColumnDef="showOrderItems">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Show order items</th>
+            <td mat-cell *matCellDef="let order"><button (click)="getOrderRow(order.id)">Show</button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Delete</th>
+            <td mat-cell *matCellDef="let order"><button (click)="deleteOrderRow(order.id)">Delete</button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </mat-table>
+
+
+      <mat-paginator
+        [length]="100"
+        [pageSize]="5">
+      </mat-paginator>
+
+      <div *ngIf="orderRows">
+
+        <h2>Order items</h2>
+        <table class="table table-bordered">
+          <!-- Order items header -->
+          <tr>
+              <th class="text-center">ID</th>
+              <th class="text-center">Product ID</th>
+              <th class="text-center">Product</th>
+              <th class="text-center">Amount</th>
+              <th class="text-center">Update</th>
+              <th class="text-center">Delete</th>
+          </tr>
+          <!-- Order items -->
+          <tr *ngFor="let row of orderRows">
+              <td class="text-center">{{row.id}}</td>
+              <td class="text-center" *ngIf="row.id === editRow"><input type="number" [(ngModel)]="row.productId" value="row.productId"></td>
+              <td class="text-center" *ngIf="row.id !== editRow" (click)="activateEditRow(row.id)">{{row.productId}}</td>
+              <td class="text-center"></td>
+              <td class="text-center">{{row.amount}}</td>
+              <td class="text-center"><button>Update</button></td>
+              <td class="text-center"><button>Delete</button></td>
+          </tr>
+        </table>
+      </div>
     <div>
   <div class="container main-container">
 <main>
+
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+      background: none;
+      color: pink!important;
+      /*change the hover text color*/
+    }
+    
+    
+    /*below block of css for change style when active*/
+    
+    .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+      background: none;
+      color: pink!important;
+    }
+    </style>

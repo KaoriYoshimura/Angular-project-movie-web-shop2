@@ -20,6 +20,7 @@ import { SearchComponent } from './home/search/search.component';
 import { OrderSentComponent } from './order-sent/order-sent.component';
 import { CategoryComponent } from './home/category/category.component';
 import { AdminComponent } from './admin/admin.component';
+import { UpdateOrderComponent } from './update-order/update-order.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AdminComponent } from './admin/admin.component';
     OrderSentComponent,
     CategoryComponent,
     AdminComponent,
+    UpdateOrderComponent,
   ],
   imports: [
     BrowserModule,

@@ -46,7 +46,7 @@ describe('HomeComponent', () => {
   });
 
   it('should search', ()=> {
-    expect(component.searchResults.length).toBe(2);
+    expect(component.searchResults).toBeUndefined();
     component.searchProduct('Dark');
     expect(component.searchResults.length).toBe(1);
   });

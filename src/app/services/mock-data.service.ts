@@ -16,6 +16,7 @@ export class MockDataService implements IdataService{
   cartItems: IProduct[] = [];
   userData: IUser;
   orders: IPlacedOrders[] = [];
+  searchResults: IProduct[];
 
   // To show a number of items in sessionStorage
   NumberOfCartItems = 0;
@@ -103,7 +104,8 @@ export class MockDataService implements IdataService{
   }
 
   searchProductApi(Query: string):Observable<IProduct[]>{
-    return of(this.products);
+    this.searchResults = this.products.filter(eachItem => eachItem.name.includes(Query));
+    return of(this.searchResults)
   }
 
   getCategory():Observable<ICategory[]>{

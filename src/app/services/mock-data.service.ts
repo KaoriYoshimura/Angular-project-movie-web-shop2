@@ -15,6 +15,7 @@ export class MockDataService implements IdataService{
   // Temporary cartItems to store instead of sessionStorage
   cartItems: IProduct[] = [];
   userData: IUser;
+  orders: IPlacedOrders[] = [];
 
   // To show a number of items in sessionStorage
   NumberOfCartItems = 0;
@@ -117,14 +118,15 @@ export class MockDataService implements IdataService{
   //   return this.http.put<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/{' + id + '}', updateOrder, httpOptions);
   // }
 
-  deleteOrderRow(id:number): Observable<IPlacedOrders>{
+  deleteOrder(id:number) : Observable<IPlacedOrders> {
     for (let i = 0; i < this.orderDataMock.length; i++) {
       if(this.orderDataMock[i].id === id){
         this.orderDataMock.splice(i, 1);
+        return of(this.orderDataMock[i]);
       }
     }
 
-    return this.orderDataMock;
+    // Return as observable so that it can match with IProduct interface
   }
 
   constructor() { }

@@ -45,7 +45,7 @@ describe('AdminComponent', () => {
 
   it('should delete order row',() => {
     expect(component.orders.data.length).toBe(3);
-    component.deleteOrderRow(558);
+    component.deleteOrder(558);
     expect(component.orders.data.length).toBe(2);
   });
 

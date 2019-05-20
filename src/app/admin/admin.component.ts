@@ -71,9 +71,9 @@ export class AdminComponent implements OnInit {
   //   console.log(payment, status, id);
   // }
 
-  deleteOrderRow(id:number){
+  deleteOrder(id:number){
     console.log(id);
-    this.service.deleteOrderRow(id).subscribe(
+    this.service.deleteOrder(id).subscribe(
       response => {
         console.log(response);
         this.getOrders();

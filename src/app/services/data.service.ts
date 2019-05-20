@@ -109,16 +109,16 @@ export class DataService implements IdataService{
     return this.http.get<ICategory[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/categories');
   }
 
-  getOrders(): Observable<IPlacedOrders[]> {
+  getOrders(): Observable<IPlacedOrders[]>{
     return this.http.get<IPlacedOrders[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25');
   }
 
-  updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders> {
-    return this.http.post<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/${' + id + '}', updateOrder, httpOptions);
+  updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>{
+    return this.http.put<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/' + id, updateOrder, httpOptions);
   }
 
-  deleteOrderRow(id:number): Observable<IPlacedOrders> {
-    return this.http.delete<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/${' + id + '}', httpOptions);
+  deleteOrderRow(id:number): Observable<IPlacedOrders>{
+    return this.http.delete<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders' + '/' + id, httpOptions);
   }
 
 }

@@ -5,6 +5,7 @@ import { IUser } from '../interfaces/iuser';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ICategory } from '../interfaces/icategory';
+import { IPlacedOrders } from '../interfaces/iplaced-orders';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,11 @@ export class MockDataService implements IdataService{
   categoryDataMock: ICategory[] = [
     {id:5, name :"Action"},
     {id:6, name :"Comedy"},
+  ];
+
+  orderDataMock: IPlacedOrders[] = [
+    {id:558, companyId:25, created:"2019-04-01T00:00:00", createdBy :"Kaori", paymentMethod:"paypal", totalPrice :100, status:0, orderRows :[{id:965, productId:79, product:null, amount:3, orderId:558}]},
+    {id:559, companyId:25, created:"2019-05-01T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :200, status:0, orderRows :[{id:966, productId:78, product:null, amount:1, orderId:559}]},
   ];
 
   // Return product array above as Observable<Iproduct[]>
@@ -66,10 +72,7 @@ export class MockDataService implements IdataService{
     // this.countNumberOfCartItems();
   }
 
-  RemoveFromSessionStorage(item) {
-    // const cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
-    // const cartItems = this.getSessionCartItems();
-
+  RemoveFromSessionStorage(item: number) {
     for (let i = 0; i < this.cartItems.length; i++) {
       if(this.cartItems[i].id === item){
         this.cartItems.splice(i, 1);
@@ -77,7 +80,6 @@ export class MockDataService implements IdataService{
     }
 
     return this.cartItems;
-    // this.countNumberOfCartItems();
   }
 
   caluculateTotalCost(){
@@ -97,18 +99,27 @@ export class MockDataService implements IdataService{
     };
   }
 
-  // How can I use search API?
-  // searchProductApi(Query: string):Observable<IProduct[]>{
-  //   return of(this.products);
-  // return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/search' + '?searchText=' + Query);
-
-  // }
+  searchProductApi(Query: string):Observable<IProduct[]>{
+    return of(this.products);
+  }
 
   getCategory():Observable<ICategory[]>{
     return of(this.categoryDataMock);
   }
 
+  getOrders(): Observable<IPlacedOrders[]>{
+    return of(this.orderDataMock);
+  }
 
+  // updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>{
+  //   return this.http.put<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/{' + id + '}', updateOrder, httpOptions);
+  // }
+
+  // deleteOrderRow(id:number): Observable<IPlacedOrders>{
+  //   return of(this.orderDataMock);
+
+  // //   return this.http.delete<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/{' + id + '}', httpOptions);
+  // }
 
   constructor() { }
 }

@@ -38,10 +38,9 @@ describe('AdminComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should print out placed order list',() => {
-  //   expect(component.checkOrderRows).toBeUndefined();
-  //   component.getOrders();
-  //   expect(component.checkOrderRows.length).toBe(2);
-  // });
+  it('should print out placed order list',() => {
+    component.getOrders();
+    expect(component.checkOrderRows.length).toBe(2);
+  });
 
 });

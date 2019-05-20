@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
   displayedColumns: string[] = [
     'id', 'OrderedOn', 'orderedBy', 'paymentMethod', 'totalPrice', 'status', 'update', 'showOrderItems', 'delete'
   ];
-  orders;
+  orders: MatTableDataSource<IPlacedOrders>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit {
   orderRows: IPlacedOrderRow[];
   updatedOrders: IPlacedOrders[];
 
-  constructor(private service:DataService) { }
+  constructor(private service: DataService) { }
 
   ngOnInit() {
     this.getOrders();
@@ -41,9 +41,6 @@ export class AdminComponent implements OnInit {
   }
 
   getOrderRow(id:number){
-    console.log(id);
-    console.log(this.checkOrderRows);
-
     // Define the array to be pushed
     this.orderRows = [];
 
@@ -56,10 +53,11 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  updateOrders(){
+  // updateOrders(){
     // this.createOrderRows();
 
   //   this.updatedOrders = {
+    //   id: use "="
   //     companyId: 25,
   //     created: this.now,
   //     createdBy: this.userData.email,
@@ -74,9 +72,10 @@ export class AdminComponent implements OnInit {
   // UpdateOrder(payment:string, status:number, id:string){
   //   this.service.updateOrders(id, this.updateOrder)
   //   console.log(payment, status, id);
-  }
+  // }
 
   deleteOrderRow(id:number){
+    console.log(id);
     this.service.deleteOrderRow(id).subscribe(
       response => console.log(response),
       error => console.log(error),

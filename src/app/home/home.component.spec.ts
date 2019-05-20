@@ -45,11 +45,10 @@ describe('HomeComponent', () => {
     expect(component.products.length).toBe(2);
   });
 
-  // How can I use mockDataService instead of API?
-  // it('should search', ()=> {
-  //   component.searchProduct('dark');
-  //   expect(component.searchResults.length).toBe(1);
-  // });
+  it('should search', ()=> {
+    component.searchProduct('Dark');
+    expect(component.searchResults.length).toBe(1);
+  });
 
   it('should print out category list',() => {
     expect(component.categories.length).toBe(2);

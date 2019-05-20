@@ -19,5 +19,5 @@ export interface IdataService {
     getCategory():Observable<ICategory[]>;
     getOrders(): Observable<IPlacedOrders[]>;
     // updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>;
-    deleteOrderRow(id:number): Observable<IPlacedOrders>;
+    // deleteOrderRow(id:number): Observable<IPlacedOrders>;
 }

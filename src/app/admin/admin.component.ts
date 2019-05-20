@@ -17,8 +17,6 @@ export class AdminComponent implements OnInit {
   orders: MatTableDataSource<IPlacedOrders>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
-  checkOrderRows: IPlacedOrders[];
   orderRows: IPlacedOrderRow[];
   updatedOrders: IPlacedOrders[];
 
@@ -33,7 +31,6 @@ export class AdminComponent implements OnInit {
       response => {
         this.orders = new MatTableDataSource<IPlacedOrders>(response as IPlacedOrders[]);
         this.orders.paginator = this.paginator;
-        this.checkOrderRows = response;
       },
       error => console.log(error),
       () => console.log('HPPT request for category completed')
@@ -44,10 +41,10 @@ export class AdminComponent implements OnInit {
     // Define the array to be pushed
     this.orderRows = [];
 
-    for(var i=0; i<this.checkOrderRows.length; i++){
-      for(var j=0; j<this.checkOrderRows[i].orderRows.length; j++){
-        if(this.checkOrderRows[i].orderRows[j].orderId === id){
-          this.orderRows.push(this.checkOrderRows[i].orderRows[j]);
+    for(var i=0; i<this.orders.data.length; i++){
+      for(var j=0; j<this.orders.data[i].orderRows.length; j++){
+        if(this.orders.data[i].orderRows[j].orderId === id){
+          this.orderRows.push(this.orders.data[i].orderRows[j]);
         }
       };
     }
@@ -66,7 +63,7 @@ export class AdminComponent implements OnInit {
   //     status: 0,
   //     orderRows: this.orderRows
   //   };
-  // }
+  // }  
 
 
   // UpdateOrder(payment:string, status:number, id:string){
@@ -77,10 +74,24 @@ export class AdminComponent implements OnInit {
   deleteOrderRow(id:number){
     console.log(id);
     this.service.deleteOrderRow(id).subscribe(
-      response => console.log(response),
+      response => {
+        console.log(response);
+        this.getOrders();
+      },
       error => console.log(error),
       () => console.log('HPPT request for category completed')
     );
   }
 
+  // // Remove item from the array to print out
+  // removeOrderRowFromArray(id:number){
+  //   for (let i = 0; i < this.orders.data.length; i++) {
+  //     if(this.orders.data[i].id === id){
+        
+  //       this.orders.data.splice(i, 1);
+  //       // this.checkOrderRows.splice(i, 1);
+  //       console.log(this.orders.data);
+  //     }
+  //   }
+  // }
 }

@@ -40,7 +40,13 @@ describe('AdminComponent', () => {
 
   it('should print out placed order list',() => {
     component.getOrders();
-    expect(component.checkOrderRows.length).toBe(2);
+    expect(component.orders.data.length).toBe(3);
+  });
+
+  it('should delete order row',() => {
+    expect(component.orders.data.length).toBe(3);
+    component.deleteOrderRow(558);
+    expect(component.orders.data.length).toBe(2);
   });
 
 });

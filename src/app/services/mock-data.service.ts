@@ -37,6 +37,8 @@ export class MockDataService implements IdataService{
   orderDataMock: IPlacedOrders[] = [
     {id:558, companyId:25, created:"2019-04-01T00:00:00", createdBy :"Kaori", paymentMethod:"paypal", totalPrice :100, status:0, orderRows :[{id:965, productId:79, product:null, amount:3, orderId:558}]},
     {id:559, companyId:25, created:"2019-05-01T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :200, status:0, orderRows :[{id:966, productId:78, product:null, amount:1, orderId:559}]},
+    {id:560, companyId:25, created:"2019-05-02T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :300, status:0, orderRows :[{id:967, productId:80, product:null, amount:1, orderId:559}]},
+
   ];
 
   // Return product array above as Observable<Iproduct[]>
@@ -115,11 +117,15 @@ export class MockDataService implements IdataService{
   //   return this.http.put<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/{' + id + '}', updateOrder, httpOptions);
   // }
 
-  // deleteOrderRow(id:number): Observable<IPlacedOrders>{
-  //   return of(this.orderDataMock);
+  deleteOrderRow(id:number): Observable<IPlacedOrders>{
+    for (let i = 0; i < this.orderDataMock.length; i++) {
+      if(this.orderDataMock[i].id === id){
+        this.orderDataMock.splice(i, 1);
+      }
+    }
 
-  // //   return this.http.delete<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/{' + id + '}', httpOptions);
-  // }
+    return this.orderDataMock;
+  }
 
   constructor() { }
 }

@@ -18,7 +18,7 @@
         </ng-container>
         <ng-container matColumnDef="paymentMethod">
             <th mat-header-cell *matHeaderCellDef class="text-center">Payment Method</th>
-            <td mat-cell *matCellDef="let order"><input type="text" placeholder="{{order.paymentMethod}}" value="{{order.payment}}" #payment></td>
+            <td mat-cell *matCellDef="let order"><input type="text" placeholder="{{order.paymentMethod}}" #payment></td>
         </ng-container>
         <ng-container matColumnDef="totalPrice">
             <th mat-header-cell *matHeaderCellDef class="text-center">Total Price</th>
@@ -30,15 +30,15 @@
         </ng-container>
         <ng-container matColumnDef="update">
             <th mat-header-cell *matHeaderCellDef class="text-center">Update</th>
-            <td mat-cell *matCellDef="let order"><button (click)="UpdateOrder(payment.value, status.value, order.id)">Update</button></td>
+            <td mat-cell *matCellDef="let order"><button (click)="updateOrder(payment.value, status.value, order.id)">Update</button></td>
         </ng-container>
         <ng-container matColumnDef="showOrderItems">
             <th mat-header-cell *matHeaderCellDef class="text-center">Show order items</th>
-            <td mat-cell *matCellDef="let order"><button (click)="getOrderRow(order.id)">Show</button></td>
+            <td mat-cell *matCellDef="let order"><button (click)="showOrderRow(order.id)">Show</button></td>
         </ng-container>
         <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef class="text-center">Delete</th>
-            <td mat-cell *matCellDef="let order"><button (click)="deleteOrderRow(order.id)">Delete</button></td>
+            <td mat-cell *matCellDef="let order"><button (click)="deleteOrder(order.id)">Delete</button></td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -72,7 +72,7 @@
               <td class="text-center"></td>
               <td class="text-center">{{row.amount}}</td>
               <td class="text-center"><button>Update</button></td>
-              <td class="text-center"><button>Delete</button></td>
+              <td class="text-center"><button (click)="deleteOrderRow(row.id)">Delete</button></td>
           </tr>
         </table>
       </div>
@@ -80,7 +80,7 @@
   <div class="container main-container">
 <main>
 
-<style>
+<!-- <style>
     .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
       background: none;
       color: pink!important;
@@ -94,4 +94,4 @@
       background: none;
       color: pink!important;
     }
-    </style>
+    </style> -->

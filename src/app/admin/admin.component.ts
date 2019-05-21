@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IPlacedOrders, IPlacedOrderRow } from '../interfaces/iplaced-orders';
 import { DataService } from '../services/data.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -37,7 +38,7 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  getOrderRow(id:number){
+  showOrderRow(id:number){
     // Define the array to be pushed
     this.orderRows = [];
 
@@ -63,13 +64,13 @@ export class AdminComponent implements OnInit {
   //     status: 0,
   //     orderRows: this.orderRows
   //   };
-  // }  
-
-
-  // UpdateOrder(payment:string, status:number, id:string){
-  //   this.service.updateOrders(id, this.updateOrder)
-  //   console.log(payment, status, id);
   // }
+
+
+  updateOrder(payment:string, status:number , id:string){
+    // this.service.updateOrders(id, this.updateOrder)
+    console.log(payment, status, id );
+  }
 
   deleteOrder(id:number){
     console.log(id);
@@ -83,15 +84,26 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  // // Remove item from the array to print out
-  // removeOrderRowFromArray(id:number){
-  //   for (let i = 0; i < this.orders.data.length; i++) {
-  //     if(this.orders.data[i].id === id){
-        
-  //       this.orders.data.splice(i, 1);
-  //       // this.checkOrderRows.splice(i, 1);
-  //       console.log(this.orders.data);
-  //     }
-  //   }
-  // }
+  deleteOrderRow(id:number){
+    console.log(id);
+    // this.service.deleteOrder(id).subscribe(
+    //   response => {
+    //     console.log(response);
+    //     this.getOrders();
+    //   },
+    //   error => console.log(error),
+    //   () => console.log('HPPT request for category completed')
+    // );
+
+        // Define the array to be pushed
+        // this.orderRows = [];
+
+        // for(var i=0; i<this.orders.data.length; i++){
+        //   for(var j=0; j<this.orders.data[i].orderRows.length; j++){
+        //     if(this.orders.data[i].orderRows[j].orderId === id){
+        //       this.orderRows.push(this.orders.data[i].orderRows[j]);
+        //     }
+        //   };
+        // }
+  }
 }

@@ -394,13 +394,12 @@
     text-align: left;
     font-family: $fontFamilyName;
     font-size: 1.8rem;
+    font-weight: bold;
   }
   
   h2{
-    margin: 0;
-    font-size: 1.8rem;
-    color: $mainColorR;
-    font-weight: bold;
+    margin: 10px 0;
+    font-size: 1.5rem;
   }
   
   h3{
@@ -413,7 +412,7 @@
   }
   
 //Button style
-button:not(.dataTables_wrapper):not(.paginate_button ):not(.paginate_button) {
+.button-basic {
   @include buttonStyle($mainColorB, $fontColorNav, $mainColorB);
   text-transform: uppercase;
 
@@ -422,7 +421,14 @@ button:not(.dataTables_wrapper):not(.paginate_button ):not(.paginate_button) {
   }
 }
 
-  // Padding for top containers in every page
-  .main-container {
-    padding: 20px 10px 0px 10px;
-  }
+// Paginator icons
+.mat-icon-button {
+  background-color: $mainColorB!important;
+  color: $fontColorNav!important;
+  margin: 10px!important;
+}
+
+// Padding for top containers in every page
+.main-container {
+  padding: 20px 10px 0px 10px;
+}

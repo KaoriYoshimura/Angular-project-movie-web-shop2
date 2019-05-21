@@ -1,97 +1,57 @@
-<div *ngFor="let cartItem of cartItems">
-  <a routerLink="/details/{{cartItem.id}}">{{cartItem.name}}</a>
-  <br>
-  {{cartItem.price}}<br>
-</div>
-<p>Total {{totalCost}}</p>
+<main>
+  <div class="container main-container">
+    <h1>Check out</h1>
 
-
-<div>
-  <h2>Billing Information</h2>
-  <form [formGroup]="userForm" (ngSubmit)="billingOnSubmit()">
-    <mat-form-field>
-      <label>First Name<span>(required)</span></label>
-      <input matInput type="text" formControlName="firstName">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <label>Last Name<span>(required)</span></label>
-      <input matInput type="text" formControlName="lastName">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <label>Email<span>(required)</span></label>
-      <input matInput type="email" formControlName="email">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <label>Confirm email<span>(required)</span></label>
-      <input matInput type="email" formControlName="confirmEmail">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <label>Payment method<span>(required)</span></label>
-      <input matInput type="text" formControlName="paymentMethod">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-
-      <label>Street<span>(required)</span></label>
-      <input matInput type="text" formControlName="street">
-      <br>
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <label>Street 2<span></span></label>
-      <input matInput type="text" formControlName="street2">
-      <br>
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <label>City<span>(required)</span></label>
-      <input matInput type="text" formControlName="city">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <label>postcode<span>(required)</span></label>
-      <input matInput type="number" formControlName="postcode">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <label>Phone number<span>(required)</span></label>
-      <input matInput type="number" formControlName="phoneNumber">
-    </mat-form-field>
-    <br>
-
-      <div formArrayName="phoneNumbers">
-        <div *ngFor="let phone of phoneNumbers.controls; let i=index">
-          <mat-form-field>
-            <label>Other phone number<span>(option)</span></label>
-            <input matInput type="number" [formControlName]="i">
-          </mat-form-field>
-          <button mat-button (click)="removePhoneNumber(i)">Remove</button>
-          <br>
-        </div>
-        <button type="button" (click)="addPhoneNumber()">Add more phone numbers</button>
+    <div class="row">
+    <!-- Cart items -->
+    <div class="col-lg-6">
+      <h2>Your cart items</h2>
+      <div class="cart-items-container">
+        <ul>
+          <li class="row" *ngFor="let cartItem of cartItems">
+            <span class="col-9"><a routerLink="/details/{{cartItem.id}}">{{cartItem.name}}</a></span>
+            <span class="price col-3">{{cartItem.price}}kr</span>
+          </li>
+        </ul>
+        <hr>
+        <p>Total {{totalCost}}kr</p>
       </div>
-    <br>
+    </div>
 
-    <!-- <span *ngIf="userForm.errors?.matchingFields">Emailds do not match</span> -->
-    <button type="submit" [disabled]="!userForm.valid">Confirm</button>
-  </form>
+    <div class="billing-info-container col-lg-6">
+      <h2>Billing Information</h2>
+      <form [formGroup]="userForm" (ngSubmit)="billingOnSubmit()">
+        <div>
+          <label>First Name<span>(required)</span></label><br>
+          <input type="text" formControlName="firstName">
+        </div>
+        <div>
+          <label>Email<span>(required)</span></label><br>
+          <input type="email" formControlName="email">
+        </div>
+        <div>
+          <label>Payment method<span>(required)</span></label><br>
+          <input type="text" formControlName="paymentMethod">
+        </div>
+        <div>
+          <label>Phone number<span>(required)</span></label><br>
+          <input  type="number" formControlName="phoneNumber">
+        </div>
 
+        <div formArrayName="phoneNumbers">
+          <div *ngFor="let phone of phoneNumbers.controls; let i=index">
+            <div>
+              <label>Other phone number<span>(option)</span></label><br>
+              <input  type="number" [formControlName]="i">
+              <button class="sub-button" (click)="removePhoneNumber(i)">Remove</button>
+            </div>
+            <button class="sub-button" type="button" (click)="addPhoneNumber()">Add more phone numbers</button>
+          </div>
+        </div>
+        <button class="button-basic" type="submit" [ngClass]="{'isDisable-style': !userForm.valid}" [disabled]="!userForm.valid">Confirm order</button>
+      </form>
+      </div>
+    </div>
 
-</div>
-
-<p>
-  Status {{userForm.status}}
-</p>
+  </div>
+</main>

@@ -86,20 +86,20 @@ export class MockDataService implements IdataService{
     return this.cartItems;
   }
 
-  caluculateTotalCost(){
-    for (let i = 0; i <this.cartItems.length; i++){
-      this.totalCost += this.cartItems[i].price;
-    }
+  // caluculateTotalCost(){
+  //   for (let i = 0; i <this.cartItems.length; i++){
+  //     this.totalCost += this.cartItems[i].price;
+  //   }
 
-    return this.totalCost;
-  }
+  //   return this.totalCost;
+  // }
 
 
     // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionUserData() {
     return this.userData = {
-      firstName:"Kaori", lastName:"Yoshimura", email:"kaori.yoshimura@medieinstitutet.se", confirmEmail:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", street:"Tulegatan 41", city:"Stockholm", postcode:1, phoneNumber:555222
+      firstName:"Kaori", email:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", phoneNumber:555222, phoneNumbers:2222
     };
   }
 

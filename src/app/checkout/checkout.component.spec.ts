@@ -54,27 +54,15 @@ describe('CheckoutComponent', () => {
   it('should validate email field', () => {
     let itemfirstName = component.userForm.controls["firstName"];
     itemfirstName.setValue("Media");
-    let itemLasttName = component.userForm.controls["lastName"];
-    itemLasttName.setValue("institutet");
     let itemEmailName = component.userForm.controls["email"];
     itemEmailName.setValue("Media@institutet.com");
-    let itemConfirmEmail = component.userForm.controls["confirmEmail"];
-    itemConfirmEmail.setValue("Media@institutet.com");
     let itempaymentMethod = component.userForm.controls["paymentMethod"];
     itempaymentMethod.setValue("Paypal");
-    let itemStreet = component.userForm.controls["street"];
-    itemStreet.setValue("Tulegatan 41");
-    let itemCity = component.userForm.controls["city"];
-    itemCity.setValue("Stockholm");
-    let itemPostCode = component.userForm.controls["postcode"];
-    itemPostCode.setValue("12345");
     let itemphoneNumber = component.userForm.controls["phoneNumber"];
     itemphoneNumber.setValue("1234567");
 
     expect(component.userForm.valid).toBeTruthy();
     expect(component.userForm.controls["firstName"].valid).toBeTruthy;
-    expect(component.userForm.controls["lastName"].valid).toBeTruthy;
-    expect(component.userForm.controls["postcode"].valid).toBeTruthy;
     expect(component.userForm.controls["phoneNumber"].valid).toBeTruthy;
   });
 

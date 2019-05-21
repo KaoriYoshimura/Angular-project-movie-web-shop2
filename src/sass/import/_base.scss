@@ -400,6 +400,7 @@
   h2{
     margin: 10px 0;
     font-size: 1.5rem;
+    text-align: center;
   }
   
   h3{
@@ -418,6 +419,24 @@
 
   &:hover {
     @include buttonStyle($fontColorNav, $mainColorB, $mainColorB);
+  }
+}
+
+.sub-button {
+  @include subButtonStyle($lightColorB_sub, $mainColorR, $mainColorR);
+  text-transform: uppercase;
+
+  &:hover {
+    @include subButtonStyle($lightColorB, $fontColorNav, $mainColorR);
+  }
+}
+
+.isDisable-style {
+  @include buttonStyle($fontColorNav, $lightColorB, $lightColorB);
+  text-transform: uppercase;
+
+  &:hover {
+    @include buttonStyle($fontColorNav, $lightColorB, $lightColorB);
   }
 }
 

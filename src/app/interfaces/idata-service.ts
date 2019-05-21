@@ -12,7 +12,7 @@ export interface IdataService {
     addToCart(details: IProduct):void;
     RemoveFromSessionStorage(item: number):void;
     getOrders(): Observable<IPlacedOrders[]>;
-    caluculateTotalCost():void;
+    // caluculateTotalCost():void;
     getSessionUserData():void;
     // submitOrder(order: IOrder): Observable<IOrder>;
     searchProductApi(Query: string):Observable<IProduct[]>;

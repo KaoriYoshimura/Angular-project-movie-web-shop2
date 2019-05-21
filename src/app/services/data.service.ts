@@ -25,7 +25,7 @@ export class DataService implements IdataService{
   constructor(private http: HttpClient) { }
 
   NumberOfCartItems = 0;
-  cartItems : IProduct[] = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
+  cartItems : IProduct[] = [];
   totalCost = 0;
   userData : IUser;
   searchWord: string = "";
@@ -81,13 +81,13 @@ export class DataService implements IdataService{
     // this.countNumberOfCartItems();
   }
 
-  caluculateTotalCost(){
-    for (let i = 0; i <this.cartItems.length; i++){
-      this.totalCost += this.cartItems[i].price;
-    }
+  // caluculateTotalCost(){
+  //   for (let i = 0; i <this.cartItems.length; i++){
+  //     this.totalCost += this.cartItems[i].price;
+  //   }
     
-    return this.totalCost;
-  }
+  //   return this.totalCost;
+  // }
 
   // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?

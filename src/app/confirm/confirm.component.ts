@@ -38,8 +38,11 @@ export class ConfirmComponent implements OnInit {
   }
 
   caluculateCost(){
-    this.totalCost = this.service.caluculateTotalCost();
-  }
+    for (let i = 0; i <this.cartItems.length; i++){
+      this.totalCost += this.cartItems[i].price;
+    }
+    return this.totalCost;
+}
 
   getUserData(){
     this.userData = this.service.getSessionUserData();

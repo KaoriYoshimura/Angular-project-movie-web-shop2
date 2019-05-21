@@ -35,20 +35,26 @@
     border-radius: 3px;
 }
 
-@mixin limitScreenForMobile {
-    @media screen and (min-width: 575px){
-        @content;
-    }
+//Sub button style
+@mixin subButtonStyle($bgColor,$tColor,$bColor) {
+    background-color: $bgColor;
+    font-size: 1rem;
+    color: $tColor;
+    padding: 5px;
+    margin: 5px;
+    text-decoration: none;
+    border: 1px solid $bColor;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
 }
 
-@mixin tablet {
-    @media screen and (min-width: 768px){
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (min-width: 991px){
-        @content;
-    }
+//Border style
+@mixin borderStyle($bColor) {
+    border: 1px solid $bColor;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
 }

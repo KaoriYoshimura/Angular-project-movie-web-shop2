@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { IPlacedOrders, IPlacedOrderRow } from '../interfaces/iplaced-orders';
 import { DataService } from '../services/data.service';
 
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatInput } from '@angular/material';
 import { faRedo, faCaretDown, faTrash, faSync } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -23,10 +24,17 @@ export class AdminComponent implements OnInit {
   orders: MatTableDataSource<IPlacedOrders>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  // For Material Design input
+  @ViewChildren(MatInput) matInputs: QueryList<MatInput>;
+  public myDates : any = {};
+
   orderRows: IPlacedOrderRow[];
   updatedOrders: IPlacedOrders[];
 
-  constructor(private service: DataService) { }
+  constructor(
+    private fb: FormBuilder,
+    private service: DataService,
+    ) { }
 
   ngOnInit() {
     this.getOrders();
@@ -71,10 +79,25 @@ export class AdminComponent implements OnInit {
   //   };
   // }
 
+  updateOrderForm = this.fb.group({
+    payment: ['', Validators.required],
+    status: ['', Validators.required],
+    productId: ['', Validators.required],
+    amount: ['', Validators.required],
+    // phoneNumbers: this.fb.array([
+    //   this.fb.control('')
+    // ])
+  });
 
-  updateOrder(payment:string, status:number , id:string){
+  updateOrder(id:number){
+    
+    // const input = this.matInputs.find(matInput => matInput.id === payment.paymentMethod);
     // this.service.updateOrders(id, this.updateOrder)
-    console.log(payment, status, id );
+    // console.log(input);
+    console.log(this.updateOrderForm.value, id);
+    // console.log(MatInput);
+
+
   }
 
   deleteOrder(id:number){

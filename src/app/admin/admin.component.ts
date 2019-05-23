@@ -3,7 +3,7 @@ import { IPlacedOrders, IPlacedOrderRow } from '../interfaces/iplaced-orders';
 import { DataService } from '../services/data.service';
 
 import { MatTableDataSource, MatPaginator, MatInput } from '@angular/material';
-import { faRedo, faCaretDown, faTrash, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin',
@@ -11,10 +11,7 @@ import { faRedo, faCaretDown, faTrash, faSync } from '@fortawesome/free-solid-sv
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  faRedo = faRedo;
-  faTrash = faTrash;
-  faCaretDown = faCaretDown;
-  faSync = faSync;
+  faEdit = faEdit;
 
   // For Material Design table
   displayedColumns: string[] = [

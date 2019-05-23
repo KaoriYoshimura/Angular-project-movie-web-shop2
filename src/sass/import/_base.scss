@@ -440,6 +440,11 @@
   }
 }
 
+hr {
+  border-top: 1px solid $lightColorB;
+  margin: 10px;
+}
+
 // Paginator icons
 .mat-icon-button {
   background-color: $mainColorB!important;
@@ -452,7 +457,6 @@
   padding: 20px 10px 0px 10px;
 }
 
-hr {
-  border-top: 1px solid $lightColorB;
-  margin: 10px;
+mat-table {
+  width: 100%;
 }

@@ -6,7 +6,7 @@ import { MockDataService } from '../services/mock-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatTableModule, MatPaginatorModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -15,7 +15,13 @@ describe('AdminComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminComponent ],
-      imports: [HttpClientModule, RouterTestingModule, MatTableModule, MatPaginatorModule, FormsModule]
+      imports: [
+        HttpClientModule,
+        RouterTestingModule,
+        MatTableModule,
+        MatPaginatorModule,
+        FontAwesomeModule
+      ]
     })
     //Override component's own provider
     .overrideComponent(AdminComponent, {
@@ -43,10 +49,5 @@ describe('AdminComponent', () => {
     expect(component.orders.data.length).toBe(3);
   });
 
-  it('should delete order row',() => {
-    expect(component.orders.data.length).toBe(3);
-    component.deleteOrder(558);
-    expect(component.orders.data.length).toBe(2);
-  });
 
 });

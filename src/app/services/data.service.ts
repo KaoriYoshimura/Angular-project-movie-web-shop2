@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { IProduct } from '../interfaces/iproduct';
 import { map } from 'rxjs/operators';
 import { IUser } from '../interfaces/iuser';
-import { IOrder } from '../interfaces/iorder';
+import { IOrder, IOrderRow } from '../interfaces/iorder';
 import { ICategory } from '../interfaces/icategory';
 import { IPlacedOrders } from '../interfaces/iplaced-orders';
 
@@ -111,6 +111,13 @@ export class DataService implements IdataService{
 
   getOrders(): Observable<IPlacedOrders[]>{
     return this.http.get<IPlacedOrders[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25');
+  }
+
+  getOrderDetailById(id: number): Observable<IPlacedOrders> {
+    return this.getOrders().pipe(map(orderDetails =>
+      orderDetails.find(detail=>
+        detail.id == id)
+    ));
   }
 
   updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>{

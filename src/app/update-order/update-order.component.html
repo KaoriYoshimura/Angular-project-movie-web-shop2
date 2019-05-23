@@ -1,60 +1,66 @@
 <main>
   <div class="container main-container">
     <h1>Update order</h1>
-    <div>
-
+    <div *ngIf="orderDetails">
       <h2>Order details</h2>
-      <table class="table table-bordered">
-        <tr>
-            <th class="text-center">ID</th>
-            <td class="text-center">{{orderDetails.id}}</td>
-        </tr>
-        <tr>
-          <th class="text-center">Ordered On</th>
-          <td class="text-center">{{orderDetails.created}}</td>
-        </tr>
-        <tr>
-          <th class="text-center">Ordered By</th>
-          <td class="text-center">{{orderDetails.createdBy}}</td>
-        </tr>
-        <tr>
-          <th class="text-center">PaymentMethod</th>
-          <td class="text-center">{{orderDetails.paymentMethod}}</td>
-        </tr>
-        <tr>
-          <th class="text-center">Status</th>
-          <td class="text-center">{{orderDetails.paymentMethod}}</td>
-        </tr>
-        <tr>
-          <th>Order item(s)</th>
-          <td>
-            <tr>
-              <td rowspan="6"><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td class="text-center">ID</td>
-                <td class="text-center">{{row.id}}</td>
-            </tr>
-            <tr>
-                <td class="text-center">Product ID</td>
-                <td class="text-center">{{row.productId}}</td>
-            </tr>
-            <tr>
-                <td class="text-center">Product</td>
-                <td class="text-center"></td>
-            </tr>
-            <tr>
-                <td class="text-center">Amount</td>
-                <td class="text-center">{{row.amount}}</td>
-            </tr>
-          </td>
-      </tr>
+      <form [formGroup]="updateOrderForm">
+        <table class="table table-bordered">
+          <tr>
+              <th class="text-center">ID</th>
+              <td class="text-center">{{orderDetails.id}}</td>
+          </tr>
+          <tr>
+            <th class="text-center">Ordered On</th>
+            <td class="text-center">{{orderDetails.created | date: 'm-d h:mm a'}}</td>
+          </tr>
+          <tr>
+            <th class="text-center">Ordered By</th>
+            <td class="text-center">{{orderDetails.createdBy}}</td>
+          </tr>
+          <tr>
+            <th class="text-center">PaymentMethod</th>
+            <td class="text-center">
+                <input type="text" formControlName="payment" placeholder="{{orderDetails.paymentMethod}}" class="text-center">
+            </td>
+          </tr>
+          <tr>
+            <th class="text-center">Status</th>
+            <td class="text-center">
+              <input type="number" formControlName="status" placeholder="{{orderDetails.status}}" max="3" min="0" class="text-right">
+            </td>
+          </tr>
+        </table>
 
+        <table class="table table-bordered">
+          <tr>
+            <th class="text-center">Item ID</th>
+            <th class="text-center">Product Id</th>
+            <th class="text-center">Product</th>
+            <th class="text-center">Amount</th>
+            <th class="text-center">Delete</th>
+          </tr>
+          <tr *ngFor="let orderRow of orderDetails.orderRows">
+          <td class="text-center">{{orderRow.id}}</td>
+          <td class="text-center">
+              <input type="number" formControlName="productId" placeholder="{{orderRow.productId}}">
+            </td>
+            <td class="text-center">
+                To be fixed
+              </td>
+              <td class="text-center">
+                  <input type="number" formControlName="amount" placeholder="{{orderRow.amount}}">
+                </td>
+                <td><button class="button-basic">Delete</button></td>
+              </tr>
 
-      </table>
-      <button>Update</button>
-      <button>Delete</button>
-
+        </table>
+        <button class="button-basic">Update order</button>
+        <button class="button-basic" (click)="deleteOrder(orderDetails.id)">Delete order</button>
+      </form>
+    </div>
+    <div *ngIf="!orderDetails">
+      <p>Order has been deleted.</p>
+      <button routerLink="/admin" class="button-basic">Go back to admin</button>
     </div>
   </div>
 <main>

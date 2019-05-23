@@ -4,7 +4,6 @@ import { DataService } from '../services/data.service';
 
 import { MatTableDataSource, MatPaginator, MatInput } from '@angular/material';
 import { faRedo, faCaretDown, faTrash, faSync } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +18,7 @@ export class AdminComponent implements OnInit {
 
   // For Material Design table
   displayedColumns: string[] = [
-    'id', 'OrderedOn', 'orderedBy', 'paymentMethod', 'totalPrice', 'status', 'update', 'showOrderItems', 'delete'
+    'id', 'OrderedOn', 'orderedBy', 'paymentMethod', 'totalPrice', 'status', 'editOrderItems'
   ];
   orders: MatTableDataSource<IPlacedOrders>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,7 +31,6 @@ export class AdminComponent implements OnInit {
   updatedOrders: IPlacedOrders[];
 
   constructor(
-    private fb: FormBuilder,
     private service: DataService,
     ) { }
 
@@ -79,38 +77,10 @@ export class AdminComponent implements OnInit {
   //   };
   // }
 
-  updateOrderForm = this.fb.group({
-    payment: ['', Validators.required],
-    status: ['', Validators.required],
-    productId: ['', Validators.required],
-    amount: ['', Validators.required],
-    // phoneNumbers: this.fb.array([
-    //   this.fb.control('')
-    // ])
-  });
-
-  updateOrder(id:number){
-    
-    // const input = this.matInputs.find(matInput => matInput.id === payment.paymentMethod);
-    // this.service.updateOrders(id, this.updateOrder)
-    // console.log(input);
-    console.log(this.updateOrderForm.value, id);
-    // console.log(MatInput);
 
 
-  }
 
-  deleteOrder(id:number){
-    console.log(id);
-    this.service.deleteOrder(id).subscribe(
-      response => {
-        console.log(response);
-        this.getOrders();
-      },
-      error => console.log(error),
-      () => console.log('HPPT request for category completed')
-    );
-  }
+
 
   deleteOrderRow(id:number){
     console.log(id);

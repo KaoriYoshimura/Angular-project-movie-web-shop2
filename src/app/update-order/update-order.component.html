@@ -11,7 +11,7 @@
           </tr>
           <tr>
             <th class="text-center">Ordered On</th>
-            <td class="text-center">{{orderDetails.created | date: 'm-d h:mm a'}}</td>
+            <td class="text-center">{{orderDetails.created | date: 'M-d h:mm a'}}</td>
           </tr>
           <tr>
             <th class="text-center">Ordered By</th>
@@ -32,6 +32,7 @@
         </table>
 
         <table class="table table-bordered">
+        <!-- <table class="table table-bordered" formArrayName="items"> -->
           <tr>
             <th class="text-center">Item ID</th>
             <th class="text-center">Product Id</th>
@@ -39,24 +40,30 @@
             <th class="text-center">Amount</th>
             <th class="text-center">Delete</th>
           </tr>
-          <tr *ngFor="let orderRow of orderDetails.orderRows">
-          <td class="text-center">{{orderRow.id}}</td>
-          <td class="text-center">
-              <input type="number" formControlName="productId" placeholder="{{orderRow.productId}}">
-            </td>
-            <td class="text-center">
-                To be fixed
-              </td>
-              <td class="text-center">
-                  <input type="number" formControlName="amount" placeholder="{{orderRow.amount}}">
+          <ng-container *ngFor="let orderRow of orderDetails.orderRows">
+            <!-- <ng-container *ngFor="let item of items.controls; let i = index"> -->
+              <tr>
+                <td class="text-center"><!-- {{orderRow.id}} --></td>
+                <td class="text-center">
+                    <!-- <input type="number" formControlName="productId"> -->
+                    <input type="number" formControlName="productId" placeholder="{{orderRow.productId}}">
+                </td>
+                <td class="text-center">
+                  To be fixed
+                </td>
+                <td class="text-center">
+                    <!-- <input type="number" formControlName="amount"> -->
+                    <input type="number" formControlName="amount" placeholder="{{orderRow.amount}}">
                 </td>
                 <td><button class="button-basic">Delete</button></td>
               </tr>
-
+            </ng-container>
+          <!-- </ng-container> -->
         </table>
-        <button class="button-basic">Update order</button>
-        <button class="button-basic" (click)="deleteOrder(orderDetails.id)">Delete order</button>
+        <button class="button-basic" type="submit" (click)="updateOrder(orderDetails.id)">Update order</button>
+        <!--  [ngClass]="{'isDisable-style': !updateOrderForm.valid}" [disabled]="!updateOrderForm.valid" -->
       </form>
+      <button class="button-basic" type="button" (click)="deleteOrder(orderDetails.id)">Delete order</button>
     </div>
     <div *ngIf="!orderDetails">
       <p>Order has been deleted.</p>

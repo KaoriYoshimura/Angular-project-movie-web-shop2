@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { IPlacedOrders } from '../interfaces/iplaced-orders';
+import { IPlacedOrders, IPlacedOrderRow } from '../interfaces/iplaced-orders';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faRedo, faCaretDown, faTrash, faSync } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, Validators } from '@angular/forms';
+import { faRedo, faCaretDown, faTrash, faSync, faGamepad } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 
 
 @Component({
@@ -17,20 +17,22 @@ export class UpdateOrderComponent implements OnInit {
   faCaretDown = faCaretDown;
   faSync = faSync;
   orderDetails: IPlacedOrders;
+  orderRows: IPlacedOrderRow[] = [];
 
+  
   updateOrderForm = this.fb.group({
     payment: ['', Validators.required],
     status: ['', Validators.required],
     productId: ['', Validators.required],
     amount: ['', Validators.required],
-    // items: this.fb.array([
-    //   this.fb.control('')
-    // ])
+    items: this.fb.array([
+      this.fb.control('')
+    ])
   });
 
-  // get items() {
-  //   return this.updateOrderForm.get('items') as FormArray;
-  // }
+  get items() {
+    return this.updateOrderForm.get('items') as FormArray;
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +43,9 @@ export class UpdateOrderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.getOrderId();
+
   }
 
   getOrderId(){
@@ -56,11 +60,24 @@ export class UpdateOrderComponent implements OnInit {
     this.service.getOrderDetailById(id).subscribe(
       response => {
         this.orderDetails = response;
-        console.log(this.orderDetails);
+        this.getOrderRows();
+
+        const itemFormGroups = this.orderRows.map((data) =>{
+          console.log(data);
+          return this.fb.group(data);
+        })
+
+
       },
       error => console.log(error),
       () => console.log('HPPT request for getOrderDetails completed')
     );
+  }
+
+  getOrderRows(){
+    for(var i=0; i<this.orderDetails.orderRows.length; i++){
+      this.orderRows.push(this.orderDetails.orderRows[i]);
+    }
   }
 
   // // Back to previous page
@@ -74,8 +91,16 @@ export class UpdateOrderComponent implements OnInit {
     // this.service.updateOrders(id, this.updateOrder)
     // console.log(input);
     console.log(this.updateOrderForm.value, id);
-    // console.log(MatInput);
 
+    // const orders = {
+    //   companyId: 25,
+    //   created: this.orderDetails.created,
+    //   createdBy: this.orderDetails.createdBy,
+    //   paymentMethod: this.updateOrderForm.value.paymentMethod,
+    //   totalPrice:this.totalCost,
+    //   status: 0,
+    //   orderRows: this.orderRows
+    // };
 
   }
 

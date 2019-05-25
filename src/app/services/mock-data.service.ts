@@ -88,16 +88,7 @@ export class MockDataService implements IdataService{
     return this.cartItems;
   }
 
-  // caluculateTotalCost(){
-  //   for (let i = 0; i <this.cartItems.length; i++){
-  //     this.totalCost += this.cartItems[i].price;
-  //   }
-
-  //   return this.totalCost;
-  // }
-
-
-    // ||[]creates array if cartItem is empty
+  // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionUserData() {
     return this.userData = {

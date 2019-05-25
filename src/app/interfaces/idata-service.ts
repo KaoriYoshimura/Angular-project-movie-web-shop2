@@ -8,11 +8,10 @@ export interface IdataService {
     getData():Observable<IProduct[]>;
     getDetailById(id: number): Observable<IProduct>;
     getSessionCartItems():void;
-    countNumberOfCartItems():void;
+    // countNumberOfCartItems():void;
     addToCart(cartItems: IProduct[]): void;
     RemoveFromSessionStorage(item: number):void;
     getOrders(): Observable<IPlacedOrders[]>;
-    // caluculateTotalCost():void;
     getSessionUserData():void;
     // submitOrder(order: IOrder): Observable<IOrder>;
     searchProductApi(Query: string):Observable<IProduct[]>;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../interfaces/iproduct';
 import { DataService } from '../services/data.service';
-import { Location } from '@angular/common';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,14 +12,13 @@ export class CartComponent implements OnInit {
   cartItems: IProduct[];
   NumberOfCartItems: number;
   isCartItems = this.NumberOfCartItems > 0;
-  totaPrice = 0;
+  totalPrice = 0;
 
   faTrashAlt = faTrashAlt;
 
 
   constructor(
     private service:DataService,
-    private location: Location,
     ) { }
 
   ngOnInit() {
@@ -30,30 +28,20 @@ export class CartComponent implements OnInit {
 
   getCartItems(){
     this.cartItems = this.service.getSessionCartItems();
-    this.countNumberOfCartItems();
   }
 
   caluculateCost(){
+    this.totalPrice = 0;
     for (let i = 0; i <this.cartItems.length; i++){
-      this.totaPrice += this.cartItems[i].price;
+      this.totalPrice += this.cartItems[i].price;
     }
-    return this.totaPrice;
+    return this.totalPrice;
   }
 
-  countNumberOfCartItems() {
-    this.NumberOfCartItems = this.cartItems.length;
-
-    return this.NumberOfCartItems;
-  }
 
   removeFromCart(item: number) {
     this.service.RemoveFromSessionStorage(item);
-    // location.reload(true);
-  }
-
-  // Back to previous page
-  goBack(): void {
-    this.location.back();
+    this.caluculateCost();
   }
 
 }

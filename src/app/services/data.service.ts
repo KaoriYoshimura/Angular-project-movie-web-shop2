@@ -47,11 +47,11 @@ export class DataService implements IdataService{
     return this.cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   }
 
-  countNumberOfCartItems() {
-    this.NumberOfCartItems = this.getSessionCartItems().length;
+  // countNumberOfCartItems() {
+  //   this.NumberOfCartItems = this.getSessionCartItems().length;
 
-    return this.NumberOfCartItems;
-  }
+  //   return this.NumberOfCartItems;
+  // }
 
   addToCart(cartItems: IProduct[]): void {
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));

@@ -46,6 +46,10 @@ describe('CartComponent', () => {
       expect(component.cartItems.length).toBe(2);
     });
 
+    it('should caluculate total cost', () => {
+        expect(component.totalPrice).toBe(328);
+      });
+
   it('should remove a product from cart', () => {
     expect(component.cartItems.length).toBe(2);
     component.removeFromCart(76);

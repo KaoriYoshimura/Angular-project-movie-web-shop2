@@ -53,21 +53,21 @@ export class DataService implements IdataService{
     return this.NumberOfCartItems;
   }
 
-  addToCart(details: IProduct): void {
-    if(this.cartItems.length === 0) {
-      this.cartItems.push(details);
-    } else {
-      let isDuplicate = false;
-      for (var i=0; i<this.cartItems.length;i++){
-        if(details.id === this.cartItems[i].id) {
-          isDuplicate = true;
-        }
-      }
-      if(!isDuplicate){
-          this.cartItems.push(details);
-      }
-    }
-    sessionStorage.setItem('cartItem', JSON.stringify(this.cartItems));
+  addToCart(cartItems: IProduct[]): void {
+    // if(this.cartItems.length === 0) {
+    //   this.cartItems.push(details);
+    // } else {
+    //   this.isDuplicate = false;
+    //   for (var i=0; i<this.cartItems.length;i++){
+    //     if(details.id === this.cartItems[i].id) {
+    //       this.isDuplicate = true;
+    //     }
+    //   }
+    //   if(!this.isDuplicate){
+    //       this.cartItems.push(details);
+    //   }
+    // }
+    sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
   }
 
   RemoveFromSessionStorage(item: number) {

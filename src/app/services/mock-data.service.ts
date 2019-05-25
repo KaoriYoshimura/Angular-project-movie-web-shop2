@@ -65,12 +65,15 @@ export class MockDataService implements IdataService{
     return this.cartItems.length;
   }
 
-  addToCart(details: IProduct): void {
+  addToCart(cartItems: IProduct[]): void {
     //const cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
     // let cartItems: [] = this.getSessionCartItems();
 
-    this.cartItems.push(details);
-    console.log(this.cartItems);
+   /*  
+   this one should be updated!!!!
+   this.cartItems.push(details);
+    */
+   
     //sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
 
     // this.countNumberOfCartItems();

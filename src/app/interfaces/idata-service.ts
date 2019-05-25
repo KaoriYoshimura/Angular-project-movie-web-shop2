@@ -9,7 +9,7 @@ export interface IdataService {
     getDetailById(id: number): Observable<IProduct>;
     getSessionCartItems():void;
     countNumberOfCartItems():void;
-    addToCart(details: IProduct):void;
+    addToCart(cartItems: IProduct[]): void;
     RemoveFromSessionStorage(item: number):void;
     getOrders(): Observable<IPlacedOrders[]>;
     // caluculateTotalCost():void;

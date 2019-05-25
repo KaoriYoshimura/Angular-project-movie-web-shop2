@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-import { ProductComponent, NgbdModalContent } from './product/product.component';
+import { ProductComponent,/*  NgbdModalContent */ } from './product/product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
@@ -24,6 +24,7 @@ import { OrderSentComponent } from './order-sent/order-sent.component';
 import { CategoryComponent } from './home/category/category.component';
 import { AdminComponent } from './admin/admin.component';
 import { UpdateOrderComponent } from './update-order/update-order.component';
+import { NgbdModalContent } from './product/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [

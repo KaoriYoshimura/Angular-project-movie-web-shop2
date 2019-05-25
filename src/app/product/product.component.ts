@@ -5,34 +5,31 @@ import { Location } from '@angular/common';
 import { IProduct } from '../interfaces/iproduct';
 import { Router } from '@angular/router';
 import { ICategory } from '../interfaces/icategory';
-// import { MatDialog } from '@angular/material';
-// import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-// import { NgbdModalProduct, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdModalContent } from './error-dialog/error-dialog.component';
 
-@Component({
-  selector: 'ngbd-modal-content',
-  template: `
-    <div class="modal-header">
-      <h4 class="modal-title">Hi there!</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>Hello, {{name}}!</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-    </div>
-  `
-})
-export class NgbdModalContent {
-  @Input() name;
+// @Component({
+//   selector: 'ngbd-modal-content',
+//   template: `
+//     <div class="modal-header">
+//       <h4 class="modal-title">Hi there!</h4>
+//       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+//         <span aria-hidden="true">&times;</span>
+//       </button>
+//     </div>
+//     <div class="modal-body">
+//       <p>Hello, {{name}}!</p>
+//     </div>
+//     <div class="modal-footer">
+//       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+//     </div>
+//   `
+// })
+// export class NgbdModalContent {
+//   @Input() name;
 
-  constructor(public activeModal: NgbActiveModal) {}
-}
+//   constructor(public activeModal: NgbActiveModal) {}
+// }
 @Component({
   selector: 'app-details',
   templateUrl: './product.component.html',
@@ -40,12 +37,12 @@ export class NgbdModalContent {
 })
 export class ProductComponent implements OnInit {
   details: IProduct;
-  NumberOfCartItems : number;
   categories: ICategory[];
   categoryResults: ICategory[] = [];
 
-  // For bootstrap dialog
-  closeResult: string;
+  // To check if product already exists in sessionStorage
+  cartItems: IProduct[] = [];
+
 
 
   // Implement ActivatedRoute to use dependency injection
@@ -79,14 +76,45 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(): void{
-    this.service.addToCart(this.details);
-    // this.router.navigate(['/cart']);
-
-    // Error message with dialog
-    const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.name = 'World';
+    // Fetch cart items from sessionStorage
+    this.cartItems = this.service.getSessionCartItems();
+    console.log(this.cartItems);
+    // If there is no items in cart add to cart
+    if(this.cartItems.length === 0) {
+      this.addSessionStorage();
+      // Otherwise check if the product is already in the cart
+    } else {
+      let isDuplicate = false;
+      for (var i=0; i<this.cartItems.length;i++){
+        // If there is the same product in the cart mark as duplicate
+        if(this.details.id === this.cartItems[i].id) {
+          isDuplicate = true;
+        }
+      }
+      // If there is no same component in the cart add to the cart
+      if(!isDuplicate){
+      this.addSessionStorage();
+      // Otherwise show error dialog
+      } else {
+        this.errorDialog();
+      }
     }
+  }
 
+  // add sessionStorage and move to cart page
+  addSessionStorage(){
+    this.cartItems.push(this.details);
+    this.service.addToCart(this.cartItems);
+    this.router.navigate(['/cart']);
+  }
+
+  // Show error dialog
+  errorDialog(){
+    const modalRef = this.modalService.open(NgbdModalContent, {
+      centered: true }
+      );
+    modalRef.componentInstance.name = 'This product is already in the cart!';
+  }
 
   findCcategory(){
     this.service.getCategory().subscribe(
@@ -99,7 +127,6 @@ export class ProductComponent implements OnInit {
             }
           }
         }
-        console.log(this.categoryResults);
       },
       error => console.log(error),
       () => console.log('HPPT request for category completed')

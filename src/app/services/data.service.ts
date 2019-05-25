@@ -54,19 +54,6 @@ export class DataService implements IdataService{
   }
 
   addToCart(cartItems: IProduct[]): void {
-    // if(this.cartItems.length === 0) {
-    //   this.cartItems.push(details);
-    // } else {
-    //   this.isDuplicate = false;
-    //   for (var i=0; i<this.cartItems.length;i++){
-    //     if(details.id === this.cartItems[i].id) {
-    //       this.isDuplicate = true;
-    //     }
-    //   }
-    //   if(!this.isDuplicate){
-    //       this.cartItems.push(details);
-    //   }
-    // }
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
   }
 

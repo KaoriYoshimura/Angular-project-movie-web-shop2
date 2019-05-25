@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 // import { MatInputModule } from '@angular/material/input';
 import { CdkTableModule } from '@angular/cdk/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app-component/app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,7 +24,7 @@ import { OrderSentComponent } from './order-sent/order-sent.component';
 import { CategoryComponent } from './home/category/category.component';
 import { AdminComponent } from './admin/admin.component';
 import { UpdateOrderComponent } from './update-order/update-order.component';
-import { NgbdModalContent } from './product/error-dialog/error-dialog.component';
+import { notifyModalContent } from './notify-dialog/notify-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { NgbdModalContent } from './product/error-dialog/error-dialog.component'
     CategoryComponent,
     AdminComponent,
     UpdateOrderComponent,
-    NgbdModalContent,
+    notifyModalContent,
   ],
   imports: [
     BrowserModule,
@@ -59,9 +59,10 @@ import { NgbdModalContent } from './product/error-dialog/error-dialog.component'
     CdkTableModule,
     MatTreeModule,
     FontAwesomeModule,
-    NgbModule
+    NgbModule,
+    NgbActiveModal
   ],
-  entryComponents: [NgbdModalContent],
+  entryComponents: [notifyModalContent],
   providers: [],
   bootstrap: [AppComponent]
 })

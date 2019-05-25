@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -6,32 +6,10 @@ import { IProduct } from '../interfaces/iproduct';
 import { Router } from '@angular/router';
 import { ICategory } from '../interfaces/icategory';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdModalContent } from './error-dialog/error-dialog.component';
+import { notifyModalContent } from '../notify-dialog/notify-dialog.component';
 
-// @Component({
-//   selector: 'ngbd-modal-content',
-//   template: `
-//     <div class="modal-header">
-//       <h4 class="modal-title">Hi there!</h4>
-//       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-//         <span aria-hidden="true">&times;</span>
-//       </button>
-//     </div>
-//     <div class="modal-body">
-//       <p>Hello, {{name}}!</p>
-//     </div>
-//     <div class="modal-footer">
-//       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-//     </div>
-//   `
-// })
-// export class NgbdModalContent {
-//   @Input() name;
-
-//   constructor(public activeModal: NgbActiveModal) {}
-// }
 @Component({
-  selector: 'app-details',
+  selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
@@ -110,7 +88,7 @@ export class ProductComponent implements OnInit {
 
   // Show error dialog
   errorDialog(){
-    const modalRef = this.modalService.open(NgbdModalContent, {
+    const modalRef = this.modalService.open(notifyModalContent, {
       centered: true }
       );
     modalRef.componentInstance.name = 'This product is already in the cart!';

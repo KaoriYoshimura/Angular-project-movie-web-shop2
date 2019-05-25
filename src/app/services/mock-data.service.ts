@@ -69,10 +69,9 @@ export class MockDataService implements IdataService{
     //const cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
     // let cartItems: [] = this.getSessionCartItems();
 
-   /*  
-   this one should be updated!!!!
-   this.cartItems.push(details);
-    */
+  
+  //  this one should be updated!!!!
+  //  this.cartItems.push(cartItems);
    
     //sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
 

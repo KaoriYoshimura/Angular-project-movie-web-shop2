@@ -44,7 +44,7 @@ export class ProductComponent implements OnInit {
   getMovie(id: number) {
     this.service.getDetailById(id).subscribe((detailsFromApi)=> {
       this.details = detailsFromApi;
-      this.findCcategory();
+      this.findCategory();
     });
   }
 
@@ -94,7 +94,7 @@ export class ProductComponent implements OnInit {
     modalRef.componentInstance.name = 'This product is already in the cart!';
   }
 
-  findCcategory(){
+  findCategory(){
     this.service.getCategory().subscribe(
       response => {
         this.categories = response;

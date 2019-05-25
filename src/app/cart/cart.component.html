@@ -11,23 +11,36 @@
       <div class="cart-list-container">
         <ul list-group mb-3>
           <li class="list-group-item d-flex" *ngFor="let cartItem of cartItems">
-            <span class="col-3 align-self-center"><img src= "{{cartItem.imageUrl}}"></span>
-            <span class="col-4 align-self-center"><a routerLink="/product/{{cartItem.id}}">{{cartItem.name}}</a></span>
-            <span class="col-2 align-self-center">{{cartItem.price}}</span>
             <span class="col-2 align-self-center">
-              <button (click)="removeFromCart(cartItem.id)">Remove</button>
+              <img src= "{{cartItem.imageUrl}}">
+            </span>
+            <span class="col-4 align-self-center">
+              <a routerLink="/product/{{cartItem.id}}"><h3>{{cartItem.name}}</h3></a>
+              {{cartItem.year}}
+            </span>
+            <span class="col-2 align-self-center">
+              {{cartItem.price}}kr
+            </span>
+            <span class="col-2 align-self-center">
+              <button class="button-basic" (click)="removeFromCart(cartItem.id)">
+                remove
+              </button>
             </span>
           </li>
         </ul>
       </div>
 
+      <div>
+        <p class="total-price">Total price <span class="price">{{totaPrice}}kr</span></p>
+      </div>
+
       <div class="btn-container row">
         <!-- Show Checkout btn only if cart item(s) is more than one -->
         <div *ngIf="NumberOfCartItems > 0">
-          <button routerLink="/checkout">Checkout</button>
+          <button routerLink="/checkout" class="button-basic">Checkout</button>
         </div>
-        
-        <button (click)="goBack()">GO BACK</button>
+
+        <button routerLink="/home" class="button-basic">Go back to the list</button>
       </div>
     </div>
   </div>

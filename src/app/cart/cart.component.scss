@@ -21,6 +21,17 @@
 
             li {
                 padding: 10px;
+                margin: 10px;
+            }
+        }
+
+        .total-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: right;
+
+            .price {
+                font-size: 1.6rem;
             }
         }
 

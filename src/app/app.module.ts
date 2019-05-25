@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 // import { MatInputModule } from '@angular/material/input';
 import { CdkTableModule } from '@angular/cdk/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, /* NgbActiveModal */ } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app-component/app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -60,7 +60,7 @@ import { notifyModalContent } from './notify-dialog/notify-dialog.component';
     MatTreeModule,
     FontAwesomeModule,
     NgbModule,
-    NgbActiveModal
+    // NgbActiveModal
   ],
   entryComponents: [notifyModalContent],
   providers: [],

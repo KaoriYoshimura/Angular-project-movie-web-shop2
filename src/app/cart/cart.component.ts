@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../interfaces/iproduct';
 import { DataService } from '../services/data.service';
 import { Location } from '@angular/common';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cart',
@@ -9,10 +10,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  
   cartItems: IProduct[];
   NumberOfCartItems: number;
   isCartItems = this.NumberOfCartItems > 0;
+  totaPrice = 0;
+
+  faTrashAlt = faTrashAlt;
+
 
   constructor(
     private service:DataService,
@@ -21,14 +25,19 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.getCartItems();
-    console.log(this.isCartItems);
-    console.log(this.NumberOfCartItems);
-
+    this.caluculateCost();
   }
 
   getCartItems(){
     this.cartItems = this.service.getSessionCartItems();
     this.countNumberOfCartItems();
+  }
+
+  caluculateCost(){
+    for (let i = 0; i <this.cartItems.length; i++){
+      this.totaPrice += this.cartItems[i].price;
+    }
+    return this.totaPrice;
   }
 
   countNumberOfCartItems() {

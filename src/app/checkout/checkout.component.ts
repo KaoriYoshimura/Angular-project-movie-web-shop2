@@ -69,7 +69,7 @@ export class CheckoutComponent implements OnInit{
       this.totalCost += this.cartItems[i].price;
     }
     return this.totalCost;
-}
+  }
 
   // Back to previous page
   goBack(): void {

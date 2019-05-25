@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -13,7 +14,11 @@ describe('CartComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CartComponent ],
-      imports: [HttpClientModule, RouterTestingModule]
+      imports: [
+        HttpClientModule,
+        RouterTestingModule,
+        FontAwesomeModule
+      ]
     })
     //Override component's own provider
     .overrideComponent(CartComponent, {

@@ -1,11 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { IProduct } from '../interfaces/iproduct';
 import { Router } from '@angular/router';
 import { ICategory } from '../interfaces/icategory';
+// import { MatDialog } from '@angular/material';
+// import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+// import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbdModalProduct, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Hi there!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Hello, {{name}}!</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+  @Input() name;
+
+  constructor(public activeModal: NgbActiveModal) {}
+}
 @Component({
   selector: 'app-details',
   templateUrl: './product.component.html',
@@ -17,12 +44,17 @@ export class ProductComponent implements OnInit {
   categories: ICategory[];
   categoryResults: ICategory[] = [];
 
+  // For bootstrap dialog
+  closeResult: string;
+
+
   // Implement ActivatedRoute to use dependency injection
   constructor(
     private route: ActivatedRoute,
     private service: DataService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private modalService: NgbModal
   ) { }
 
   // Get the property params from product.component, 'id' and copies the data into myParams. Use this id to collect the item with the same id from API.
@@ -48,8 +80,13 @@ export class ProductComponent implements OnInit {
 
   addToCart(): void{
     this.service.addToCart(this.details);
-    this.router.navigate(['/cart']);
-  }
+    // this.router.navigate(['/cart']);
+
+    // Error message with dialog
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.name = 'World';
+    }
+
 
   findCcategory(){
     this.service.getCategory().subscribe(

@@ -1,20 +1,30 @@
 <main>
   <div class="container main-container" *ngIf="details">
-      <h1>{{details.name}}</h1>
+      <h1>Product details</h1>
       <div class="product-cocntent row align-items-center">
           <div class="img-container col-lg-6">
-            <img src= "{{details.imageUrl}}">
+              <img src= "{{details.imageUrl}}">
           </div>
           <div class="details-container col-lg-6">
-            <p>{{details.description}}</p>
-            <hr>
-            <ul>
-              <p>Price: <span class="price">{{details.price}}</span>KR</p>
-              <p>Released: {{details.year}}</p>
-              <p>Added: {{details.added | date}}</p>
-              <p *ngFor="let category of categoryResults">Category: {{category.name}}</p>
-            </ul><button class="button-basic" (click)="addToCart()">ADD TO CART</button>
-            <button class="button-basic" (click)="goBack()">GO BACK</button>
+              <h2>{{details.name}}</h2>
+              <p>{{details.description}}</p>
+              <hr>
+              <ul>
+                  <li class="d-flex">
+                      <span class="col-4">Price</span><span class="col-8"><span class="price">{{details.price}}</span>kr</span>
+                  </li>
+                  <li class="d-flex">
+                      <span class="col-4">Released</span><span class="col-8">{{details.year}}</span>
+                  </li>
+                  <li class="d-flex">
+                      <span class="col-4">Added</span><span class="col-8">{{details.added | date}}</span>
+                  </li>
+                  <li class="d-flex">
+                      <span class="col-4">Category</span><span class="col-8"><span *ngFor="let category of categoryResults; let isLast=last">{{category.name}}{{isLast ? '' : ', '}}</span></span>
+                  </li>
+              </ul>
+              <button class="button-basic" (click)="addToCart()">ADD TO CART</button>
+              <button class="button-basic" (click)="goBack()">GO BACK</button>
           </div>
       </div>
   </div>

@@ -44,7 +44,7 @@ export class CartComponent implements OnInit {
     this.caluculateCost();
     // Trigger to update cart amount in header
     let numberOfCartItems = this.cartItems.length;
-    this.service.onNotifySharedDataChanged(numberOfCartItems);
+    this.service.onNotifyCartAmoutUpdated(numberOfCartItems);
   }
 
 }

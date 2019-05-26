@@ -5,6 +5,8 @@ import { IOrder } from './iorder';
 import { ICategory } from './icategory';
 
 export interface IdataService {
+    // How to test?
+    // onNotifyCartAmoutUpdated(updated: number);
     getData():Observable<IProduct[]>;
     getDetailById(id: number): Observable<IProduct>;
     getSessionCartItems():void;
@@ -13,6 +15,7 @@ export interface IdataService {
     RemoveFromSessionStorage(item: number):void;
     getOrders(): Observable<IPlacedOrders[]>;
     getSessionUserData():void;
+    // To be tested in e2e test
     // submitOrder(order: IOrder): Observable<IOrder>;
     searchProductApi(Query: string):Observable<IProduct[]>;
     getCategory():Observable<ICategory[]>;

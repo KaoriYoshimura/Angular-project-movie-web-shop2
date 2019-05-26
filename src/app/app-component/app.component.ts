@@ -9,22 +9,27 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  // Font awesome icon
   faBars = faBars;
 
-  cartAmount: number = this.service.countNumberOfCartItems();
-  // CommonService の変数の参照を取得するプロパティ
-
-  // subscribe を保持するための Subscription
+  cartAmount: number;
+  // Declare subscription to keep subscribe
   subscription: Subscription;
 
-  constructor( private service: DataService ){}
+  constructor( private service: DataService ){ }
 
   ngOnInit(){
-        // イベント登録
-    // サービスで共有しているデータが更新されたら発火されるイベントをキャッチする
+    this.updateCartAmount();
+
+  }
+
+  updateCartAmount(){
+    // Fetch cart items from sessionStorage
+    this.cartAmount = this.service.getSessionCartItems().length;
+    // Catch and subscribe when "numberOfCartItem" in dataService is updated
     this.subscription = this.service.numberOfCartItems$.subscribe(
       amount => {
-        console.log('Cart Item updated', amount);
+        console.log('Cart Item updated to', amount);
         this.cartAmount = amount;
       }
     );

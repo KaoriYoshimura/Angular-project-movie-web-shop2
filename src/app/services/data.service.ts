@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { IdataService } from '../interfaces/idata-service';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IProduct } from '../interfaces/iproduct';
 import { map } from 'rxjs/operators';
 import { IUser } from '../interfaces/iuser';
-import { IOrder, IOrderRow } from '../interfaces/iorder';
+import { IOrder } from '../interfaces/iorder';
 import { ICategory } from '../interfaces/icategory';
 import { IPlacedOrders } from '../interfaces/iplaced-orders';
 
@@ -20,28 +20,23 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DataService implements IdataService{
-
-  // Inject the HttpClient into an application class in order to activate HttpClient
-  constructor(private http: HttpClient) { }
-
-  // データの変更を通知するためのオブジェクト Subject型のプロパティを宣言
-  numberOfCartItems = new Subject<number>();
-  NumberOfCartItems: number;
-
-  // Subscribe するためのプロパティ
-  //  * `- コンポーネント間で共有するためのプロパティ
-  numberOfCartItems$ = this.numberOfCartItems.asObservable();
-
-  // データの更新イベント
-  onNotifySharedDataChanged(updated: number) {
-    this.numberOfCartItems.next(updated);
-  }
-
   cartItems : IProduct[] = [];
   totalCost = 0;
   userData : IUser;
   searchWord: string = "";
 
+  // Inject the HttpClient into an application class in order to activate HttpClient
+  constructor(private http: HttpClient) { }
+
+  // Declaration of object and function to update cart amount in app.component
+  // Declare subject type property to inform when data is updated
+  numberOfCartItems = new Subject<number>();
+  // Create observable object from numberOfCartItems object to share the data in app.component
+  numberOfCartItems$ = this.numberOfCartItems.asObservable();
+  // Pass "updated" data to numberOfCartItems object and .next will fire off an eent that a subscriber will listen in app component.
+  onNotifyCartAmoutUpdated(updated: number) {
+    this.numberOfCartItems.next(updated);
+  }
 
 
   getData():Observable<IProduct[]>{
@@ -61,13 +56,12 @@ export class DataService implements IdataService{
     return this.cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   }
 
-  countNumberOfCartItems() {
-    return this.getSessionCartItems().length;
-  }
+  // countNumberOfCartItems() {
+  //   return this.getSessionCartItems().length;
+  // }
 
   addToCart(cartItems: IProduct[]): void {
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
-    this.countNumberOfCartItems();
   }
 
   RemoveFromSessionStorage(item: number) {
@@ -77,17 +71,7 @@ export class DataService implements IdataService{
       }
     }
     sessionStorage.setItem('cartItem', JSON.stringify(this.cartItems));
-
-    // this.countNumberOfCartItems();
   }
-
-  // caluculateTotalCost(){
-  //   for (let i = 0; i <this.cartItems.length; i++){
-  //     this.totalCost += this.cartItems[i].price;
-  //   }
-    
-  //   return this.totalCost;
-  // }
 
   // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?

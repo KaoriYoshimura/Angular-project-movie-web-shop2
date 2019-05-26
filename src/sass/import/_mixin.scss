@@ -14,9 +14,9 @@
 }
 
 @mixin boxShadow(){
-    -webkit-box-shadow: 3px 4px 11px 0px rgba(0,0,0,0.51);
-    -moz-box-shadow: 3px 4px 11px 0px rgba(0,0,0,0.51);
-    box-shadow: 3px 4px 11px 0px rgba(0,0,0,0.51);
+    -webkit-box-shadow: 3px 4px 8px 0px rgba(133,133,133,1);
+    -moz-box-shadow: 3px 4px 8px 0px rgba(133,133,133,1);
+    box-shadow: 3px 4px 8px 0px rgba(133,133,133,1);
 }
 
 //Button style

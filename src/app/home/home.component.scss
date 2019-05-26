@@ -6,8 +6,11 @@
 
     .filter {
 
-        border: 1px solid $mainColorB;
+        @include borderStyle($mainColorB);
+        @include boxShadow;
         margin: 15px;
+        padding: 10px;
+        background-color: white;
 
         .search-box {
             padding: 5px;

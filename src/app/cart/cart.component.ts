@@ -42,6 +42,9 @@ export class CartComponent implements OnInit {
   removeFromCart(item: number) {
     this.service.RemoveFromSessionStorage(item);
     this.caluculateCost();
+    // Trigger to update cart amount in header
+    let numberOfCartItems = this.cartItems.length;
+    this.service.onNotifySharedDataChanged(numberOfCartItems);
   }
 
 }

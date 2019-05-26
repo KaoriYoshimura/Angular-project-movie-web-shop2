@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { notifyModalContent } from './notify-dialog.component';
+
 import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MockDataService } from '../services/mock-data.service';
 

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ICategory } from '../interfaces/icategory';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { notifyModalContent } from '../notify-dialog/notify-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -38,6 +39,8 @@ export class ProductComponent implements OnInit {
       const id = myParams['id'];
       this.getMovie(id);
     });
+
+
   }
 
   // Create function separately in order to test even it works within ngOnInit
@@ -54,6 +57,7 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(): void{
+
     // Fetch cart items from sessionStorage
     this.cartItems = this.service.getSessionCartItems();
     console.log(this.cartItems);
@@ -84,6 +88,10 @@ export class ProductComponent implements OnInit {
     this.cartItems.push(this.details);
     this.service.addToCart(this.cartItems);
     this.router.navigate(['/cart']);
+    // Trigger to update cart amount in header
+    let numberOfCartItems = this.cartItems.length;
+    this.service.onNotifySharedDataChanged(numberOfCartItems);
+
   }
 
   // Show error dialog

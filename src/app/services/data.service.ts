@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IdataService } from '../interfaces/idata-service';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { IProduct } from '../interfaces/iproduct';
 import { map } from 'rxjs/operators';
 import { IUser } from '../interfaces/iuser';
@@ -24,11 +24,25 @@ export class DataService implements IdataService{
   // Inject the HttpClient into an application class in order to activate HttpClient
   constructor(private http: HttpClient) { }
 
-  NumberOfCartItems = 0;
+  // データの変更を通知するためのオブジェクト Subject型のプロパティを宣言
+  numberOfCartItems = new Subject<number>();
+  NumberOfCartItems: number;
+
+  // Subscribe するためのプロパティ
+  //  * `- コンポーネント間で共有するためのプロパティ
+  numberOfCartItems$ = this.numberOfCartItems.asObservable();
+
+  // データの更新イベント
+  onNotifySharedDataChanged(updated: number) {
+    this.numberOfCartItems.next(updated);
+  }
+
   cartItems : IProduct[] = [];
   totalCost = 0;
   userData : IUser;
   searchWord: string = "";
+
+
 
   getData():Observable<IProduct[]>{
     return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/products');
@@ -47,14 +61,13 @@ export class DataService implements IdataService{
     return this.cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   }
 
-  // countNumberOfCartItems() {
-  //   this.NumberOfCartItems = this.getSessionCartItems().length;
-
-  //   return this.NumberOfCartItems;
-  // }
+  countNumberOfCartItems() {
+    return this.getSessionCartItems().length;
+  }
 
   addToCart(cartItems: IProduct[]): void {
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
+    this.countNumberOfCartItems();
   }
 
   RemoveFromSessionStorage(item: number) {

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { IOrder, IOrderRow } from '../interfaces/iorder';
+import { IProduct } from '../interfaces/iproduct';
 
 
 @Component({
@@ -15,20 +16,23 @@ import { IOrder, IOrderRow } from '../interfaces/iorder';
 export class UpdateOrderComponent implements OnInit {
   // Fontawesome icon
   faTrash = faTrash;
+
   orderDetails: IPlacedOrders;
   orderRows: IPlacedOrderRow[] = [];
   updateOrderDetails: IOrder;
   updateOrderRows: IOrderRow[] = [];
+  updateTotalCost: number;
+  products:IProduct[] ;
 
-  formData = {
-    items: [{
-        productId: ['', Validators.required],
-        amount: ['', Validators.required],
-      }]
-  }
+  // formData = {
+  //   items: [{
+  //       productId: ['', Validators.required],
+  //       amount: ['', Validators.required],
+  //     }]
+  // }
 
   updateOrderForm: FormGroup;
-  items: FormArray;
+  //items: FormArray;
 
 
   // get items() {
@@ -52,15 +56,15 @@ export class UpdateOrderComponent implements OnInit {
     });
 
 
-    console.log(this.updateOrderForm.controls);
-
 
     this.getOrderId();
+    this.getMovie();
     // this.setItems();
-    
+
     // this.addItem();
   }
 
+  // For FormArray no longer needed ..?
   // createItems(): FormGroup {
   //   return this.fb.group({
   //     productId: '',
@@ -84,6 +88,7 @@ export class UpdateOrderComponent implements OnInit {
     });
   }
 
+  // For FormArray, no longer in use?
   // setOrders(){
   //   let control = <FormArray>this.updateOrderForm.controls.orders;
   //   this.formData.orderDetailsFormat.forEach(x => {
@@ -115,8 +120,11 @@ export class UpdateOrderComponent implements OnInit {
 
         for(let i= 0; i<this.orderRows.length; i++) {
           const items = this.fb.group({
-          productId: '',
-          amount:  ''
+          id: this.orderRows[i].id,
+          productId: this.orderRows[i].productId,
+          // product: this.orderRows[i].product,
+          amount: this.orderRows[i].amount,
+          // orderId: this.orderRows[i].orderId
           });
           (<FormArray>this.updateOrderForm.get('items')).push(items);
           }
@@ -139,38 +147,61 @@ export class UpdateOrderComponent implements OnInit {
   //   this.location.back();
   // }
 
-  // createOrderRows(){
-  //   for(var i=0; i<this.orderRows.length; i++){
-  //     this.updateOrderRows.push(
-  //       // put uppdatorderform.value?
-  //       {ProductId: this.cartItems[i].id, Amount: 1}
-  //       );
+  getMovie(){
+    this.service.getData().subscribe(
+      response => {
+        this.products = response;
+      },
+      error => console.log(error),
+      () => console.log('HTTP request for getMovie completed')
+    );
+  }
+
+  createOrderRows(){
+    for(var i=0; i<this.updateOrderForm.value.items.length; i++){
+      this.updateOrderRows.push(
+        {ProductId: this.updateOrderForm.value.items[i].productId, Amount: this.updateOrderForm.value.items[i].amount}
+        );
+    }
+    console.log(this.updateOrderRows);
+  }
+
+  // caluculateTotalCost(): number{
+  //   let price = 0;
+  //   for(var j=0; j<this.updateOrderRows.length; j++){
+  //     for(var i=0; i<this.products.length; i++){
+  //       if(this.updateOrderRows[j].ProductId === this.products[i].id){
+  //         price += 
+  //         console.log('price',this.products[i].price);
+  //       }
+  //     }
   //   }
+
+  //   return price;
   // }
 
   // createOrders(){
   //   this.createOrderRows();
 
-  //   this.updateOrder = {
+  //   this.updateOrderDetails = {
+  //     id: 0,
   //     companyId: 25,
-  //     created: this.now,
-  //     createdBy: this.userData.email,
-  //     paymentMethod: this.userData.paymentMethod,
-  //     totalPrice:this.totalCost,
+  //     created: this.orderDetails.created,
+  //     createdBy: this.orderDetails.createdBy,
+  //     paymentMethod: this.updateOrderForm.value.paymentMethod,
+  //     totalPrice:this.caluculateTotalCost(),
   //     status: 0,
-  //     orderRows: this.orderRows
+  //     orderRows: this.updateOrderRows
   //   };
   // }
 
 
   updateOrder(id:number){
     
-    // const input = this.matInputs.find(matInput => matInput.id === payment.paymentMethod);
-    // this.service.updateOrders(id, this.updateOrder)
-    // console.log(input);
     console.log(this.updateOrderForm.value, id);
-    console.log(this.updateOrderForm.value.items.value, id);
-
+    console.log(this.updateOrderForm.value.items[0].productId, id);
+    this.createOrderRows();
+    // this.caluculateTotalCost();
 
     // const orders = {
     //   companyId: 25,

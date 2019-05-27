@@ -65,6 +65,7 @@ export class ConfirmComponent implements OnInit {
     this.createOrderRows();
 
     this.orders = {
+      id: 0,
       companyId: 25,
       created: this.now,
       createdBy: this.userData.email,

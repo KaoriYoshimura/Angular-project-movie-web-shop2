@@ -30,9 +30,9 @@
             </td>
           </tr>
         </table>
-
+<p>{{orderDetails.orderRows[0].productId}}</p>
+        <!-- <table class="table table-bordered"> -->
         <table class="table table-bordered">
-        <!-- <table class="table table-bordered" formArrayName="items"> -->
           <tr>
             <th class="text-center">Item ID</th>
             <th class="text-center">Product Id</th>
@@ -40,13 +40,16 @@
             <th class="text-center">Amount</th>
             <th class="text-center">Delete</th>
           </tr>
-          <ng-container *ngFor="let orderRow of orderDetails.orderRows">
-            <!-- <ng-container *ngFor="let item of items.controls; let i = index"> -->
-              <tr>
-                <td class="text-center"><!-- {{orderRow.id}} --></td>
+            <ng-container *ngFor="let orderRow of orderRows">
+              <ng-container formArrayName="items">
+                <ng-container *ngFor="let item of updateOrderForm.get('items').controls; let i=index">
+                    <ng-container [formGroupName]="i">
+                        <tr>
+                <td class="text-center">{{i}},{{orderRow.id}}</td>
                 <td class="text-center">
                     <!-- <input type="number" formControlName="productId"> -->
                     <input type="number" formControlName="productId" placeholder="{{orderRow.productId}}">
+                    <!-- <input type="number" placeholder="{{orderRow.productId}}"> -->
                 </td>
                 <td class="text-center">
                   To be fixed
@@ -54,15 +57,22 @@
                 <td class="text-center">
                     <!-- <input type="number" formControlName="amount"> -->
                     <input type="number" formControlName="amount" placeholder="{{orderRow.amount}}">
+                    <!-- <input type="number" placeholder="{{orderRow.amount}}"> -->
                 </td>
                 <td><button class="button-basic">Delete</button></td>
+
               </tr>
             </ng-container>
-          <!-- </ng-container> -->
+          </ng-container>
+            </ng-container>
+        </ng-container>
         </table>
         <button class="button-basic" type="submit" (click)="updateOrder(orderDetails.id)">Update order</button>
         <!--  [ngClass]="{'isDisable-style': !updateOrderForm.valid}" [disabled]="!updateOrderForm.valid" -->
-      </form>
+    </form>
+
+    <pre>{{updateOrderForm.value | json}}</pre>
+
       <button class="button-basic" type="button" (click)="deleteOrder(orderDetails.id)">Delete order</button>
     </div>
     <div *ngIf="!orderDetails">

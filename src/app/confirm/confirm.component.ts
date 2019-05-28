@@ -29,12 +29,11 @@ export class ConfirmComponent implements OnInit {
   ngOnInit() {
     this.getCartItems();
     this.getUserData();
+    this.caluculateCost();
   }
 
   getCartItems(){
     this.cartItems = this.service.getSessionCartItems();
-    this.caluculateCost();
-
   }
 
   caluculateCost(){
@@ -86,8 +85,11 @@ export class ConfirmComponent implements OnInit {
     );
 
     sessionStorage.clear();
+    this.getCartItems();
+    // Trigger to update cart amount in header
+    let numberOfCartItems = this.cartItems.length;
+    this.service.onNotifyCartAmoutUpdated(numberOfCartItems);
     this.router.navigate(['/ordersent']);
-
  }
 
 }

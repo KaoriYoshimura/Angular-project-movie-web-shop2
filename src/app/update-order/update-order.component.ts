@@ -23,120 +23,73 @@ export class UpdateOrderComponent implements OnInit {
   updateOrderRows: IOrderRow[] = [];
   updateTotalCost: number;
   products:IProduct[] ;
+  productNames: string[] = [];
+  totalPrice: number;
 
-  // formData = {
-  //   items: [{
-  //       productId: ['', Validators.required],
-  //       amount: ['', Validators.required],
-  //     }]
-  // }
-
+  // Declare FormGroup
   updateOrderForm: FormGroup;
-  //items: FormArray;
-
-
-  // get items() {
-  //   return this.updateOrderForm.get('items') as FormArray;
-  // }
-
-  // Choices for payement in checkout and update order page
+  // Fetch choices for payement in checkout and update order page
   paymentChoices = this.service.paymentChoices;
-
-  // Choices for status in checkout and update order page
+  // Fetch choices for status in checkout and update order page
   statusChoices: IStatus[] = this.service.statusChoices;
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    // private location: Location,
     private service: DataService,
     // private router: Router
   ) { }
 
   ngOnInit() {
 
-    // this.updateOrderForm = this.fb.group({
-    //   payment: [this.orderDetails.paymentMethod, Validators.required],
-    //   status: [this.orderDetails.status, Validators.required],
-    //   items: this.fb.array([])
-    // });
-
     this.getOrderId();
-
+    this.getProduct();
   }
 
-  // For FormArray no longer needed ..?
-  // createItems(): FormGroup {
-  //   return this.fb.group({
-  //     productId: '',
-  //     amount:  ''
-  //   })
-  // }
-
-  // addItem(){
-  //   for(var i=0; i<this.orderDetails.orderRows.length; i++){
-  //     this.items = this.updateOrderForm.get('items') as FormArray;
-  //     this.items.push(this.createItems());
-
-  //   }
-  // }
-
+  // Get the property params 'id' from admin.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
   getOrderId(){
     this.route.params.subscribe(myParams => {
       const id = myParams['id'];
       this.getOrderDetails(id);
-      console.log(id);
     });
   }
 
-  // For FormArray, no longer in use?
-  // setOrders(){
-  //   let control = <FormArray>this.updateOrderForm.controls.orders;
-  //   this.formData.orderDetailsFormat.forEach(x => {
-  //     control.push(this.fb.group({
-  //       payment: x.payment,
-  //       status: x.status,
-  //       items: this.setItems(x)
-  //     }))
-  //   })
-  // }
-
-  // setItems() {
-  //   let control = <FormArray>this.updateOrderForm.controls.items;
-  //   // let arr = new FormArray([])
-  //   this.formData.items.forEach(x => {
-  //     control.push(this.fb.group({
-  //       productId: x.productId,
-  //       amount: x.amount
-  //     }))
-  //   })
-  //   console.log(control);
-  // }
+  // Fetch details of the products
+  getProduct(){
+    this.service.getData().subscribe(
+      response => {
+        return this.products = response;
+      },
+      error => console.log(error),
+      () => console.log('HTTP request for getProduct completed')
+    );
+  }
 
   getOrderDetails(id: number){
+    // Fetch details of the order
     this.service.getOrderDetailById(id).subscribe(
       response => {
         this.orderDetails = response;
         this.getOrderRows();
 
+        // Set FormBuilder
         this.updateOrderForm = this.fb.group({
-          payment: [this.orderDetails.paymentMethod, Validators.required],
-          status: [this.orderDetails.status, Validators.required],
+          payment: this.orderDetails.paymentMethod,
+          status: this.orderDetails.status,
           items: this.fb.array([])
         });
-    
 
+        // Set items FormArray
         for(let i= 0; i<this.orderRows.length; i++) {
           const items = this.fb.group({
           id: this.orderRows[i].id,
           productId: this.orderRows[i].productId,
-          // product: this.orderRows[i].product,
           amount: this.orderRows[i].amount,
-          // orderId: this.orderRows[i].orderId
           });
+          // Push formGroup into FormArray
           (<FormArray>this.updateOrderForm.get('items')).push(items);
-          }
-          console.log(this.orderDetails);
+        }
+          console.log('Original order details', this.orderDetails);
 
       },
       error => console.log(error),
@@ -144,27 +97,28 @@ export class UpdateOrderComponent implements OnInit {
     );
   }
 
+  // Get OrderRows from data base
   getOrderRows(){
     for(var i=0; i<this.orderDetails.orderRows.length; i++){
       this.orderRows.push(this.orderDetails.orderRows[i]);
     }
   }
 
-  // // Back to previous page
-  // goBack(): void {
-  //   this.location.back();
-  // }
+/*     // what is type?
+    // getProductName(){
+    //   for(var j=0; j<this.orderDetails.orderRows.length; j++){
+    //     for(var i=0; i<this.products.length; i++){
+    //       if(this.orderDetails.orderRows[j].productId === this.products[i].id){
+    //         this.productNames.push(this.products[i].name);
+    //       }
+    //     }
+    //   }
+  
+    //   console.log(this.productNames);
+    //   return this.productNames;
+  
+    // } */
 
-  getMovie(){
-    this.service.getData().subscribe(
-      response => {
-        this.products = response;
-        this.caluculateTotalCost();
-      },
-      error => console.log(error),
-      () => console.log('HTTP request for getMovie completed')
-    );
-  }
 
   createOrderRows(){
     for(var i=0; i<this.updateOrderForm.value.items.length; i++){
@@ -172,11 +126,9 @@ export class UpdateOrderComponent implements OnInit {
         {ProductId: this.updateOrderForm.value.items[i].productId, Amount: this.updateOrderForm.value.items[i].amount}
         );
     }
-    console.log(this.updateOrderForm.value.items);
-    console.log(this.updateOrderRows);
   }
 
-  caluculateTotalCost(): number{
+  caluculateTotalPrice(): number{
     let price = 0;
     for(var j=0; j<this.updateOrderRows.length; j++){
       for(var i=0; i<this.products.length; i++){
@@ -185,42 +137,16 @@ export class UpdateOrderComponent implements OnInit {
         }
       }
     }
-
+    console.log('total price', price);
     return price;
   }
 
-  createOrders(){
-    this.createOrderRows();
 
-    this.service.getData().subscribe(
-      response => {
-        this.products = response;
-        this.updateOrderDetails = {
-          id: this.orderDetails.id,
-          companyId: 25,
-          created: this.orderDetails.created,
-          createdBy: this.orderDetails.createdBy,
-          paymentMethod: this.updateOrderForm.value.paymentMethod,
-          totalPrice:this.caluculateTotalCost(),
-          status: 0,
-          orderRows: this.updateOrderRows
-        };
-
-      console.log(this.updateOrderDetails);
-
-      },
-      error => console.log(error),
-      () => console.log('HTTP request for getMovie completed')
-    );
-
-
-  }
 
 
   updateOrder(id:number){
-    console.log(id);
-    // this.getMovie();
-    // console.log(this.products);
+
+    // Fake variable for put trial
     this.updateOrderDetails = {
       id: 896,
       companyId: 25,
@@ -232,56 +158,40 @@ export class UpdateOrderComponent implements OnInit {
       orderRows: [{ProductId:80, Amount:1}]
     };
 
-  console.log(this.updateOrderDetails);
+    console.log('To API', this.updateOrderDetails);
 
-  this.service.updateOrders(id, this.updateOrderDetails).subscribe(
-  response => {console.log(response);},
-  err => {console.log(err.message);},
-  () =>{console.log('completed');}
-);
-    // console.log(this.updateOrderForm.value.payment);
-    // console.log(this.updateOrderForm.value.items[0].productId);
+    // Send update request to API
+    this.service.updateOrders(id, this.updateOrderDetails).subscribe(
+      response => {console.log(response);},
+      err => {console.log(err.message);},
+      () =>{console.log('completed');}
+    );
 
-    // this.createOrderRows();
+    this.createOrderRows();
 
+    // Fetch product list
     this.service.getData().subscribe(
       response => {
+        // Store product data
         this.products = response;
-        this.updateOrderDetails = {
+        // Store all info into an object to send to API
+        let updateOrderDetailsReal = {
           id: this.orderDetails.id,
           companyId: 25,
           created: this.orderDetails.created,
           createdBy: this.orderDetails.createdBy,
-          paymentMethod: this.updateOrderForm.value.payment,
-          totalPrice:this.caluculateTotalCost(),
-          status: this.updateOrderForm.value.status,
+          paymentMethod: this.updateOrderForm.value.payment, //From FromGroup
+          totalPrice:this.caluculateTotalPrice(),
+          status: this.updateOrderForm.value.status, //From FromGroup
           orderRows: this.updateOrderRows
         };
 
-        // this.updateOrderDetails = {
-        //   id: 896,
-        //   companyId: 25,
-        //   created: '2019',
-        //   createdBy: 'kaori',
-        //   paymentMethod: 'paypal',
-        //   totalPrice:50,
-        //   status: 0,
-        //   orderRows:  [{ ProductId: 81, Amount: 3 }]
-        // };
+      console.log('Real order update object', updateOrderDetailsReal);
 
-      console.log(this.updateOrderDetails);
-
-    //   this.service.updateOrders(id, this.updateOrderDetails).subscribe(
-    //   response => {console.log(response);},
-    //   err => {console.log(err.message);},
-    //   () =>{console.log('completed');}
-    // );
       },
       error => console.log(error),
       () => console.log('HTTP request for getMovie completed')
     );
-
-
   }
 
   deleteOrder(id:number){

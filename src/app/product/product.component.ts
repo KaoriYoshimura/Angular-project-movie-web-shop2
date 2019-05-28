@@ -21,7 +21,6 @@ export class ProductComponent implements OnInit {
   // To check if product already exists in sessionStorage
   cartItems: IProduct[] = [];
 
-  // Implement ActivatedRoute to use dependency injection
   constructor(
     private route: ActivatedRoute,
     private service: DataService,
@@ -30,7 +29,7 @@ export class ProductComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
-  // Get the property params from product.component, 'id' and copies the data into myParams. Use this id to collect the item with the same id from API.
+  // Get the property params 'id' from product.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
   ngOnInit() {
     this.route.params.subscribe(myParams => {
       const id = myParams['id'];
@@ -38,7 +37,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  // Fetch details of the product
+  // Fetch details of the products
   getMovie(id: number) {
     this.service.getDetailById(id).subscribe((detailsFromApi)=> {
       this.details = detailsFromApi;

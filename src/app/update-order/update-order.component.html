@@ -6,8 +6,8 @@
         <h2>Order details</h2>
         <table class="table table-bordered">
           <tr>
-              <th class="text-center">ID</th>
-              <td class="text-center">{{orderDetails.id}}</td>
+            <th class="text-center">ID</th>
+            <td class="text-center">{{orderDetails.id}}</td>
           </tr>
           <tr>
             <th class="text-center">Ordered On</th>
@@ -20,66 +20,57 @@
           <tr>
             <th class="text-center">PaymentMethod</th>
             <td class="text-center">
-                <select formControlName="payment">
-                  <option [ngValue]="paymentChoice" *ngFor= "let paymentChoice of paymentChoices">{{paymentChoice}}</option>
-<!-- 
-                  <option>{{orderDetails.paymentMethod}}</option>
-                  <option value="Paypal">Paypal</option>
-                  <option value="BankId">BankId</option>
-                  <option value="Credit card">Credit card</option> -->
-                </select>
+              <select formControlName="payment">
+                <option [ngValue]="paymentChoice" *ngFor="let paymentChoice of paymentChoices">
+                  {{paymentChoice}}
+                </option>
+              </select>
             </td>
           </tr>
           <tr>
             <th class="text-center">Status</th>
             <td class="text-center">
-              <!-- <input type="number" formControlName="status" placeholder="{{orderDetails.status}}" max="3" min="0" class="text-right"> -->
               <select formControlName="status">
-                  <option [ngValue]="statusChoice.id" *ngFor= "let statusChoice of statusChoices">{{statusChoice.status}}</option>
+                <option [ngValue]="statusChoice.id" *ngFor="let statusChoice of statusChoices">
+                  {{statusChoice.status}}
+                </option>
               </select>
             </td>
           </tr>
         </table>
+
         <h2>Item details</h2>
-        <!-- <table class="table table-bordered"> -->
         <table class="table table-bordered">
           <tr>
             <th class="text-center">Item ID</th>
             <th class="text-center">Product Id</th>
             <th class="text-center">Product</th>
             <th class="text-center">Amount</th>
-            <th class="text-center">Delete</th>
           </tr>
-            <!-- <ng-container *ngFor="let orderRow of orderRows"> -->
-              <ng-container formArrayName="items">
-                <ng-container *ngFor="let item of updateOrderForm.get('items').controls; let i=index">
-                    <ng-container [formGroupName]="i">
-                        <tr>
-                <!-- <td class="text-center"><span formControlName='id'>{{item.id}}</span></td> -->
-                <td><input type="number" formControlName="id" readonly style="border:0"></td>
-                <td class="text-center">
-                    <!-- <input type="number" formControlName="productId"> -->
-                    <input type="number" formControlName="productId" placeholder="{{item.productId}}">
-                    <!-- <input type="number" placeholder="{{orderRow.productId}}"> -->
-                </td>
-                <td class="text-center">
-                  To be fixed
-                </td>
-                <td class="text-center">
-                    <!-- <input type="number" formControlName="amount"> -->
-                    <input type="number" formControlName="amount" placeholder="{{item.amount}}">
-                    <!-- <input type="number" placeholder="{{orderRow.amount}}"> -->
-                </td>
-                <td><button class="button-basic">Delete</button></td>
-
-              </tr>
+          <ng-container formArrayName="items">
+            <ng-container *ngFor="let item of updateOrderForm.get('items').controls; let i=index">
+              <ng-container [formGroupName]="i">
+                <tr>
+                  <td><input type="number" formControlName="id" readonly style="border:0"></td>
+                  <td class="text-center">
+                    <select formControlName="productId">
+                        <option [ngValue]="product.id" *ngFor="let product of products">
+                          {{product.id}}
+                        </option>
+                    </select>
+                  </td>
+                  <td class="text-center">
+                    To be fixed
+                  </td>
+                  <td class="text-center">
+                    <input type="number" formControlName="amount" placeholder="{{item.amount}}" min="0" max="1">
+                  </td>
+                </tr>
+              </ng-container>
             </ng-container>
           </ng-container>
-            </ng-container>
-        <!-- </ng-container> -->
         </table>
         <button class="button-basic" type="submit" (click)="updateOrder(orderDetails.id)">Update order</button>
-        <!--  [ngClass]="{'isDisable-style': !updateOrderForm.valid}" [disabled]="!updateOrderForm.valid" -->
       </form>
 
       <pre>{{updateOrderForm.value | json}}</pre>
@@ -91,4 +82,4 @@
       <button routerLink="/admin" class="button-basic">Go back to admin</button>
     </div>
   </div>
-<main>
+  <main>

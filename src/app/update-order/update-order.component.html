@@ -4,22 +4,22 @@
     <div *ngIf="orderDetails">
       <form [formGroup]="updateOrderForm">
         <h2>Order details</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-order">
           <tr>
-            <th class="text-center">ID</th>
-            <td class="text-center">{{orderDetails.id}}</td>
+            <th>ID</th>
+            <td>{{orderDetails.id}}</td>
           </tr>
           <tr>
-            <th class="text-center">Ordered On</th>
-            <td class="text-center">{{orderDetails.created | date: 'M/d/yy, h:mm a'}}</td>
+            <th>Ordered On</th>
+            <td>{{orderDetails.created | date: 'M/d/yy, h:mm a'}}</td>
           </tr>
           <tr>
-            <th class="text-center">Ordered By</th>
-            <td class="text-center">{{orderDetails.createdBy}}</td>
+            <th>Ordered By</th>
+            <td>{{orderDetails.createdBy}}</td>
           </tr>
           <tr>
-            <th class="text-center">PaymentMethod</th>
-            <td class="text-center">
+            <th>PaymentMethod</th>
+            <td>
               <select formControlName="payment">
                 <option [ngValue]="paymentChoice" *ngFor="let paymentChoice of paymentChoices">
                   {{paymentChoice}}
@@ -28,8 +28,8 @@
             </td>
           </tr>
           <tr>
-            <th class="text-center">Status</th>
-            <td class="text-center">
+            <th>Status</th>
+            <td>
               <select formControlName="status">
                 <option [ngValue]="statusChoice.id" *ngFor="let statusChoice of statusChoices">
                   {{statusChoice.status}}
@@ -40,19 +40,19 @@
         </table>
 
         <h2>Item details</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-items">
           <tr>
-            <th class="text-center">Item ID</th>
-            <th class="text-center">Product Id</th>
-            <th class="text-center">Product Name</th>
-            <th class="text-center">Amount</th>
+            <th width="15%">Item ID</th>
+            <th width="15%">Product Id</th>
+            <th width="30%">Product Name</th>
+            <th width="15%">Amount</th>
           </tr>
           <ng-container formArrayName="items">
             <ng-container *ngFor="let item of updateOrderForm.get('items').controls; let i=index">
               <ng-container [formGroupName]="i">
                 <tr>
-                  <td>
-                    <input type="number" formControlName="id" readonly style="border:0">
+                  <td class="text-center">
+                    <input type="number" formControlName="id" readonly class="table-readonly">
                   </td>
                   <td class="text-center">
                     <select formControlName="productId">
@@ -61,11 +61,14 @@
                         </option>
                     </select>
                   </td>
-                  <td class="text-center">
-                    <input type="text" formControlName="productName" readonly style="border:0">
+                  <td>
+                    <input type="text" formControlName="productName" readonly class="table-readonly">
                   </td>
                   <td class="text-center">
-                    <input type="number" formControlName="amount" placeholder="{{item.amount}}" min="0" max="1">
+                    <select formControlName="amount">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
                   </td>
                 </tr>
               </ng-container>

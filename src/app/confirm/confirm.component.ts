@@ -85,8 +85,8 @@ export class ConfirmComponent implements OnInit {
       () => { console.log('completed');}
     );
 
-    sessionStorage.clear();
-    this.router.navigate(['/ordersent']);
+    // sessionStorage.clear();
+    // this.router.navigate(['/ordersent']);
 
  }
 

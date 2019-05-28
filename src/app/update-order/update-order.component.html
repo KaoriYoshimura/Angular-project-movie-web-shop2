@@ -73,11 +73,11 @@
           </ng-container>
         </table>
         <button class="button-basic" type="submit" (click)="updateOrder(orderDetails.id)">Update order</button>
+        <button class="button-basic" type="button" (click)="deleteOrder(orderDetails.id)">Delete order</button>
       </form>
 
       <pre>{{updateOrderForm.value | json}}</pre>
 
-      <button class="button-basic" type="button" (click)="deleteOrder(orderDetails.id)">Delete order</button>
     </div>
     <div *ngIf="!orderDetails">
       <p>Order has been deleted.</p>

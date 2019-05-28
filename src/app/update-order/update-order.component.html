@@ -11,7 +11,7 @@
           </tr>
           <tr>
             <th class="text-center">Ordered On</th>
-            <td class="text-center">{{orderDetails.created | date: 'M-d h:mm a'}}</td>
+            <td class="text-center">{{orderDetails.created | date: 'M/d/yy, h:mm a'}}</td>
           </tr>
           <tr>
             <th class="text-center">Ordered By</th>
@@ -20,13 +20,23 @@
           <tr>
             <th class="text-center">PaymentMethod</th>
             <td class="text-center">
-                <input type="text" formControlName="payment" placeholder="{{orderDetails.paymentMethod}}" class="text-center">
+                <select formControlName="payment">
+                  <option [ngValue]="paymentChoice" *ngFor= "let paymentChoice of paymentChoices">{{paymentChoice}}</option>
+<!-- 
+                  <option>{{orderDetails.paymentMethod}}</option>
+                  <option value="Paypal">Paypal</option>
+                  <option value="BankId">BankId</option>
+                  <option value="Credit card">Credit card</option> -->
+                </select>
             </td>
           </tr>
           <tr>
             <th class="text-center">Status</th>
             <td class="text-center">
-              <input type="number" formControlName="status" placeholder="{{orderDetails.status}}" max="3" min="0" class="text-right">
+              <!-- <input type="number" formControlName="status" placeholder="{{orderDetails.status}}" max="3" min="0" class="text-right"> -->
+              <select formControlName="status">
+                  <option [ngValue]="statusChoice.id" *ngFor= "let statusChoice of statusChoices">{{statusChoice.status}}</option>
+                </select>
             </td>
           </tr>
         </table>

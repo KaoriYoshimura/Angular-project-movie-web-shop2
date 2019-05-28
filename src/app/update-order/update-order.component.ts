@@ -7,7 +7,6 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { IOrder, IOrderRow } from '../interfaces/iorder';
 import { IProduct } from '../interfaces/iproduct';
 
-
 @Component({
   selector: 'app-update-order',
   templateUrl: './update-order.component.html',
@@ -39,6 +38,19 @@ export class UpdateOrderComponent implements OnInit {
   //   return this.updateOrderForm.get('items') as FormArray;
   // }
 
+  paymentChoices = [
+    'Paypal',
+    'Bank Id',
+    'Credit card'
+  ]
+
+
+  statusChoices = [
+    { id: 0, status: '0: Waiting for payment'},
+    { id: 1, status: '1: Paid'},
+    { id: 2, status: '2: Pending'}
+  ]
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -49,11 +61,11 @@ export class UpdateOrderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.updateOrderForm = this.fb.group({
-      payment: ['', Validators.required],
-      status: ['', Validators.required],
-      items: this.fb.array([])
-    });
+    // this.updateOrderForm = this.fb.group({
+    //   payment: [this.orderDetails.paymentMethod, Validators.required],
+    //   status: [this.orderDetails.status, Validators.required],
+    //   items: this.fb.array([])
+    // });
 
     this.getOrderId();
 
@@ -113,6 +125,13 @@ export class UpdateOrderComponent implements OnInit {
         this.orderDetails = response;
         this.getOrderRows();
 
+        this.updateOrderForm = this.fb.group({
+          payment: [this.orderDetails.paymentMethod, Validators.required],
+          status: [this.orderDetails.status, Validators.required],
+          items: this.fb.array([])
+        });
+    
+
         for(let i= 0; i<this.orderRows.length; i++) {
           const items = this.fb.group({
           id: this.orderRows[i].id,
@@ -123,7 +142,7 @@ export class UpdateOrderComponent implements OnInit {
           });
           (<FormArray>this.updateOrderForm.get('items')).push(items);
           }
-          console.log(this.orderRows);
+          console.log(this.orderDetails);
 
       },
       error => console.log(error),
@@ -205,13 +224,31 @@ export class UpdateOrderComponent implements OnInit {
 
 
   updateOrder(id:number){
+    console.log(id);
     // this.getMovie();
     // console.log(this.products);
-    
-    console.log(this.updateOrderForm.value.payment);
-    console.log(this.updateOrderForm.value.items[0].productId);
+    this.updateOrderDetails = {
+      id: 896,
+      companyId: 25,
+      created: '2019',
+      createdBy: 'kaori',
+      paymentMethod: 'paypal',
+      totalPrice:50,
+      status: 0,
+      orderRows: [{ProductId:80, Amount:1}]
+    };
 
-    this.createOrderRows();
+  console.log(this.updateOrderDetails);
+
+  this.service.updateOrders(id, this.updateOrderDetails).subscribe(
+  response => {console.log(response);},
+  err => {console.log(err.message);},
+  () =>{console.log('completed');}
+);
+    // console.log(this.updateOrderForm.value.payment);
+    // console.log(this.updateOrderForm.value.items[0].productId);
+
+    // this.createOrderRows();
 
     this.service.getData().subscribe(
       response => {
@@ -227,12 +264,29 @@ export class UpdateOrderComponent implements OnInit {
           orderRows: this.updateOrderRows
         };
 
+        // this.updateOrderDetails = {
+        //   id: 896,
+        //   companyId: 25,
+        //   created: '2019',
+        //   createdBy: 'kaori',
+        //   paymentMethod: 'paypal',
+        //   totalPrice:50,
+        //   status: 0,
+        //   orderRows:  [{ ProductId: 81, Amount: 3 }]
+        // };
+
       console.log(this.updateOrderDetails);
 
+    //   this.service.updateOrders(id, this.updateOrderDetails).subscribe(
+    //   response => {console.log(response);},
+    //   err => {console.log(err.message);},
+    //   () =>{console.log('completed');}
+    // );
       },
       error => console.log(error),
       () => console.log('HTTP request for getMovie completed')
     );
+
 
   }
 

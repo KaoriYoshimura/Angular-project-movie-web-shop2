@@ -55,14 +55,8 @@ export class UpdateOrderComponent implements OnInit {
       items: this.fb.array([])
     });
 
-
-
     this.getOrderId();
 
-
-    // this.setItems();
-
-    // this.addItem();
   }
 
   // For FormArray no longer needed ..?
@@ -165,6 +159,7 @@ export class UpdateOrderComponent implements OnInit {
         {ProductId: this.updateOrderForm.value.items[i].productId, Amount: this.updateOrderForm.value.items[i].amount}
         );
     }
+    console.log(this.updateOrderForm.value.items);
     console.log(this.updateOrderRows);
   }
 
@@ -181,39 +176,63 @@ export class UpdateOrderComponent implements OnInit {
     return price;
   }
 
-  // createOrders(){
-  //   this.createOrderRows();
+  createOrders(){
+    this.createOrderRows();
 
-  //   this.updateOrderDetails = {
-  //     id: 0,
-  //     companyId: 25,
-  //     created: this.orderDetails.created,
-  //     createdBy: this.orderDetails.createdBy,
-  //     paymentMethod: this.updateOrderForm.value.paymentMethod,
-  //     totalPrice:this.caluculateTotalCost(),
-  //     status: 0,
-  //     orderRows: this.updateOrderRows
-  //   };
-  // }
+    this.service.getData().subscribe(
+      response => {
+        this.products = response;
+        this.updateOrderDetails = {
+          id: this.orderDetails.id,
+          companyId: 25,
+          created: this.orderDetails.created,
+          createdBy: this.orderDetails.createdBy,
+          paymentMethod: this.updateOrderForm.value.paymentMethod,
+          totalPrice:this.caluculateTotalCost(),
+          status: 0,
+          orderRows: this.updateOrderRows
+        };
+
+      console.log(this.updateOrderDetails);
+
+      },
+      error => console.log(error),
+      () => console.log('HTTP request for getMovie completed')
+    );
+
+
+  }
 
 
   updateOrder(id:number){
-    this.getMovie();
-    console.log(this.products);
+    // this.getMovie();
+    // console.log(this.products);
     
-    console.log(this.updateOrderForm.value, id);
-    console.log(this.updateOrderForm.value.items[0].productId, id);
+    console.log(this.updateOrderForm.value.payment);
+    console.log(this.updateOrderForm.value.items[0].productId);
+
     this.createOrderRows();
 
-    // const orders = {
-    //   companyId: 25,
-    //   created: this.orderDetails.created,
-    //   createdBy: this.orderDetails.createdBy,
-    //   paymentMethod: this.updateOrderForm.value.paymentMethod,
-    //   totalPrice:this.totalCost,
-    //   status: 0,
-    //   orderRows: this.orderRows
-    // };
+    this.service.getData().subscribe(
+      response => {
+        this.products = response;
+        this.updateOrderDetails = {
+          id: this.orderDetails.id,
+          companyId: 25,
+          created: this.orderDetails.created,
+          createdBy: this.orderDetails.createdBy,
+          paymentMethod: this.updateOrderForm.value.payment,
+          totalPrice:this.caluculateTotalCost(),
+          status: this.updateOrderForm.value.status,
+          orderRows: this.updateOrderRows
+        };
+
+      console.log(this.updateOrderDetails);
+
+      },
+      error => console.log(error),
+      () => console.log('HTTP request for getMovie completed')
+    );
 
   }
 

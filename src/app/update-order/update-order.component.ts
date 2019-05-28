@@ -58,7 +58,8 @@ export class UpdateOrderComponent implements OnInit {
 
 
     this.getOrderId();
-    this.getMovie();
+
+
     // this.setItems();
 
     // this.addItem();
@@ -151,6 +152,7 @@ export class UpdateOrderComponent implements OnInit {
     this.service.getData().subscribe(
       response => {
         this.products = response;
+        this.caluculateTotalCost();
       },
       error => console.log(error),
       () => console.log('HTTP request for getMovie completed')
@@ -166,19 +168,18 @@ export class UpdateOrderComponent implements OnInit {
     console.log(this.updateOrderRows);
   }
 
-  // caluculateTotalCost(): number{
-  //   let price = 0;
-  //   for(var j=0; j<this.updateOrderRows.length; j++){
-  //     for(var i=0; i<this.products.length; i++){
-  //       if(this.updateOrderRows[j].ProductId === this.products[i].id){
-  //         price += 
-  //         console.log('price',this.products[i].price);
-  //       }
-  //     }
-  //   }
+  caluculateTotalCost(): number{
+    let price = 0;
+    for(var j=0; j<this.updateOrderRows.length; j++){
+      for(var i=0; i<this.products.length; i++){
+        if(this.updateOrderRows[j].ProductId === this.products[i].id){
+          price += this.products[i].price;
+        }
+      }
+    }
 
-  //   return price;
-  // }
+    return price;
+  }
 
   // createOrders(){
   //   this.createOrderRows();
@@ -197,11 +198,12 @@ export class UpdateOrderComponent implements OnInit {
 
 
   updateOrder(id:number){
+    this.getMovie();
+    console.log(this.products);
     
     console.log(this.updateOrderForm.value, id);
     console.log(this.updateOrderForm.value.items[0].productId, id);
     this.createOrderRows();
-    // this.caluculateTotalCost();
 
     // const orders = {
     //   companyId: 25,

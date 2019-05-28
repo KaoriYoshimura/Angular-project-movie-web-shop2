@@ -2,8 +2,8 @@
   <div class="container main-container">
     <h1>Update order</h1>
     <div *ngIf="orderDetails">
-      <h2>Order details</h2>
       <form [formGroup]="updateOrderForm">
+        <h2>Order details</h2>
         <table class="table table-bordered">
           <tr>
               <th class="text-center">ID</th>
@@ -30,7 +30,7 @@
             </td>
           </tr>
         </table>
-<p>{{orderDetails.orderRows[0].productId}}</p>
+        <h2>Item details</h2>
         <!-- <table class="table table-bordered"> -->
         <table class="table table-bordered">
           <tr>
@@ -70,9 +70,9 @@
         </table>
         <button class="button-basic" type="submit" (click)="updateOrder(orderDetails.id)">Update order</button>
         <!--  [ngClass]="{'isDisable-style': !updateOrderForm.valid}" [disabled]="!updateOrderForm.valid" -->
-    </form>
+      </form>
 
-    <pre>{{updateOrderForm.value | json}}</pre>
+      <pre>{{updateOrderForm.value | json}}</pre>
 
       <button class="button-basic" type="button" (click)="deleteOrder(orderDetails.id)">Delete order</button>
     </div>

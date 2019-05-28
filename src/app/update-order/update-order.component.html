@@ -36,7 +36,7 @@
               <!-- <input type="number" formControlName="status" placeholder="{{orderDetails.status}}" max="3" min="0" class="text-right"> -->
               <select formControlName="status">
                   <option [ngValue]="statusChoice.id" *ngFor= "let statusChoice of statusChoices">{{statusChoice.status}}</option>
-                </select>
+              </select>
             </td>
           </tr>
         </table>

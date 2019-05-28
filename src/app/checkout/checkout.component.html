@@ -31,7 +31,9 @@
         </div>
         <div>
           <label>Payment method<span>(required)</span></label><br>
-          <input type="text" formControlName="paymentMethod">
+          <select formControlName="paymentMethod">
+            <option [ngValue]="paymentChoice" *ngFor= "let paymentChoice of paymentChoices">{{paymentChoice}}</option>
+          </select>
         </div>
         <div>
           <label>Phone number<span>(required)</span></label><br>

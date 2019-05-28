@@ -4,6 +4,7 @@ import { IProduct } from '../interfaces/iproduct';
 import { DataService } from '../services/data.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { IStatus } from '../interfaces/IChoices';
 
 
 @Component({
@@ -15,6 +16,12 @@ export class CheckoutComponent implements OnInit{
   cartItems: IProduct[];
   totalCost = 0;
   isDisabled: boolean = true;
+
+    // Choices for payement in checkout and update order page
+    paymentChoices = this.service.paymentChoices;
+
+    // Choices for status in checkout and update order page
+    statusChoices: IStatus[] = this.service.statusChoices;
 
   // Inject FormBuilder service
   constructor(

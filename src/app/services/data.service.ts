@@ -38,6 +38,19 @@ export class DataService implements IdataService{
     this.numberOfCartItems.next(updated);
   }
 
+  // Choices for payement in checkout and update order page
+  paymentChoices = [
+    'Paypal',
+    'Bank Id',
+    'Credit card'
+  ]
+
+  // Choices for status in checkout and update order page
+  statusChoices = [
+    { id: 0, status: '0: Waiting for payment'},
+    { id: 1, status: '1: Paid'},
+    { id: 2, status: '2: Pending'}
+  ]
 
   getData():Observable<IProduct[]>{
     return this.http.get<IProduct[]>('https://medieinstitutet-wie-products.azurewebsites.net/api/products');

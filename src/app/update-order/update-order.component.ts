@@ -6,6 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { IOrder, IOrderRow } from '../interfaces/iorder';
 import { IProduct } from '../interfaces/iproduct';
+import { IStatus } from '../interfaces/IChoices';
 
 @Component({
   selector: 'app-update-order',
@@ -38,18 +39,11 @@ export class UpdateOrderComponent implements OnInit {
   //   return this.updateOrderForm.get('items') as FormArray;
   // }
 
-  paymentChoices = [
-    'Paypal',
-    'Bank Id',
-    'Credit card'
-  ]
+  // Choices for payement in checkout and update order page
+  paymentChoices = this.service.paymentChoices;
 
-
-  statusChoices = [
-    { id: 0, status: '0: Waiting for payment'},
-    { id: 1, status: '1: Paid'},
-    { id: 2, status: '2: Pending'}
-  ]
+  // Choices for status in checkout and update order page
+  statusChoices: IStatus[] = this.service.statusChoices;
 
   constructor(
     private route: ActivatedRoute,

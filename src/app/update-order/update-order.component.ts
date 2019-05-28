@@ -3,10 +3,11 @@ import { DataService } from '../services/data.service';
 import { IPlacedOrders, IPlacedOrderRow } from '../interfaces/iplaced-orders';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { IOrder, IOrderRow } from '../interfaces/iorder';
 import { IProduct } from '../interfaces/iproduct';
 import { IStatus } from '../interfaces/IChoices';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-update-order',
@@ -38,12 +39,12 @@ export class UpdateOrderComponent implements OnInit {
     private fb: FormBuilder,
     private service: DataService,
     // private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
 
     this.getOrderId();
-    this.getProduct();
+
   }
 
   // Get the property params 'id' from admin.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
@@ -54,23 +55,14 @@ export class UpdateOrderComponent implements OnInit {
     });
   }
 
-  // Fetch details of the products
-  getProduct(){
-    this.service.getData().subscribe(
-      response => {
-        return this.products = response;
-      },
-      error => console.log(error),
-      () => console.log('HTTP request for getProduct completed')
-    );
-  }
-
   getOrderDetails(id: number){
-    // Fetch details of the order
-    this.service.getOrderDetailById(id).subscribe(
-      response => {
-        this.orderDetails = response;
-        this.getOrderRows();
+    
+    // Fetch both product list and order details
+    forkJoin(
+      this.service.getData(), this.service.getOrderDetailById(id)
+    ).subscribe((res) =>{
+      this.products = res[0],
+      this.orderDetails = res[1]
 
         // Set FormBuilder
         this.updateOrderForm = this.fb.group({
@@ -78,13 +70,15 @@ export class UpdateOrderComponent implements OnInit {
           status: this.orderDetails.status,
           items: this.fb.array([])
         });
+        this.getProductName()
 
         // Set items FormArray
-        for(let i= 0; i<this.orderRows.length; i++) {
+        for(let i= 0; i<this.orderDetails.orderRows.length; i++) {
           const items = this.fb.group({
-          id: this.orderRows[i].id,
-          productId: this.orderRows[i].productId,
-          amount: this.orderRows[i].amount,
+          id: this.orderDetails.orderRows[i].id,
+          productId: this.orderDetails.orderRows[i].productId,
+          productName: this.productNames[i],
+          amount: this.orderDetails.orderRows[i].amount,
           });
           // Push formGroup into FormArray
           (<FormArray>this.updateOrderForm.get('items')).push(items);
@@ -97,29 +91,22 @@ export class UpdateOrderComponent implements OnInit {
     );
   }
 
-  // Get OrderRows from data base
-  getOrderRows(){
-    for(var i=0; i<this.orderDetails.orderRows.length; i++){
-      this.orderRows.push(this.orderDetails.orderRows[i]);
+
+  // what is type?
+  // Fetch product names from product list
+  getProductName(){
+    for(var j=0; j<this.orderDetails.orderRows.length; j++){
+      for(var i=0; i<this.products.length; i++){
+        if(this.orderDetails.orderRows[j].productId === this.products[i].id){
+          this.productNames.push(this.products[i].name);
+        }
+      }
     }
+
+    return this.productNames;
   }
 
-/*     // what is type?
-    // getProductName(){
-    //   for(var j=0; j<this.orderDetails.orderRows.length; j++){
-    //     for(var i=0; i<this.products.length; i++){
-    //       if(this.orderDetails.orderRows[j].productId === this.products[i].id){
-    //         this.productNames.push(this.products[i].name);
-    //       }
-    //     }
-    //   }
-  
-    //   console.log(this.productNames);
-    //   return this.productNames;
-  
-    // } */
-
-
+  // Collect updated date of orderRows and store
   createOrderRows(){
     for(var i=0; i<this.updateOrderForm.value.items.length; i++){
       this.updateOrderRows.push(
@@ -128,6 +115,7 @@ export class UpdateOrderComponent implements OnInit {
     }
   }
 
+  // Caluculate total price of new orderRows
   caluculateTotalPrice(): number{
     let price = 0;
     for(var j=0; j<this.updateOrderRows.length; j++){
@@ -141,9 +129,7 @@ export class UpdateOrderComponent implements OnInit {
     return price;
   }
 
-
-
-
+  // Send put request
   updateOrder(id:number){
 
     // Fake variable for put trial
@@ -167,6 +153,7 @@ export class UpdateOrderComponent implements OnInit {
       () =>{console.log('completed');}
     );
 
+    /* From here is the actual updated order */
     this.createOrderRows();
 
     // Fetch product list

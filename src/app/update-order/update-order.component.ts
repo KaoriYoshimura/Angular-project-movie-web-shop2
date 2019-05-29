@@ -20,7 +20,7 @@ export class UpdateOrderComponent implements OnInit {
 
   orderDetails: IPlacedOrders;
   orderRows: IPlacedOrderRow[] = [];
-  updateOrderDetails: IOrder;
+  // updateOrderDetails: IOrder;
   updateOrderRows: IOrderRow[] = [];
   updateTotalCost: number;
   products: IProduct[];
@@ -86,7 +86,7 @@ export class UpdateOrderComponent implements OnInit {
         this.setItemsFormArray();
       },
       error => console.log(error),
-      () => console.log("HPPT request for getOrderDetails completed")
+      () => console.log("HPPT request for getData and getOrderDetails completed")
     );
   }
 
@@ -127,12 +127,15 @@ export class UpdateOrderComponent implements OnInit {
 
   // Collect updated date of orderRows and store
   createOrderRows() {
+    this.updateOrderRows = [];
     for (var i = 0; i < this.updateOrderForm.value.items.length; i++) {
       this.updateOrderRows.push({
         ProductId: this.updateOrderForm.value.items[i].productId,
         Amount: this.updateOrderForm.value.items[i].amount
       });
     }
+    console.log(this.updateOrderForm.value.items);
+    return this.updateOrderRows;
   }
 
   // Caluculate total price of new orderRows
@@ -141,7 +144,7 @@ export class UpdateOrderComponent implements OnInit {
     for (var j = 0; j < this.updateOrderRows.length; j++) {
       for (var i = 0; i < this.products.length; i++) {
         if (this.updateOrderRows[j].ProductId === this.products[i].id) {
-          price += this.products[i].price;
+          price += this.products[i].price * this.updateOrderRows[j].Amount;
         }
       }
     }
@@ -151,37 +154,19 @@ export class UpdateOrderComponent implements OnInit {
 
   // Send put request
   updateOrder(id: number) {
-    // Fake variable for put trial
-    this.updateOrderDetails = {
-      id: 896,
-      companyId: 25,
-      created: "2019",
-      createdBy: "kaori",
-      paymentMethod: "paypal",
-      totalPrice: 50,
-      status: 0,
-      orderRows: [{ ProductId: 80, Amount: 1 }]
-    };
 
-    console.log("To API", this.updateOrderDetails);
-
-    // Send update request to API
-    this.service.updateOrders(id, this.updateOrderDetails).subscribe(
-      response => console.log(response),
-      err => console.log(err.message),
-      () => console.log("Update order completed")
-    );
-
-    /* From here is the actual updated order */
     this.createOrderRows();
+    console.log("updateOrderRows", this.updateOrderRows);
 
-    // Fetch product list
+    console.log("updateOrderRows", this.caluculateTotalPrice());
+
+    // Fetch product list and create updated order
     this.service.getData().subscribe(
       response => {
         // Store product data
         this.products = response;
         // Store all info into an object to send to API
-        let updateOrderDetailsReal = {
+        const updateOrderDetails = {
           id: this.orderDetails.id,
           companyId: 25,
           created: this.orderDetails.created,
@@ -189,14 +174,26 @@ export class UpdateOrderComponent implements OnInit {
           paymentMethod: this.updateOrderForm.value.payment, //From FromGroup
           totalPrice: this.caluculateTotalPrice(),
           status: this.updateOrderForm.value.status, //From FromGroup
-          orderRows: this.updateOrderRows
+          orderRows: this.createOrderRows()
         };
 
-        console.log("Real order update object", updateOrderDetailsReal);
+      console.log("To API", updateOrderDetails);
+
+      // Send update request to API
+      this.service.updateOrders(id, updateOrderDetails).subscribe(
+        response => console.log(response),
+        err => console.log(err.message),
+        () => console.log("Update order completed")
+      );
+
+      this.getOrderId();
+
       },
       error => console.log(error),
       () => console.log("HTTP request for getMovie completed")
     );
+
+
   }
 
   deleteOrder(id: number) {

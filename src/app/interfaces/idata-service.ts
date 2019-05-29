@@ -15,11 +15,13 @@ export interface IdataService {
     RemoveFromSessionStorage(item: number):void;
     getOrders(): Observable<IPlacedOrders[]>;
     getSessionUserData():void;
-    // To be tested in e2e test
+    // To be tested by e2e test
     // submitOrder(order: IOrder): Observable<IOrder>;
     searchProductApi(Query: string):Observable<IProduct[]>;
     getCategory():Observable<ICategory[]>;
     getOrders(): Observable<IPlacedOrders[]>;
+    // getOrderDetailById(id: number): Observable<IPlacedOrders>;
+    // To be tested by e2e test?
     // updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>;
     deleteOrder(id:number): Observable<IOrder>;
 }

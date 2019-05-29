@@ -9,6 +9,7 @@ import { IUser } from '../interfaces/iuser';
 import { IOrder } from '../interfaces/iorder';
 import { ICategory } from '../interfaces/icategory';
 import { IPlacedOrders } from '../interfaces/iplaced-orders';
+import { IStatus } from '../interfaces/IChoices';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -46,7 +47,7 @@ export class DataService implements IdataService{
   ]
 
   // Choices for status in checkout and update order page
-  statusChoices = [
+  statusChoices: IStatus[] = [
     { id: 0, status: '0: Waiting for payment'},
     { id: 1, status: '1: Paid'},
     { id: 2, status: '2: Pending'}

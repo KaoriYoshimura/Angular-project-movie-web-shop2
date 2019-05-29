@@ -131,7 +131,8 @@ export class UpdateOrderComponent implements OnInit {
     for (var i = 0; i < this.updateOrderForm.value.items.length; i++) {
       this.updateOrderRows.push({
         ProductId: this.updateOrderForm.value.items[i].productId,
-        Amount: this.updateOrderForm.value.items[i].amount
+        Amount: this.updateOrderForm.value.items[i].amount,
+        Id: this.updateOrderForm.value.items[i].id
       });
     }
     console.log(this.updateOrderForm.value.items);
@@ -166,7 +167,7 @@ export class UpdateOrderComponent implements OnInit {
         // Store product data
         this.products = response;
         // Store all info into an object to send to API
-        const updateOrderDetails = {
+        const updateOrderDetails: IOrder = {
           id: this.orderDetails.id,
           companyId: 25,
           created: this.orderDetails.created,

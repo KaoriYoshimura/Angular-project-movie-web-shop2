@@ -55,7 +55,7 @@ export class ConfirmComponent implements OnInit {
   createOrderRows(){
     for(var i=0; i<this.cartItems.length; i++){
       this.orderRows.push(
-        {ProductId: this.cartItems[i].id, Amount: 1}
+        {ProductId: this.cartItems[i].id, Amount: 1, Id: null}
         );
     }
   }

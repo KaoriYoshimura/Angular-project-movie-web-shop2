@@ -29,8 +29,8 @@ export class ProductComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
-  // Get the property params 'id' from product.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
   ngOnInit() {
+    // Get the property params 'id' from product.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
     this.route.params.subscribe(myParams => {
       const id = myParams['id'];
       this.getMovie(id);

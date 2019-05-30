@@ -59,46 +59,4 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  // updateOrders(){
-    // this.createOrderRows();
-
-  //   this.updatedOrders = {
-    //   id: use "="
-  //     companyId: 25,
-  //     created: this.now,
-  //     createdBy: this.userData.email,
-  //     paymentMethod: this.userData.paymentMethod,
-  //     totalPrice:this.totalCost,
-  //     status: 0,
-  //     orderRows: this.orderRows
-  //   };
-  // }
-
-
-
-
-
-
-  deleteOrderRow(id:number){
-    console.log(id);
-    // this.service.deleteOrder(id).subscribe(
-    //   response => {
-    //     console.log(response);
-    //     this.getOrders();
-    //   },
-    //   error => console.log(error),
-    //   () => console.log('HPPT request for category completed')
-    // );
-
-        // Define the array to be pushed
-        // this.orderRows = [];
-
-        // for(var i=0; i<this.orders.data.length; i++){
-        //   for(var j=0; j<this.orders.data[i].orderRows.length; j++){
-        //     if(this.orders.data[i].orderRows[j].orderId === id){
-        //       this.orderRows.push(this.orders.data[i].orderRows[j]);
-        //     }
-        //   };
-        // }
-  }
 }

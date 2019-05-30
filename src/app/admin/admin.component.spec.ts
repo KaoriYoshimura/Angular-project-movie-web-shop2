@@ -45,7 +45,7 @@ describe('AdminComponent', () => {
   });
 
   it('should print out placed order list',() => {
-    component.getOrders();
+    // getOrders() is gnOnInitit
     expect(component.orders.data.length).toBe(3);
   });
 

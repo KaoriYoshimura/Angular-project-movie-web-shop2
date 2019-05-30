@@ -51,7 +51,7 @@ describe('CheckoutComponent', () => {
     expect(component.userForm.valid).toBeFalsy();
   });
 
-  it('should validate email field', () => {
+  it('should validate user form field', () => {
     let itemfirstName = component.userForm.controls["firstName"];
     itemfirstName.setValue("Media");
     let itemEmailName = component.userForm.controls["email"];

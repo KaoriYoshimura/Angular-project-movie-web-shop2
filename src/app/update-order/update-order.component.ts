@@ -44,7 +44,7 @@ export class UpdateOrderComponent implements OnInit {
         console.log(res[0], res[1]);
       },
       error => console.log(error),
-      () => console.log("HPPT request for getOrderDetails completed")
+      () => console.log("HPPT request for getChoices completed")
     );
   }
 
@@ -56,24 +56,24 @@ export class UpdateOrderComponent implements OnInit {
   {}
 
   ngOnInit() {
-    this.getOrderId();
-  }
-
-  // Get the property params 'id' from admin.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
-  getOrderId() {
+    // Get the property params 'id' from admin.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
     this.route.params.subscribe(myParams => {
       const id = myParams["id"];
       this.getOrderDetails(id);
     });
+
+    // Is this needed?
+    // this.getChoices();
   }
 
   getOrderDetails(id: number) {
-    // Fetch both product list and order details
+    // Fetch both product list and order details from API
     forkJoin(
       this.service.getData(),
       this.service.getOrderDetailById(id)
     ).subscribe(
       res => {
+        // Store results into variables
         (this.products = res[0]), (this.orderDetails = res[1]);
 
         // Set FormBuilder
@@ -126,7 +126,7 @@ export class UpdateOrderComponent implements OnInit {
   }
 
   // Collect updated date of orderRows and store
-  createOrderRows() {
+  createUpdateOrderRows() {
     this.updateOrderRows = [];
     for (var i = 0; i < this.updateOrderForm.value.items.length; i++) {
       this.updateOrderRows.push({
@@ -135,7 +135,6 @@ export class UpdateOrderComponent implements OnInit {
         Id: this.updateOrderForm.value.items[i].id
       });
     }
-    console.log(this.updateOrderForm.value.items);
     return this.updateOrderRows;
   }
 
@@ -156,7 +155,7 @@ export class UpdateOrderComponent implements OnInit {
   // Send put request
   updateOrder(id: number) {
 
-    this.createOrderRows();
+    this.createUpdateOrderRows();
     console.log("updateOrderRows", this.updateOrderRows);
 
     console.log("updateOrderRows", this.caluculateTotalPrice());
@@ -175,7 +174,7 @@ export class UpdateOrderComponent implements OnInit {
           paymentMethod: this.updateOrderForm.value.payment, //From FromGroup
           totalPrice: this.caluculateTotalPrice(),
           status: this.updateOrderForm.value.status, //From FromGroup
-          orderRows: this.createOrderRows()
+          orderRows: this.createUpdateOrderRows()
         };
 
       console.log("To API", updateOrderDetails);
@@ -187,13 +186,13 @@ export class UpdateOrderComponent implements OnInit {
         () => console.log("Update order completed")
       );
 
-      this.getOrderId();
-
       },
       error => console.log(error),
       () => console.log("HTTP request for getMovie completed")
     );
 
+    // Fetch the order details again
+    this.getOrderDetails(id) ;
 
   }
 

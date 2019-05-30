@@ -9,7 +9,7 @@ import { IUser } from '../interfaces/iuser';
 import { IOrder } from '../interfaces/iorder';
 import { ICategory } from '../interfaces/icategory';
 import { IPlacedOrders } from '../interfaces/iplaced-orders';
-import { IStatus } from '../interfaces/IChoices';
+import { IStatus } from '../interfaces/Ichoices';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -35,7 +35,7 @@ export class DataService implements IdataService{
   // Create observable object from numberOfCartItems object to share the data in app.component
   numberOfCartItems$ = this.numberOfCartItems.asObservable();
   // Pass "updated" data to numberOfCartItems object and .next will fire off an eent that a subscriber will listen in app component.
-  onNotifyCartAmoutUpdated(updated: number) {
+  onNotifyCartAmoutUpdated(updated: number):any {
     this.numberOfCartItems.next(updated);
   }
 
@@ -69,10 +69,6 @@ export class DataService implements IdataService{
   getSessionCartItems() {
     return this.cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   }
-
-  // countNumberOfCartItems() {
-  //   return this.getSessionCartItems().length;
-  // }
 
   addToCart(cartItems: IProduct[]): void {
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));

@@ -5,8 +5,7 @@ import { IOrder } from './iorder';
 import { ICategory } from './icategory';
 
 export interface IdataService {
-    // How to test?
-    // onNotifyCartAmoutUpdated(updated: number);
+    onNotifyCartAmoutUpdated(updated: number):any;
     getData():Observable<IProduct[]>;
     getDetailById(id: number): Observable<IProduct>;
     getSessionCartItems():void;
@@ -20,7 +19,7 @@ export interface IdataService {
     searchProductApi(Query: string):Observable<IProduct[]>;
     getCategory():Observable<ICategory[]>;
     getOrders(): Observable<IPlacedOrders[]>;
-    // getOrderDetailById(id: number): Observable<IPlacedOrders>;
+    getOrderDetailById(id: number): Observable<IPlacedOrders>;
     // To be tested by e2e test?
     // updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>;
     deleteOrder(id:number): Observable<IOrder>;

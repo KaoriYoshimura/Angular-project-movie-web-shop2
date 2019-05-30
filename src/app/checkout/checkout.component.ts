@@ -4,7 +4,7 @@ import { IProduct } from '../interfaces/iproduct';
 import { DataService } from '../services/data.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { IStatus } from '../interfaces/IChoices';
+import { IStatus } from '../interfaces/Ichoices';
 
 
 @Component({

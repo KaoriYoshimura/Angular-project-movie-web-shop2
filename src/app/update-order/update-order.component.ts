@@ -6,7 +6,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FormBuilder, FormArray, FormGroup } from "@angular/forms";
 import { IOrder, IOrderRow } from "../interfaces/iorder";
 import { IProduct } from "../interfaces/iproduct";
-import { IStatus } from "../interfaces/IChoices";
+import { IStatus } from "../interfaces/Ichoices";
 import { forkJoin } from "rxjs";
 
 @Component({

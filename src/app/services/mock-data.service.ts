@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { ICategory } from '../interfaces/icategory';
 import { IPlacedOrders } from '../interfaces/iplaced-orders';
 import { IOrder } from '../interfaces/iorder';
+import { IStatus } from '../interfaces/Ichoices';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,9 @@ export class MockDataService implements IdataService{
   userData: IUser;
   orders: IPlacedOrders[] = [];
   searchResults: IProduct[];
+  totalCost = 0;
+  userDataMock: IUser;
+
 
   // Declaration of object and function to update cart amount in app.component
   // Declare subject type property to inform when data is updated
@@ -25,18 +29,29 @@ export class MockDataService implements IdataService{
   // Create observable object from numberOfCartItems object to share the data in app.component
   numberOfCartItems$ = this.numberOfCartItems.asObservable();
   // Pass "updated" data to numberOfCartItems object and .next will fire off an eent that a subscriber will listen in app component.
-  onNotifyCartAmoutUpdated(updated: number) {
+  onNotifyCartAmoutUpdated(updated: number):any {
     this.numberOfCartItems.next(updated);
   }
+
+  // Choices for payement in checkout and update order page
+  paymentChoices = [
+    'Paypal',
+    'Bank Id',
+    'Credit card'
+  ]
+
+  // Choices for status in checkout and update order page
+  statusChoices: IStatus[] = [
+    { id: 0, status: '0: Waiting for payment'},
+    { id: 1, status: '1: Paid'},
+    { id: 2, status: '2: Pending'}
+  ]
+
     // Product data to run a test instead of API data
   products: IProduct[] = [
-    { id: 76, name: "The Dark Knight", description: "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham, the Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice", price: 199, imageUrl: "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg", year: 2008, added:"2016-01-05T00:00:00",productCategory: [{categoryId:5, category:null},{categoryId:6, category:null}]},
+    { id: 76, name: "The Dark Knight", description: "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham, the Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice", price: 199, imageUrl: "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg", year: 2008, added:"2016-01-05T00:00:00", productCategory: [{categoryId:5, category:null},{categoryId:6, category:null}]},
     { id: 77, name:"Interstellar", description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", price :129, imageUrl:"https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SY1000_CR0,0,640,1000_AL_.jpg", year :2014,added:"2017-07-16T00:00:00",productCategory:[{categoryId:8,category:null}]}
   ];
-
-  totalCost = 0;
-
-  userDataMock: IUser;
 
   categoryDataMock: ICategory[] = [
     {id:5, name :"Action"},
@@ -70,12 +85,6 @@ export class MockDataService implements IdataService{
   getSessionCartItems() {
     return this.cartItems = this.products;
 
-  }
-
-  countNumberOfCartItems() {
-    //this.NumberOfCartItems = this.getSessionCartItems().length;
-
-    return this.cartItems.length;
   }
 
   addToCart(cartItems: IProduct[]): void {
@@ -120,6 +129,14 @@ export class MockDataService implements IdataService{
 
   getOrders(): Observable<IPlacedOrders[]>{
     return of(this.orderDataMock);
+  }
+
+  
+  getOrderDetailById(id: number): Observable<IPlacedOrders> {
+    return this.getOrders().pipe(map(orderDetails =>
+      orderDetails.find(detail=>
+        detail.id == id)
+    ));
   }
 
   // updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>{

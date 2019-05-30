@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('UpdateOrderComponent', () => {
   let component: UpdateOrderComponent;
@@ -13,7 +14,12 @@ describe('UpdateOrderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ UpdateOrderComponent ],
-      imports: [HttpClientModule, RouterTestingModule]
+      imports: [
+        HttpClientModule,
+        RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule
+      ]
     })
     //Override component's own provider
     .overrideComponent(UpdateOrderComponent, {
@@ -32,7 +38,7 @@ describe('UpdateOrderComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

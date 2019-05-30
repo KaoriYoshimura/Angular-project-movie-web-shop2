@@ -60,8 +60,8 @@ export class MockDataService implements IdataService{
 
   orderDataMock: IPlacedOrders[] = [
     {id:558, companyId:25, created:"2019-04-01T00:00:00", createdBy :"Kaori", paymentMethod:"paypal", totalPrice :100, status:0, orderRows :[{id:1, productId:79, product: "null", amount:1, orderId: 11}]},
-    {id:559, companyId:25, created:"2019-05-01T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :200, status:0, orderRows :[{id:1, productId:79, product: "null", amount:1, orderId: 11}]},
-    {id:560, companyId:25, created:"2019-05-02T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :300, status:0, orderRows :[{id:1, productId:79, product: "null", amount:1, orderId: 11}]},
+    {id:559, companyId:25, created:"2019-05-01T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :200, status:0, orderRows :[{id:1, productId:78, product: "null", amount:1, orderId: 11}]},
+    {id:560, companyId:25, created:"2019-05-02T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :300, status:0, orderRows :[{id:1, productId:80, product: "null", amount:1, orderId: 11}]},
   ];
 
   orderHttpClientMock: IOrder[] = [

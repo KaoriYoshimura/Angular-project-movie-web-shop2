@@ -32,19 +32,19 @@
             }
 
             .action {
-                border-left: 6px solid #FACC2E;
+                border-left: 6px solid $action;
             }
 
             .thriller {
-                border-left: 6px solid #BE81F7;
+                border-left: 6px solid $thriller;
             }
 
             .comedy {
-                border-left: 6px solid #C8FE2E;
+                border-left: 6px solid $comedy;
             }
 
             .sci-fi {
-                border-left: 6px solid #F79F81;
+                border-left: 6px solid $sci-fi;
             }
 
         }
@@ -53,14 +53,15 @@
 
         .card-wrapper {
             padding:0 15px;
+            display: flex;
+            flex-wrap: wrap;
 
             .card{
-                height:500px;
                 margin-bottom: 1.875rem;
                 border: none;
                 border-radius: 0;
                 @include boxShadow;
-            
+
                 img{
                     width: 100%;
                     height: 350px;
@@ -68,6 +69,10 @@
                     object-fit: cover;
                     -o-object-position: top;
                     object-position: top;
+                }
+
+                .card-body{
+                    padding: 20px;
                 }
             }
         }

@@ -15,7 +15,7 @@ import { IStatus } from '../interfaces/Ichoices';
 export class MockDataService implements IdataService{
 
   // Temporary cartItems to store instead of sessionStorage
-  cartItems: IProduct[] = [];
+  itemsInSessionStorage: IProduct[] = [];
   userData: IUser;
   orders: IPlacedOrders[] = [];
   searchResults: IProduct[];
@@ -83,7 +83,7 @@ export class MockDataService implements IdataService{
 
   // To check how many items in a shopping cart
   getSessionCartItems() {
-    return this.cartItems = this.products;
+    return this.itemsInSessionStorage = this.products;
 
   }
 
@@ -91,23 +91,21 @@ export class MockDataService implements IdataService{
     //const cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
     // let cartItems: [] = this.getSessionCartItems();
 
-  
-  //  this one should be updated!!!!
-  //  this.cartItems.push(cartItems);
+  // cartItems becomes error, don't know why...
+  //  this.itemsInSessionStorage.push(cartItems);
    
     //sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
 
-    // this.countNumberOfCartItems();
   }
 
   RemoveFromSessionStorage(item: number) {
-    for (let i = 0; i < this.cartItems.length; i++) {
-      if(this.cartItems[i].id === item){
-        this.cartItems.splice(i, 1);
+    for (let i = 0; i < this.itemsInSessionStorage.length; i++) {
+      if(this.itemsInSessionStorage[i].id === item){
+        this.itemsInSessionStorage.splice(i, 1);
       }
     }
 
-    return this.cartItems;
+    return this.itemsInSessionStorage;
   }
 
   // ||[]creates array if cartItem is empty

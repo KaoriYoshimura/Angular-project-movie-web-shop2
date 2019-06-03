@@ -29,7 +29,6 @@ export class AppComponent implements OnInit {
     // Catch and subscribe when "numberOfCartItem" in dataService is updated
     this.subscription = this.service.numberOfCartItems$.subscribe(
       amount => {
-        console.log('Cart Item updated to', amount);
         this.cartAmount = amount;
       }
     );

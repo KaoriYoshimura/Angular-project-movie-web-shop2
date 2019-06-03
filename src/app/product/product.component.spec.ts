@@ -44,7 +44,6 @@ describe('ProductComponent', () => {
     expect(component.details.name).toBe('The Dark Knight');
   });
 
-  // // To be updated after adding qty
   // it('should add items into the array for sessionStorage', () => {
   //     //   component.getMovie(76);
   //   expect(component.cartItems.length).toBe(0);

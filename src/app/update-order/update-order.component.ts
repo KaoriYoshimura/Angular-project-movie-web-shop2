@@ -197,7 +197,6 @@ export class UpdateOrderComponent implements OnInit {
   }
 
   deleteOrder(id: number) {
-    console.log(id);
     this.service.deleteOrder(id).subscribe(
       response => {
         console.log(response);

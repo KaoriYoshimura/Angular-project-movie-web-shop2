@@ -7,9 +7,11 @@ import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 describe('UpdateOrderComponent', () => {
   let component: UpdateOrderComponent;
   let fixture: ComponentFixture<UpdateOrderComponent>;
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,6 +47,7 @@ describe('UpdateOrderComponent', () => {
       { id: 76, name: "The Dark Knight", description: "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham, the Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice", price: 199, imageUrl: "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg", year: 2008, added:"2016-01-05T00:00:00", productCategory: [{categoryId:5, category:null},{categoryId:6, category:null}]},
       { id: 77, name:"Interstellar", description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", price :129, imageUrl:"https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SY1000_CR0,0,640,1000_AL_.jpg", year :2014,added:"2017-07-16T00:00:00",productCategory:[{categoryId:8,category:null}]}
     ];
+
 
   });
 
@@ -94,4 +97,31 @@ describe('UpdateOrderComponent', () => {
   //   expect(component.updateOrderRows[0].ProductId).toBe(79);
   //   expect(component.orderRows.length).toBe(1);
   // });
+
+  // it('should remove a order from database', () => {
+  //   // Hämta alla ordrar ((använda stub?))
+  //   // this.service.getOrders().subscribe(orders = {
+  //   //   let amountOfOrders = orders
+      
+  //     component.getOrderDetails(this.stub);
+  //     // // expect(component.getOrderDetails.length).toBe(3);
+  //     component.deleteOrder(component.orderDetails[0].id);
+  //     expect(component.getOrderDetails.length).toBe(amountOfOrders - 1);
+  //   // });
+  //   });
+
+
+  it('should remove a order from database', () => {
+    // Collect all orders. MockDataService injection is needed because getOrders function is NOT run in this component.
+    const service: MockDataService = TestBed.get(MockDataService);
+    service.getOrders().subscribe(
+      orders => {
+      let amountOfOrders = orders;
+      expect(amountOfOrders.length).toBe(3);
+      component.deleteOrder(component.orderDetails[0].id);
+      expect(amountOfOrders.length).toBe(2);
+    });
+    });
+
+
 });

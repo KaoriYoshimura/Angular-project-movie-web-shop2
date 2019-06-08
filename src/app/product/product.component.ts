@@ -61,25 +61,23 @@ export class ProductComponent implements OnInit {
   addToCart(): void {
     // Fetch cart items from sessionStorage
     this.cartItems = this.service.getSessionCartItems();
-    // If there is no items in cart add to cart
-    if (this.cartItems.length === 0) {
+
+    let isDuplicate = false;
+
+    // Check if the product is already in the cart
+    for (var i = 0; i < this.cartItems.length; i++) {
+      // If there is the same product in the cart mark as duplicate
+      if (this.details.id === this.cartItems[i].id) {
+        isDuplicate = true;
+      }
+    }
+
+    // If there is no same component in the cart(or cart is empty) add to the cart
+    if (!isDuplicate) {
       this.addSessionStorage();
-      // Otherwise check if the product is already in the cart
+      // Otherwise show error dialog
     } else {
-      let isDuplicate = false;
-      for (var i = 0; i < this.cartItems.length; i++) {
-        // If there is the same product in the cart mark as duplicate
-        if (this.details.id === this.cartItems[i].id) {
-          isDuplicate = true;
-        }
-      }
-      // If there is no same component in the cart add to the cart
-      if (!isDuplicate) {
-        this.addSessionStorage();
-        // Otherwise show error dialog
-      } else {
-        this.errorDialog();
-      }
+      this.errorDialog();
     }
   }
 

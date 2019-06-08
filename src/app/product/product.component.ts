@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { IProduct } from '../interfaces/iproduct';
-import { Router } from '@angular/router';
-import { ICategory } from '../interfaces/icategory';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { notifyModalContent } from '../notify-dialog/notify-dialog.component';
+import { Component, OnInit } from "@angular/core";
+import { DataService } from "../services/data.service";
+import { ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
+import { IProduct } from "../interfaces/iproduct";
+import { Router } from "@angular/router";
+import { ICategory } from "../interfaces/icategory";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { notifyModalContent } from "../notify-dialog/notify-dialog.component";
+import { forkJoin } from "rxjs";
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: "app-product",
+  templateUrl: "./product.component.html",
+  styleUrls: ["./product.component.scss"]
 })
 export class ProductComponent implements OnInit {
   details: IProduct;
-  categories: ICategory[];
   categoryResults: ICategory[] = [];
 
   // To check if product already exists in sessionStorage
@@ -27,43 +27,56 @@ export class ProductComponent implements OnInit {
     private router: Router,
     private location: Location,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
   ngOnInit() {
     // Get the property params 'id' from product.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
     this.route.params.subscribe(myParams => {
-      const id = myParams['id'];
-      this.getMovie(id);
+      const id = myParams["id"];
+      this.getDetails(id);
     });
   }
 
-  // Fetch details of the products
-  getMovie(id: number) {
-    this.service.getDetailById(id).subscribe((detailsFromApi)=> {
-      this.details = detailsFromApi;
-      this.findCategory();
-    });
+  getDetails(id: number) {
+    forkJoin(
+      this.service.getDetailById(id),
+      this.service.getCategory()
+    ).subscribe(
+      response => {
+        this.details = response[0];
+        const categories = response[1];
+        // for (var j = 0; j < this.details.productCategory.length; j++) {
+          for (var i = 0; i < categories.length; i++) {
+            // if (categories[i].id === this.details.productCategory[j].categoryId) {
+              // this.categoryResults.push(categories[i]);
+            // }
+          }
+        // }
+      },
+      error => console.log(error),
+      () => console.log("HPPT request for movie details completed")
+    );
   }
 
-  addToCart(): void{
+  addToCart(): void {
     // Fetch cart items from sessionStorage
     this.cartItems = this.service.getSessionCartItems();
     // If there is no items in cart add to cart
-    if(this.cartItems.length === 0) {
+    if (this.cartItems.length === 0) {
       this.addSessionStorage();
       // Otherwise check if the product is already in the cart
     } else {
       let isDuplicate = false;
-      for (var i=0; i<this.cartItems.length;i++){
+      for (var i = 0; i < this.cartItems.length; i++) {
         // If there is the same product in the cart mark as duplicate
-        if(this.details.id === this.cartItems[i].id) {
+        if (this.details.id === this.cartItems[i].id) {
           isDuplicate = true;
         }
       }
       // If there is no same component in the cart add to the cart
-      if(!isDuplicate){
-      this.addSessionStorage();
-      // Otherwise show error dialog
+      if (!isDuplicate) {
+        this.addSessionStorage();
+        // Otherwise show error dialog
       } else {
         this.errorDialog();
       }
@@ -71,43 +84,25 @@ export class ProductComponent implements OnInit {
   }
 
   // add sessionStorage and move to cart page
-  addSessionStorage(){
+  addSessionStorage() {
     this.cartItems.push(this.details);
     this.service.addToCart(this.cartItems);
-    this.router.navigate(['/cart']);
+    this.router.navigate(["/cart"]);
     // Trigger to update cart amount in app.component (header)
     let numberOfCartItems = this.cartItems.length;
     this.service.onNotifyCartAmoutUpdated(numberOfCartItems);
-
   }
 
   // Show error dialog
-  errorDialog(){
+  errorDialog() {
     const modalRef = this.modalService.open(notifyModalContent, {
-      centered: true }
-      );
-    modalRef.componentInstance.name = 'This product is already in the cart!';
+      centered: true
+    });
+    modalRef.componentInstance.name = "This product is already in the cart!";
   }
 
-  findCategory(){
-    this.service.getCategory().subscribe(
-      response => {
-        this.categories = response;
-        for(var i=0; i<this.categories.length; i++){
-          for(var j=0; j<this.details.productCategory.length; j++){
-            if(this.categories[i].id === this.details.productCategory[j].categoryId){
-              this.categoryResults.push(this.categories[i]);
-            }
-          }
-        }
-      },
-      error => console.log(error),
-      () => console.log('HPPT request for category completed')
-    );
+  // Back to previous page
+  goBack(): void {
+    this.location.back();
   }
-
-    // Back to previous page
-    goBack(): void{
-      this.location.back();
-    }
 }

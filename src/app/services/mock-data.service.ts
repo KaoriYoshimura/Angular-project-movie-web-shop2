@@ -105,14 +105,7 @@ export class MockDataService implements IdataService{
   }
 
   addToCart(cartItems: IProduct[]): void {
-    //const cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
-    // let cartItems: [] = this.getSessionCartItems();
-
-  // cartItems becomes error, don't know why...
-  //  this.itemsInSessionStorage.push(cartItems);
-   
-    //sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
-
+    return sessionStorage.push(cartItems);
   }
 
   RemoveFromSessionStorage(item: number) {
@@ -167,8 +160,6 @@ export class MockDataService implements IdataService{
       }
     }
 
-    // Is it needed?
-    // return of();
   }
 
   constructor() { }

@@ -9,7 +9,6 @@ export interface IdataService {
     getData():Observable<IProduct[]>;
     getDetailById(id: number): Observable<IProduct>;
     getSessionCartItems():void;
-    // countNumberOfCartItems():void;
     addToCart(cartItems: IProduct[]): void;
     RemoveFromSessionStorage(item: number):void;
     getOrders(): Observable<IPlacedOrders[]>;
@@ -20,7 +19,7 @@ export interface IdataService {
     getCategory():Observable<ICategory[]>;
     getOrders(): Observable<IPlacedOrders[]>;
     getOrderDetailById(id: number): Observable<IPlacedOrders>;
-    // To be tested by e2e test?
+    // No need
     // updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>;
     deleteOrder(id:number): Observable<IOrder>;
 }

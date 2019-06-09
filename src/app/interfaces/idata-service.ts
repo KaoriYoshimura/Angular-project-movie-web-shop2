@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { IProduct } from './iproduct'
-import { IPlacedOrders, IPlacedOrderRow } from './iplaced-orders';
+import { IPlacedOrders } from './iplaced-orders';
 import { IOrder } from './iorder';
 import { ICategory } from './icategory';
 

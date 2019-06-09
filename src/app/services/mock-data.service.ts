@@ -54,7 +54,7 @@ export class MockDataService implements IdataService{
       name: "The Dark Knight",
       description: "When the menace",
       price: 199,
-      imageUrl: "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg",
+      imageUrl: "https://images-na.ssl-images-amazon.com/jpg",
       year: 2008,
       added:"2016-01-05T00:00:00",
       productCategory: [{categoryId:5, category:null},{categoryId:6, category:null}]
@@ -64,7 +64,7 @@ export class MockDataService implements IdataService{
       name:"Interstellar",
       description: "A team of explorers",
       price :129,
-      imageUrl:"https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SY1000_CR0,0,640,1000_AL_.jpg",
+      imageUrl:"https://images-na.ssl-images-amazon.com/",
       year :2014,
       added:"2017-07-16T00:00:00",
       productCategory:[{categoryId:8,category:null}]}
@@ -76,15 +76,15 @@ export class MockDataService implements IdataService{
   ];
 
   orderDataMock: IPlacedOrders[] = [
-    {id:558, companyId:25, created:"2019-04-01T00:00:00", createdBy :"Kaori", paymentMethod:"paypal", totalPrice :100, status:0, orderRows :[{id:1, productId:79, product: "null", amount:1, orderId: 11}]},
-    {id:559, companyId:25, created:"2019-05-01T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :200, status:0, orderRows :[{id:1, productId:78, product: "null", amount:1, orderId: 11}]},
-    {id:560, companyId:25, created:"2019-05-02T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :300, status:0, orderRows :[{id:1, productId:80, product: "null", amount:1, orderId: 11}]},
+    {id:558, companyId:25, created:"2019-04-01", createdBy :"Kaori", paymentMethod:'Paypal', totalPrice :100, status:0, orderRows :[{id:1, productId:79, product: "null", amount:1, orderId: 11}]},
+    {id:559, companyId:25, created:"2019-05-02", createdBy :"Kaori", paymentMethod:'Paypal', totalPrice :200, status:0, orderRows :[{id:1, productId:78, product: "null", amount:1, orderId: 11}]},
+    {id:560, companyId:25, created:"2019-05-03", createdBy :"Kaori", paymentMethod:'Paypal', totalPrice :300, status:0, orderRows :[{id:1, productId:80, product: "null", amount:1, orderId: 11}]},
   ];
 
   orderHttpClientMock: IOrder[] = [
-    {id:558, companyId:25, created:"2019-04-01T00:00:00", createdBy :"Kaori", paymentMethod:"paypal", totalPrice :100, status:0, orderRows :[{ProductId:79, Amount:1, Id: 100}]},
-    {id:559, companyId:25, created:"2019-05-01T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :200, status:0, orderRows :[{ProductId:78, Amount:1, Id: 101}]},
-    {id:560, companyId:25, created:"2019-05-02T00:00:00", createdBy :"Kaori", paymentMethod:"cash", totalPrice :300, status:0, orderRows :[{ProductId:80, Amount:1, Id: 102}]},
+    {id:558, companyId:25, created:"2019-04-01", createdBy :"Kaori", paymentMethod:'Paypal', totalPrice :100, status:0, orderRows :[{ProductId:79, Amount:1, Id: 100}]},
+    {id:559, companyId:25, created:"2019-05-02", createdBy :"Kaori", paymentMethod:'Paypal', totalPrice :200, status:0, orderRows :[{ProductId:78, Amount:1, Id: 101}]},
+    {id:560, companyId:25, created:"2019-05-03", createdBy :"Kaori", paymentMethod:'Paypal', totalPrice :300, status:0, orderRows :[{ProductId:80, Amount:1, Id: 102}]},
 
   ];
 
@@ -119,10 +119,9 @@ export class MockDataService implements IdataService{
   }
 
   // ||[]creates array if cartItem is empty
-  // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
   getSessionUserData() {
     return this.userData = {
-      firstName:"Kaori", email:"kaori.yoshimura@medieinstitutet.se", paymentMethod:"Paypal", phoneNumber:555222, phoneNumbers:2222
+      firstName:"Kaori", email:"kaori.yoshimura@medieinstitutet.se", paymentMethod:'Paypal', phoneNumber:555222, phoneNumbers:2222
     };
   }
 

@@ -1,7 +1,6 @@
 @import './../../sass/_import.scss';
 
 .main-container {
-    @include bordersToCheck(pink, yellow, blue);
 
     .cart-items-container {
         max-width: 500px;
@@ -9,8 +8,6 @@
         background-color: white;
         padding: 10px;
         margin: auto;
-        margin-right: 10px;
-
 
         .price {
             text-align: right;

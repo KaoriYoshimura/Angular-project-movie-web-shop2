@@ -2,9 +2,9 @@
   <div class="container main-container">
     <h1>Confirm your order</h1>
 
-    <div class="row">
+    <div class="row justify-content-around">
       <!-- Cart items -->
-      <div class="col-lg-6">
+      <div class="col-lg-5">
         <h2>Your cart items</h2>
         <div class="cart-items-container">
           <ul>
@@ -17,11 +17,9 @@
           <p>Total {{totalCost}}kr</p>
         </div>
       </div>
-
       <!-- Billing-info -->
       <div class="billing-info-container col-lg-6">
         <h2>Billing Information</h2>
-
         <ul *ngIf="userData">
             <li class="row">
                 <span class="col-3">Name</span>
@@ -45,10 +43,9 @@
             </li>
         </ul>
       </div>
-
-      <button class="button-basic" (click)="orderSubmit()">Order</button>
-      <button class="button-basic" (click)="goBack()">Go back</button>
     </div>
+    <button class="button-basic" (click)="orderSubmit()">Order</button>
+    <button class="button-basic" (click)="goBack()">Go back</button>
 
   </div>
 </main>

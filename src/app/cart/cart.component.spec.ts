@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartComponent } from './cart.component';
+
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -17,7 +17,6 @@ describe('CartComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        FontAwesomeModule
       ]
     })
     //Override component's own provider
@@ -43,12 +42,12 @@ describe('CartComponent', () => {
 
   it('should show cart items', () => {
     // test if getCartItems() works (do not need to write function and run because it is in ngOnInit)
-      expect(component.cartItems.length).toBe(2);
-    });
+    expect(component.cartItems.length).toBe(2);
+  });
 
-    it('should caluculate total cost', () => {
-        expect(component.totalPrice).toBe(328);
-      });
+  it('should caluculate total cost', () => {
+    expect(component.totalPrice).toBe(328);
+  });
 
   it('should remove a product from cart', () => {
     expect(component.cartItems.length).toBe(2);

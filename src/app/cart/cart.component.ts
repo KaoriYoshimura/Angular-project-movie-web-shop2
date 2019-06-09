@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../interfaces/iproduct';
 import { DataService } from '../services/data.service';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cart',
@@ -13,9 +12,6 @@ export class CartComponent implements OnInit {
   NumberOfCartItems: number;
   isCartItems = this.NumberOfCartItems > 0;
   totalPrice = 0;
-
-  faTrashAlt = faTrashAlt;
-
 
   constructor(
     private service:DataService,

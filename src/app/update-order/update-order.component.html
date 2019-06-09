@@ -2,6 +2,7 @@
   <div class="container main-container">
     <h1>Update order</h1>
     <div *ngIf="orderDetails">
+
       <form [formGroup]="updateOrderForm">
         <h2>Order details</h2>
         <table class="table table-bordered table-order">
@@ -56,9 +57,9 @@
                   </td>
                   <td class="text-center">
                     <select formControlName="productId">
-                        <option [ngValue]="product.id" *ngFor="let product of products">
-                          {{product.id}}
-                        </option>
+                      <option [ngValue]="product.id" *ngFor="let product of products">
+                        {{product.id}}
+                      </option>
                     </select>
                   </td>
                   <td>
@@ -66,8 +67,8 @@
                   </td>
                   <td class="text-center">
                     <select formControlName="amount">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
                     </select>
                   </td>
                 </tr>
@@ -78,13 +79,13 @@
         <button class="button-basic" type="submit" (click)="updateOrder(orderDetails.id)">Update order</button>
         <button class="button-basic" type="button" (click)="deleteOrder(orderDetails.id)">Delete order</button>
       </form>
-
-      <pre>{{updateOrderForm.value | json}}</pre>
-
     </div>
+
+    <!-- Show only orderDetail is empty -->
     <div *ngIf="!orderDetails">
       <p>Order has been deleted.</p>
       <button routerLink="/admin" class="button-basic">Go back to admin</button>
     </div>
+
   </div>
-  <main>
+<main>

@@ -16,9 +16,6 @@ export class ConfirmComponent implements OnInit {
   cartItems: IProduct[];
   totalCost = 0;
   userData: IUser;
-  orders: IOrder;
-  now = moment().format('LLLL');
-  orderRows: IOrderRow[] = [];
 
   constructor(
     private service: DataService,
@@ -32,10 +29,12 @@ export class ConfirmComponent implements OnInit {
     this.caluculateCost();
   }
 
+  // Show cart items
   getCartItems(){
     this.cartItems = this.service.getSessionCartItems();
   }
 
+  // Show total cost
   caluculateCost(){
     for (let i = 0; i <this.cartItems.length; i++){
       this.totalCost += this.cartItems[i].price;
@@ -43,53 +42,56 @@ export class ConfirmComponent implements OnInit {
     return this.totalCost;
 }
 
+  // Show billing information
   getUserData(){
     this.userData = this.service.getSessionUserData();
   }
 
-  // Back to previous page
-  goBack(): void {
-    this.location.back();
-  }
-
+  // Collect cart items and store in an object to use for order
   createOrderRows(){
+    const orderRows: IOrderRow[] = [];
+  
     for(var i=0; i<this.cartItems.length; i++){
-      this.orderRows.push(
+      orderRows.push(
         {ProductId: this.cartItems[i].id, Amount: 1, Id: 0}
         );
     }
+
+    return orderRows;
   }
 
   createOrders(){
-    this.createOrderRows();
-
-    this.orders = {
+    const orders: IOrder = {
       id: 0,
       companyId: 25,
-      created: this.now,
+      created: moment().format('LLLL'),
       createdBy: this.userData.email,
       paymentMethod: this.userData.paymentMethod,
       totalPrice:this.totalCost,
       status: 0,
-      orderRows: this.orderRows
+      orderRows: this.createOrderRows()
     };
+
+    return orders;
   }
 
   orderSubmit() {
-    this.createOrders();
-
-    this.service.submitOrder(this.orders).subscribe(
+    this.service.submitOrder(this.createOrders()).subscribe(
       response => {console.log(response);},
       err => {console.log(err.message);},
       () => { console.log('completed');}
     );
 
+    // Clean sessionStorage after submitting
     sessionStorage.clear();
-    this.getCartItems();
     // Trigger to update cart amount in header
-    let numberOfCartItems = this.cartItems.length;
-    this.service.onNotifyCartAmoutUpdated(numberOfCartItems);
+    this.service.onNotifyCartAmoutUpdated(0);
+    // Move to ordersent page
     this.router.navigate(['/ordersent']);
- }
+  }
 
+   // Back to previous page
+  goBack(): void {
+    this.location.back();
+  }
 }

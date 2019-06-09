@@ -34,20 +34,6 @@ export class UpdateOrderComponent implements OnInit {
   // Fetch choices for status in checkout and update order page
   statusChoices: IStatus[] = this.service.statusChoices;
 
-  // Is is needed? paymentChoices and statusChoices works...
-  getChoices() {
-    forkJoin(
-      this.service.paymentChoices,
-      this.service.statusChoices
-    ).subscribe(
-      res => {
-        console.log(res[0], res[1]);
-      },
-      error => console.log(error),
-      () => console.log("HPPT request for getChoices completed")
-    );
-  }
-
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -61,20 +47,18 @@ export class UpdateOrderComponent implements OnInit {
       const id = myParams["id"];
       this.getOrderDetails(id);
     });
-
-    // Is this needed?
-    // this.getChoices();
   }
 
   getOrderDetails(id: number) {
     // Fetch both product list and order details from API
     forkJoin(
-      this.service.getData(),
-      this.service.getOrderDetailById(id)
+      this.service.getData(), //To get product name
+      this.service.getOrderDetailById(id) // To get order details
     ).subscribe(
       res => {
         // Store results into variables
-        (this.products = res[0]), (this.orderDetails = res[1]);
+        this.products = res[0];
+        this.orderDetails = res[1];
 
         // Set FormBuilder
         this.setFormBuilder();
@@ -112,7 +96,6 @@ export class UpdateOrderComponent implements OnInit {
     }
   }
 
-  // what is type?
   // Fetch product names from product list
   getProductName() {
     for (var j = 0; j < this.orderDetails.orderRows.length; j++) {

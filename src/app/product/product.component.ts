@@ -31,8 +31,10 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     // Get the property params 'id' from product.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
-    this.route.params.subscribe(myParams => {
-      const id = myParams["id"];
+    // variable name must be matched with the one in activatedRouteStub
+    this.route.paramMap.subscribe(myParams => {
+      // + is to convert to number (the same as parsInt)
+      const id = +myParams.get("id");
       this.getDetails(id);
     });
   }
@@ -45,13 +47,13 @@ export class ProductComponent implements OnInit {
       response => {
         this.details = response[0];
         const categories = response[1];
-        // for (var j = 0; j < this.details.productCategory.length; j++) {
+        for (var j = 0; j < this.details.productCategory.length; j++) {
           for (var i = 0; i < categories.length; i++) {
-            // if (categories[i].id === this.details.productCategory[j].categoryId) {
-              // this.categoryResults.push(categories[i]);
-            // }
+            if (categories[i].id === this.details.productCategory[j].categoryId) {
+              this.categoryResults.push(categories[i]);
+            }
           }
-        // }
+        }
       },
       error => console.log(error),
       () => console.log("HPPT request for movie details completed")
@@ -77,7 +79,7 @@ export class ProductComponent implements OnInit {
       this.addSessionStorage();
       // Otherwise show error dialog
     } else {
-      this.errorDialog();
+      // this.errorDialog();
     }
   }
 

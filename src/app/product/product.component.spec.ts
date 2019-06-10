@@ -6,14 +6,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
 import { notifyModalContent } from '../notify-dialog/notify-dialog.component';
+import { ActivatedRouteStub } from './testing/activatedRouteStub';
+import { ActivatedRoute } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
 
+  // Specify the id which is in ngOnInit (it can't be specified in test function)
+  const activatedRouteStub = new ActivatedRouteStub({ id : 76})
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
       declarations: [ ProductComponent, notifyModalContent ],
       imports: [ HttpClientModule, RouterTestingModule ]
     })
@@ -21,7 +28,8 @@ describe('ProductComponent', () => {
         .overrideComponent(ProductComponent, {
           set: {
             providers: [
-              { provide: DataService, useClass: MockDataService }
+              { provide: DataService, useClass: MockDataService },
+              { provide: NgbActiveModal, useClass: NgbActiveModal }
             ]
           }
         })
@@ -39,17 +47,13 @@ describe('ProductComponent', () => {
   });
 
   it('should show details', () => {
-    expect(component.details).toBeUndefined();
-    component.getDetails(76);
     expect(component.details).toBeDefined();
     expect(component.details.name).toBe('The Dark Knight');
   });
 
   it('should show category', () => {
-    expect(component.categoryResults.length).toBe(0);
-    component.getDetails(76);
-  // Does not work..
-  // expect(component.categoryResults.length).toBe(2);
+
+    expect(component.categoryResults.length).toBe(2);
   });
 
   it('should add items into the array for sessionStorage', () => {

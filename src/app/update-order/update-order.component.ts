@@ -38,13 +38,15 @@ export class UpdateOrderComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private service: DataService
-  ) // private router: Router
+  )
   {}
 
   ngOnInit() {
     // Get the property params 'id' from admin.component, and copies the data into myParams. Use this id to collect the item with the same id from API.
-    this.route.params.subscribe(myParams => {
-      const id = myParams["id"];
+    // variable name must be matched with the one in activatedRouteStub
+    this.route.paramMap.subscribe(myParams => {
+      // + is to convert to number (the same as parsInt)
+      const id = +myParams["id"];
       this.getOrderDetails(id);
     });
   }

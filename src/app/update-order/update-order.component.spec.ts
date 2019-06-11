@@ -6,15 +6,19 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { DataService } from '../services/data.service';
 import { MockDataService } from '../services/mock-data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { ActivatedRouteStub } from '../product/testing/activatedRouteStub';
+import { ActivatedRoute } from '@angular/router';
 
 describe('UpdateOrderComponent', () => {
   let component: UpdateOrderComponent;
   let fixture: ComponentFixture<UpdateOrderComponent>;
 
+  // Specify the id which is in ngOnInit (it can't be specified in test function)
+  const activatedRouteStub = new ActivatedRouteStub({ id : 558})
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
       declarations: [ UpdateOrderComponent ],
       imports: [
         HttpClientModule,
@@ -110,17 +114,17 @@ describe('UpdateOrderComponent', () => {
   //   });
 
 
-  // it('should remove a order from database', () => {
-  //   // Collect all orders. MockDataService injection is needed because getOrders function is NOT run in this component.
-  //   const service: MockDataService = TestBed.get(MockDataService);
-  //   service.getOrders().subscribe(
-  //     orders => {
-  //       let amountOfOrders = orders;
-  //       expect(amountOfOrders.length).toBe(3);
-  //       component.deleteOrder(component.orderDetails[0].id);
-  //       expect(amountOfOrders.length).toBe(2);
-  //   });
-  // });
+  it('should remove a order from database', () => {
+    // Collect all orders. MockDataService injection is needed because getOrders function is NOT run in this component.
+    const service: MockDataService = TestBed.get(MockDataService);
+    service.getOrders().subscribe(
+      orders => {
+        let amountOfOrders = orders;
+        expect(amountOfOrders.length).toBe(3);
+        component.deleteOrder(558);
+        expect(amountOfOrders.length).toBe(2);
+    });
+  });
 
 
 });

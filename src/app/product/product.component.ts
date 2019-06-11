@@ -78,7 +78,7 @@ export class ProductComponent implements OnInit {
       this.addSessionStorage();
       // Otherwise show error dialog
     } else {
-      // this.errorDialog();
+      this.errorDialog();
     }
   }
 
@@ -94,10 +94,11 @@ export class ProductComponent implements OnInit {
 
   // Show error dialog
   errorDialog() {
-    const modalRef = this.modalService.open(notifyModalContent, {
-      centered: true
-    });
-    modalRef.componentInstance.name = "This product is already in the cart!";
+    window.alert('This product is already in the cart!');
+  //   const modalRef = this.modalService.open(notifyModalContent, {
+  //     centered: true
+  //   });
+  //   modalRef.componentInstance.name = "This product is already in the cart!";
   }
 
   // Back to previous page

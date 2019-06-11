@@ -66,8 +66,6 @@ describe('UpdateOrderComponent', () => {
 
   it('should get order details data by order ID', () => {
   //   // this function is in ngOnInit
-    expect(component.orderDetails).toBeUndefined();
-    component.getOrderDetails(558);
     expect(component.orderDetails).toBeDefined();
     expect(component.orderDetails.id).toBe(558);
   });
@@ -121,7 +119,7 @@ describe('UpdateOrderComponent', () => {
       orders => {
         let amountOfOrders = orders;
         expect(amountOfOrders.length).toBe(3);
-        component.deleteOrder(558);
+        component.deleteOrder(component.orderDetails.id);
         expect(amountOfOrders.length).toBe(2);
     });
   });

@@ -73,7 +73,6 @@ export class ProductComponent implements OnInit {
         isDuplicate = true;
       }
     }
-
     // If there is no same component in the cart(or cart is empty) add to the cart
     if (!isDuplicate) {
       this.addSessionStorage();

@@ -58,9 +58,11 @@ describe('ProductComponent', () => {
 
   it('should add items into the array for sessionStorage', () => {
     expect(component.cartItems.length).toBe(0);
-    component.details = { id: 76, name: "The Dark Knight", description: "When the menace", price: 199, imageUrl: "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg", year: 2008, added:"2016-01-05T00:00:00",productCategory: [{categoryId:5, category:null},{categoryId:6, category:null}]};
     component.addToCart();
-    // cartItem length is one after getSessionCartItems function. Plus add one item => toBe(2)
+    // There is already one item in cartafter getSessionCartItems function. Plus add one item => toBe(2)
+    expect(component.cartItems.length).toBe(2);
+    component.addToCart();
+    // If there is already the same product in SC it won't be added.
     expect(component.cartItems.length).toBe(2);
   });
 

@@ -46,7 +46,7 @@ export class UpdateOrderComponent implements OnInit {
     // variable name must be matched with the one in activatedRouteStub
     this.route.paramMap.subscribe(myParams => {
       // + is to convert to number (the same as parsInt)
-      const id = +myParams["id"];
+      const id = +myParams.get("id");
       this.getOrderDetails(id);
     });
   }

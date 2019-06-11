@@ -16,11 +16,20 @@ describe('CategoryComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryComponent);
     component = fixture.componentInstance;
+    // Create the mock for input
+    component.categoryInput = {id:1, name:"commedy"};
     fixture.detectChanges();
   });
 
-  // does not work...
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create and show category name', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should emit on click and trigger filtering product by category', () => {
+    // Call EventEmitter and check if it has been called
+    spyOn(component.categoryEvent, 'emit');
+    component.filterByCategory();
+    expect(component.categoryEvent.emit).toHaveBeenCalled();
+  });
+
 });

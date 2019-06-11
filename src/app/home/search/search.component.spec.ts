@@ -27,4 +27,12 @@ describe('filterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit on click and trigger filtering product by key', () => {
+    // Call EventEmitter and check if it has been called
+    spyOn(component.queryEvent, 'emit');
+    component.searchByQuery('');
+    expect(component.queryEvent.emit).toHaveBeenCalled();
+  });
+
 });

@@ -155,7 +155,7 @@ export class MockDataService implements IdataService{
       if(this.orderHttpClientMock[i].id === id){
         let removedElements = this.orderHttpClientMock.splice(i, 1);
     // Return as observable so that it can match with IProduct interface
-    return of(removedElements[0]);
+    return of(removedElements[i]);
       }
     }
 

@@ -188,7 +188,7 @@ export class UpdateOrderComponent implements OnInit {
         this.getOrderDetails(id);
       },
       error => console.log(error),
-      () => console.log("HPPT request for category completed")
+      () => console.log("HPPT request for deleteOrder completed")
     );
   }
 }

@@ -114,14 +114,17 @@ describe('UpdateOrderComponent', () => {
 
   it('should remove a order from database', () => {
     // Collect all orders. MockDataService injection is needed because getOrders function is NOT run in this component.
-    const service: MockDataService = TestBed.get(MockDataService);
-    service.getOrders().subscribe(
-      orders => {
-        let amountOfOrders = orders;
-        expect(amountOfOrders.length).toBe(3);
-        component.deleteOrder(component.orderDetails.id);
-        expect(amountOfOrders.length).toBe(2);
-    });
+  //   const service: MockDataService = TestBed.get(MockDataService);
+  //   service.getOrders().subscribe(
+  //     orders => {
+  //       let amountOfOrders = orders;
+  //       expect(amountOfOrders.length).toBe(3);
+  //       component.deleteOrder(component.orderDetails.id);
+  //       expect(amountOfOrders.length).toBe(2);
+  //   });
+    component.deleteOrder(component.orderDetails.id);
+    expect(component.deleteOrder[0]).toBe(558);
+
   });
 
 

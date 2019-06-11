@@ -19,8 +19,6 @@ export class UpdateOrderComponent implements OnInit {
   faTrash = faTrash;
 
   orderDetails: IPlacedOrders;
-  orderRows: IPlacedOrderRow[] = [];
-  // updateOrderDetails: IOrder;
   updateOrderRows: IOrderRow[] = [];
   updateTotalCost: number;
   products: IProduct[];
@@ -99,7 +97,7 @@ export class UpdateOrderComponent implements OnInit {
   }
 
   // Fetch product names from product list
-  getProductName() {
+  getProductName(): Array<string> {
     for (var j = 0; j < this.orderDetails.orderRows.length; j++) {
       for (var i = 0; i < this.products.length; i++) {
         if (this.orderDetails.orderRows[j].productId === this.products[i].id) {
@@ -111,7 +109,7 @@ export class UpdateOrderComponent implements OnInit {
   }
 
   // Collect updated date of orderRows and store
-  createUpdateOrderRows() {
+  createUpdateOrderRows(): IOrderRow[] {
     this.updateOrderRows = [];
     for (var i = 0; i < this.updateOrderForm.value.items.length; i++) {
       this.updateOrderRows.push({

@@ -19,7 +19,6 @@ export class UpdateOrderComponent implements OnInit {
   faTrash = faTrash;
 
   orderDetails: IPlacedOrders;
-  updateOrderRows: IOrderRow[] = [];
   updateTotalCost: number;
   products: IProduct[];
   productNames: string[] = [];
@@ -110,24 +109,24 @@ export class UpdateOrderComponent implements OnInit {
 
   // Collect updated date of orderRows and store
   createUpdateOrderRows(): IOrderRow[] {
-    this.updateOrderRows = [];
+    const updateOrderRows:IOrderRow[] = [];
     for (var i = 0; i < this.updateOrderForm.value.items.length; i++) {
-      this.updateOrderRows.push({
+      updateOrderRows.push({
         ProductId: this.updateOrderForm.value.items[i].productId,
         Amount: this.updateOrderForm.value.items[i].amount,
         Id: this.updateOrderForm.value.items[i].id
       });
     }
-    return this.updateOrderRows;
+    return updateOrderRows;
   }
 
   // Caluculate total price of new orderRows
   caluculateTotalPrice(): number {
     let price = 0;
-    for (var j = 0; j < this.updateOrderRows.length; j++) {
+    for (var j = 0; j < this.createUpdateOrderRows.length; j++) {
       for (var i = 0; i < this.products.length; i++) {
-        if (this.updateOrderRows[j].ProductId === this.products[i].id) {
-          price += this.products[i].price * this.updateOrderRows[j].Amount;
+        if (this.createUpdateOrderRows[j].ProductId === this.products[i].id) {
+          price += this.products[i].price * this.createUpdateOrderRows[j].Amount;
         }
       }
     }
@@ -139,7 +138,7 @@ export class UpdateOrderComponent implements OnInit {
   updateOrder(id: number) {
 
     this.createUpdateOrderRows();
-    console.log("updateOrderRows", this.updateOrderRows);
+    console.log("updateOrderRows", this.createUpdateOrderRows);
 
     console.log("updateOrderRows", this.caluculateTotalPrice());
 
@@ -183,7 +182,7 @@ export class UpdateOrderComponent implements OnInit {
     this.service.deleteOrder(id).subscribe(
       response => {
         console.log(response);
-        this.getOrderDetails(id);
+        this.orderDetails = undefined;
       },
       error => console.log(error),
       () => console.log("HPPT request for deleteOrder completed")

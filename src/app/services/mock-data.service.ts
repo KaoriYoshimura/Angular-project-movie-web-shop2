@@ -150,12 +150,12 @@ export class MockDataService implements IdataService{
   //   return this.http.put<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=25' + '/{' + id + '}', updateOrder, httpOptions);
   // }
 
-  deleteOrder(id:number) : Observable<IOrder> {
-    for (let i = 0; i < this.orderHttpClientMock.length; i++) {
-      if(this.orderHttpClientMock[i].id === id){
-        let removedElements = this.orderHttpClientMock.splice(i, 1);
+  deleteOrder(id:number) : Observable<IPlacedOrders> {
+    for (let i = 0; i < this.orderDataMock.length; i++) {
+      if(this.orderDataMock[i].id === id){
+        let removedElements = this.orderDataMock.splice(i, 1);
     // Return as observable so that it can match with IProduct interface
-    return of(removedElements[i]);
+        return of(removedElements[0]);
       }
     }
 

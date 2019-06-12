@@ -21,5 +21,5 @@ export interface IdataService {
     getOrderDetailById(id: number): Observable<IPlacedOrders>;
     // No need
     // updateOrders(id:number, updateOrder:IPlacedOrders): Observable<IPlacedOrders>;
-    deleteOrder(id:number): Observable<IOrder>;
+    deleteOrder(id:number): Observable<IPlacedOrders>;
 }

@@ -118,8 +118,8 @@ export class DataService implements IdataService{
     return this.http.put<IOrder>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders' + '/' + id, updateOrder, httpOptions);
   }
 
-  deleteOrder(id:number): Observable<IOrder>{
-    return this.http.delete<IOrder>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders' + '/' + id, httpOptions);
+  deleteOrder(id:number): Observable<IPlacedOrders>{
+    return this.http.delete<IPlacedOrders>('https://medieinstitutet-wie-products.azurewebsites.net/api/orders' + '/' + id, httpOptions);
   }
 
 }

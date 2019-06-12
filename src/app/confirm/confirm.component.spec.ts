@@ -53,23 +53,19 @@ describe('ConfirmComponent', () => {
     expect(component.userData.firstName).toBe('Kaori');
   });
 
-  // it(`Should create orderRows`, () => {
-  //   expect(component.createOrderRows).toBeTruthy();
-  // //   expect(component.orderRows.length).toBe(0);
-  // //   component.createOrderRows();
-  // //   expect(component.orderRows[0].ProductId).toBe(76);
-  // //   expect(component.orderRows.length).toBe(2);
-  // });
+  it(`Should create orderRows`, () => {
+    expect(component.orderRows.length).toBe(0);
+    component.createOrderRows();
+    expect(component.orderRows[0].ProductId).toBe(76);
+    expect(component.orderRows.length).toBe(2);
+  });
 
-  // it(`Should create orders`, () => {
-  //   spyOn(component, "createOrders");
-  //   fixture.whenStable().then(() =>{
-  //     expect(component.createOrders).toHaveBeenCalled();
-  //   })
-  // // expect(component.orders).toBeUndefined();
-  // //   component.createOrders();
-  // //   expect(component.orders).toBeDefined();
-  // //   expect(component.orders.companyId).toBe(25);
-  // });
+  it(`Should create orders`, () => {
+  component.createOrderRows();
+  expect(component.orders).toBeUndefined();
+  component.createOrders();
+  expect(component.orders).toBeDefined();
+  expect(component.orders.companyId).toBe(25);
+  });
 
 });

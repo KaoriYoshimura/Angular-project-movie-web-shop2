@@ -48,20 +48,22 @@ export class ConfirmComponent implements OnInit {
   }
 
   // Collect cart items and store in an object to use for order
-  createOrderRows(){
-    const orderRows: IOrderRow[] = [];
-  
+  // Define public variable instead of const for test
+  orderRows: IOrderRow[] = [];
+  createOrderRows():IOrderRow[]{
     for(var i=0; i<this.cartItems.length; i++){
-      orderRows.push(
+      this.orderRows.push(
         {ProductId: this.cartItems[i].id, Amount: 1, Id: 0}
         );
     }
-
-    return orderRows;
+    return this.orderRows;
   }
 
-  createOrders(){
-    const orders: IOrder = {
+  // Define public variable instead of const for test
+  orders: IOrder;
+
+  createOrders():IOrder{
+    this.orders = {
       id: 0,
       companyId: 25,
       created: moment().format('LLLL'),
@@ -72,7 +74,7 @@ export class ConfirmComponent implements OnInit {
       orderRows: this.createOrderRows()
     };
 
-    return orders;
+    return this.orders;
   }
 
   orderSubmit() {

@@ -1,7 +1,7 @@
 <div class="wrapper">
   <header class="container">
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Angular Web Shop</a>
+      <a class="navbar-brand" routerLink="">Angular Web Shop</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <fa-icon [icon]="faBars"></fa-icon>
         <span class="navbar-toggler-icon"></span>
@@ -9,13 +9,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HOME <span class="sr-only">(current)</span></a>
+            <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/cart" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">CART ({{this.cartAmount}})</a>
+            <a class="nav-link" routerLink="/cart" routerLinkActive="active">CART ({{this.cartAmount}})</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ADMIN</a>
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active">ADMIN</a>
           </li>
         </ul>
       </div>

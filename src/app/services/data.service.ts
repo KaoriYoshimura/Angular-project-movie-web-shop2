@@ -40,7 +40,7 @@ export class DataService implements IdataService{
   }
 
   // Choices for payement in checkout and update order page
-  paymentChoices = [
+  paymentChoices: Array<string> = [
     'Paypal',
     'Bank Id',
     'Credit card'
@@ -66,7 +66,7 @@ export class DataService implements IdataService{
 
   // ||[]creates array if cartItem is empty
   // If I want to reuse this function in addToCart for id, name, price is highlited. Not good idea?
-  getSessionCartItems() {
+  getSessionCartItems():IProduct[] {
     return this.cartItems = JSON.parse(sessionStorage.getItem('cartItem'))|| [];
   }
 

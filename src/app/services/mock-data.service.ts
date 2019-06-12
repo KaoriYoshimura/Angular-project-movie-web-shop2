@@ -34,7 +34,7 @@ export class MockDataService implements IdataService{
   }
 
   // Choices for payement in checkout and update order page
-  paymentChoices = [
+  paymentChoices: Array<string> = [
     'Paypal',
     'Bank Id',
     'Credit card'
@@ -99,7 +99,7 @@ export class MockDataService implements IdataService{
   }
 
   // To check how many items in a shopping cart
-  getSessionCartItems() {
+  getSessionCartItems():IProduct[] {
     return this.itemsInSessionStorage = this.products;
 
   }

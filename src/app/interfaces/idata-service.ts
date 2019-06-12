@@ -8,7 +8,7 @@ export interface IdataService {
     onNotifyCartAmoutUpdated(updated: number):any;
     getData():Observable<IProduct[]>;
     getDetailById(id: number): Observable<IProduct>;
-    getSessionCartItems():void;
+    getSessionCartItems():IProduct[];
     addToCart(cartItems: IProduct[]): void;
     RemoveFromSessionStorage(item: number):void;
     getOrders(): Observable<IPlacedOrders[]>;

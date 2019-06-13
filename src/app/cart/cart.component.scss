@@ -8,6 +8,11 @@
 
         .cart-list-container {
 
+            .cart-list {
+                background-color: white;
+                border: 1px solid rgba(0, 0, 0, 0.125);
+            }
+
             span {
                 img {
                     width: 100px;

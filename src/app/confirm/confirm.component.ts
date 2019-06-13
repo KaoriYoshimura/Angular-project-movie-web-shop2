@@ -61,7 +61,6 @@ export class ConfirmComponent implements OnInit {
 
   // Define public variable instead of const for test
   orders: IOrder;
-
   createOrders():IOrder{
     this.orders = {
       id: 0,
